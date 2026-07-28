@@ -29,6 +29,14 @@ the parts that bind their repo; this file is the source of record.
   `done`).
 - **Regenerate the dashboard after every change** (`python
   scripts/build_dashboard.py`); edit the JSON, never the HTML.
+- **Every plan or to-do list ships in HTML as well as markdown.** Any
+  `PLAN.md`, `BACKLOG.md`, `ROADMAP.md`, `OWNER-TASKS.md`, launch plan, content
+  plan, or checklist gets a generated `.html` sibling so it opens and reads
+  anywhere without a markdown viewer — phone, browser, shared link. Generate
+  with `python scripts/render_docs.py <file.md> …` (from
+  `plan-track/assets/render_docs.py`); check freshness with `--check`. The
+  markdown is the source; **the HTML is generated and never hand-edited**, same
+  as the dashboard. Write the markdown, render, and commit both together.
 - **Split ownership honestly.** Agents build, measure, analyze, draft. The
   owner takes anything with a name, a credential, money, or a git push
   attached.

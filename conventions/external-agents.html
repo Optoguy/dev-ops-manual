@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>External agents</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="src">Generated from external-agents.md — edit the markdown, not this file</p>
+<h1>External agents</h1>
+<p>Added 2026-07-27, after five parallel Devin sessions opened PRs that all collided on the same generated files in one repo.</p>
+<p>Any non-Claude agent working these repos follows <strong>the same contract</strong> as a Claude session. The rules aren&#x27;t Claude-specific; they&#x27;re what keeps parallel workers from destroying each other&#x27;s work.</p>
+<h2>The contract</h2>
+<ol>
+<li><strong>Point it at the repo&#x27;s <code>CLAUDE.md</code> first.</strong> That file is the contract; an</li>
+</ol>
+<p>agent that hasn&#x27;t read it can&#x27;t honor it.</p>
+<ol>
+<li><strong>Claim before you build.</strong> Claim as <code>(claimed &amp;lt;date&amp;gt; devin)</code> /</li>
+</ol>
+<p><code>status: in-progress</code> with a devin note, <strong>pushed before building</strong> — same protocol as everyone else. See <a href="house-rules.md">house-rules.md</a>.</p>
+<ol>
+<li><strong>Draft PRs only</strong>, one concern per PR.</li>
+<li><strong>Never hand-edit generated files</strong> — regenerate them.</li>
+<li><strong>Never two agents on overlapping file sets at once.</strong> This is the rule the</li>
+</ol>
+<p>five colliding PRs violated; the collision was in the <em>generated dashboards</em> every PR rebuilt.</p>
+<h2>What to dispatch</h2>
+<p><strong>Suitable:</strong> well-scoped, mechanically verifiable, self-contained file scope — tests, refactors, security hardening, migrations, mechanical fixes.</p>
+<p><strong>Not suitable:</strong> business content, judgment-laden positions, credentials, identity, plan reprioritization, anything under the owner&#x27;s name, or work that needs an approval gate mid-run.</p>
+<h2>The best use</h2>
+<p><strong>Adversarial review of agent-built work.</strong> A second, independently-built agent reviewing the first one&#x27;s output catches blind spots that more of the same agent will not. The most valuable Devin PR in this account&#x27;s history was the one that reviewed Claude-authored skills and found two real defects — a scaffold step that would clobber an existing generator, and a skill contradicting the repo&#x27;s own declared task source of truth.</p>
+<p>Run it in both directions: have Devin audit Claude&#x27;s work, and have Claude review and integrate Devin&#x27;s PRs rather than merging them blind.</p>
+<h2>Dispatch tagging</h2>
+<p>When proposing a slate of agent tasks, tag each one:</p>
+<ul>
+<li><strong>run-here</strong> — bookkeeping, approval gates, judgment content, Routines,</li>
+</ul>
+<p>credentials, identity.</p>
+<ul>
+<li><strong>Devin-suitable</strong> — mechanically verifiable, self-contained, no house</li>
+</ul>
+<p>bookkeeping.</p>
+<p>The owner decides; the tag just makes the choice one click instead of a conversation.</p>
+<h2>Merging external PRs</h2>
+<p>Expect conflicts in generated output when several land together. The house resolution is always the same: <strong>merge one, regenerate, then rebase the next</strong> — never hand-merge a generated file. For plan files, union by task id and prefer the more-progressed status. Verify after each merge (tests, lint gate, build) before taking the next one.</p>
+</div>
+</body>
+</html>

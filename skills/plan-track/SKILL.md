@@ -53,6 +53,29 @@ It renders, self-contained and offline:
 Rebuild with `python src/build_dashboard.py`; check freshness in CI or a
 pre-commit with `python src/build_dashboard.py --check`.
 
+## Markdown plans get an HTML twin
+
+**Every plan or to-do list that exists as markdown also exists as HTML.**
+`docs/PLAN.md`, `BACKLOG.md`, `ROADMAP.md`, `OWNER-TASKS.md`, a launch plan, a
+content plan, any checklist — each gets a generated `.html` sibling, so it can
+be opened and read anywhere without a markdown viewer.
+
+```
+python src/render_docs.py docs/PLAN.md docs/BACKLOG.md   # writes docs/*.html
+python src/render_docs.py --check docs/*.md              # nonzero if stale
+```
+
+`assets/render_docs.py` (drop it at `src/render_docs.py`) is dependency-free
+and emits self-contained HTML — inline CSS, no external assets, no JS, so it
+opens offline and survives a strict CSP. It renders headings, nested lists,
+**task checkboxes** (`- [ ]` / `- [x]`), tables, code, blockquotes, and links
+(rejecting `javascript:`/`data:` schemes), and follows the reader's light/dark
+preference.
+
+The markdown is the source; **the HTML is generated and never hand-edited** —
+same contract as the dashboard. Render and commit both in the same commit, or
+the pair goes stale and the HTML starts lying.
+
 ## Procedure
 
 1. **Create/refresh `plan/plan.json`.** Break the work into tasks; give each an
@@ -79,9 +102,11 @@ pre-commit with `python src/build_dashboard.py --check`.
    identified but not yet scheduled — when a backlog item is picked up, it becomes
    a task in `plan.json`.
 
-5. **Regenerate after every change.** `python src/build_dashboard.py`. Commit the
-   JSON and the regenerated HTML together, scoped staging, plain dated message, no
-   push. A dashboard that disagrees with the plan is worse than none.
+5. **Regenerate after every change.** `python src/build_dashboard.py` for the
+   plan, and `python src/render_docs.py <changed>.md` for any markdown plan or
+   to-do list you touched. Commit each source and its regenerated HTML
+   together, scoped staging, plain dated message, no push. A dashboard — or an
+   HTML plan — that disagrees with its source is worse than none.
 
 ## Judgment
 

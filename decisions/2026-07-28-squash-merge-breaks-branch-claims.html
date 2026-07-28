@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Branch-ahead is not a claim signal — open PRs and task status are</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="src">Generated from 2026-07-28-squash-merge-breaks-branch-claims.md — edit the markdown, not this file</p>
+<h1>Branch-ahead is not a claim signal — open PRs and task status are</h1>
+<p><strong>Date:</strong> 2026-07-28 <strong>Amends:</strong> <a href="2026-07-26-claim-before-you-build.md">2026-07-26 — claim before you build</a> (that protocol stands; only its third detection signal is withdrawn)</p>
+<h2>The decision</h2>
+<p>A task is claimed — in flight, not available — when its <strong>status says <code>in-progress</code></strong> or an <strong>open PR touches its files</strong>. Nothing else. The &quot;or a branch is ahead of the default branch on the same files&quot; test is <strong>removed</strong> from the protocol.</p>
+<h2>Why</h2>
+<p>We squash-merge everything. A squash merge replays a branch&#x27;s content as one new commit on the default branch; the branch&#x27;s own commits never become ancestors of it. So <strong>no git-topology test can tell you a squash-merged branch is finished</strong> — not <code>rev-list main..branch</code>, not a merge-base diff. A shipped branch reads as &quot;ahead of main, touching these files&quot; permanently.</p>
+<p>Found while cleaning up after PR #52: all thirteen <code>claude/*</code> branches on SpecBuildr read as ahead of <code>main</code>, including <code>claude/retire-dev-skills</code> — merged four minutes earlier. Since a night shift creates one or more branches per run, the poisoned signal grows daily.</p>
+<p>The consequence was not cosmetic. The night shift&#x27;s availability rule would have seen phantom claims on <code>plan/plan.json</code>, <code>dashboard/index.html</code>, and much of <code>demo/</code> — the files nearly every branch touches — and skipped genuinely available tasks, silently, on every future run.</p>
+<h2>Why the remaining signals are sound</h2>
+<ul>
+<li><strong>Open PR state</strong> is authoritative and <em>self-clearing</em>: merging or closing a</li>
+</ul>
+<p>PR removes the claim with no extra bookkeeping.</p>
+<ul>
+<li><strong><code>status: in-progress</code></strong> is explicit, pushed before work starts, and cleared</li>
+</ul>
+<p>to <code>done</code> or back to <code>todo</code> when the work resolves.</p>
+<p>Both are checked directly (GitHub API, plan file) rather than inferred from history shape. Inferring intent from git topology was the mistake.</p>
+<h2>Trickle-down</h2>
+<ul>
+<li><code>skills/night-shift/SKILL.md</code> — selection rule 2 rewritten, with the reason</li>
+</ul>
+<p>stated so it isn&#x27;t &quot;simplified&quot; back in later.</p>
+<ul>
+<li><code>conventions/house-rules.md</code> — claim-before-you-build step 1.</li>
+<li>The night-shift Routine prompt — same rule, all repos.</li>
+<li><code>SpecBuildr/CLAUDE.md</code>, <code>NewCoEndotest/CLAUDE.md</code> — claim conventions.</li>
+<li>Installed <code>.claude/skills/</code> copies in every project repo (re-install).</li>
+</ul>
+<h2>Related practice</h2>
+<p><strong>Delete merged branches after merging.</strong> It doesn&#x27;t fix the signal — the rule change does that — but it keeps branch lists readable and stops a session from mistaking shipped work for work in flight when reading by eye. Exceptions: branches with an open PR, a session&#x27;s designated working branch, and any branch a deploy target references.</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dev Ops Manual</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="src">Generated from README.md — edit the markdown, not this file</p>
+<h1>Dev Ops Manual</h1>
+<p><strong>How I work with Claude.</strong> This repo is the source of record for the method — the portable skills, the operating conventions, and the decisions behind them. Every project repo installs from here; nothing here is project-specific.</p>
+<p>Readable from anywhere: browse it on GitHub, or clone it locally (<code>C:\Users\dancg\OneDrive\Projects\dev-ops-manual</code> on the PC).</p>
+<hr>
+<h2>Quick start in a new project</h2>
+<pre><code>git clone https://github.com/Optoguy/dev-ops-manual
+cd dev-ops-manual
+./install.sh --global --prefs        # skills + standing preferences, first-time setup
+./install.sh --repo /path/to/project # skills into one project&#x27;s .claude/skills/</code></pre>
+<p>Then, in that project, run <code>/project-init</code> and answer the interview. You get a CLAUDE.md contract, a plan and dashboard, and the git conventions on day one.</p>
+<hr>
+<h2>The skills</h2>
+<p>Each is a directory under <a href="skills/"><code>skills/</code></a> with a <code>SKILL.md</code> and optional assets. Invoke with <code>/&amp;lt;name&amp;gt;</code> in any session where they&#x27;re installed.</p>
+<p><strong>Starting and running a project</strong> | Skill | What it does | |---|---| | <a href="skills/project-init/SKILL.md"><code>project-init</code></a> | Scaffold a repo the house way — CLAUDE.md contract, <code>.claude/</code> config, docs/brain skeleton, git conventions | | <a href="skills/plan-track/SKILL.md"><code>plan-track</code></a> | <code>plan/plan.json</code> as single source of truth + a generated dashboard splitting your tasks from the agent&#x27;s, ranked P0→P2 | | <a href="skills/weekly-review/SKILL.md"><code>weekly-review</code></a> | The operating cadence: what moved, what stalled, what&#x27;s blocked on you, is the plan still honest | | <a href="skills/wrap-session/SKILL.md"><code>wrap-session</code></a> | Close-out ritual — capture findings, log decisions, update statuses, regenerate, commit |</p>
+<p><strong>Knowing things</strong> | Skill | What it does | |---|---| | <a href="skills/brain/SKILL.md"><code>brain</code></a> | Provenance-tracked knowledge base: capture findings with sources, answer with citations, keep it healthy | | <a href="skills/decision-log/SKILL.md"><code>decision-log</code></a> | Record a decision as a dated file and trickle it through every file it affects | | <a href="skills/verify/SKILL.md"><code>verify</code></a> | Adversarial fact-check of any document — audit every citation, report verdicts worst-first | | <a href="skills/options-memo/SKILL.md"><code>options-memo</code></a> | Structure a decision before it&#x27;s made: criteria, options, evidence, recommendation |</p>
+<p><strong>Building and shipping</strong> | Skill | What it does | |---|---| | <a href="skills/ship-web-app/SKILL.md"><code>ship-web-app</code></a> | The web stack playbook — one engine + swappable modules, provider behind a stable contract, CSP-safe frontend, Cloudflare hosting | | <a href="skills/deliverable-delight/SKILL.md"><code>deliverable-delight</code></a> | Design the final output so it feels like a prize, not a printout (peak-end, IKEA effect, shareability) | | <a href="skills/growth-loop/SKILL.md"><code>growth-loop</code></a> | Instrument → measure → adjust, with agents measuring and drafting and humans approving anything published |</p>
+<p><strong>Working with people and agents</strong> | Skill | What it does | |---|---| | <a href="skills/night-shift/SKILL.md"><code>night-shift</code></a> | Propose overnight agent work, get slate approval, run only what&#x27;s approved → one draft PR | | <a href="skills/routine-design/SKILL.md"><code>routine-design</code></a> | Scheduled agents that run safely unattended — quiet-until-prereqs, untrusted-data guardrails, explicit thresholds | | <a href="skills/discovery-call/SKILL.md"><code>discovery-call</code></a> | Prep a customer/advisor conversation and capture what it taught, with provenance |</p>
+<hr>
+<h2>The conventions</h2>
+<ul>
+<li><strong><a href="conventions/house-rules.md">House rules</a></strong> — the operating contract: tasks,</li>
+</ul>
+<p>claims, git, ownership split, interaction defaults, untrusted data.</p>
+<ul>
+<li><strong><a href="conventions/routines.md">Routines and sessions</a></strong> — how scheduled agents</li>
+</ul>
+<p>bind to conversations, what a container is and isn&#x27;t, and the rules learned the hard way.</p>
+<ul>
+<li><strong><a href="conventions/external-agents.md">External agents</a></strong> — the contract any</li>
+</ul>
+<p>non-Claude agent (Devin) must follow in these repos.</p>
+<ul>
+<li><strong><a href="conventions/global-CLAUDE-snippet.md">Standing preferences snippet</a></strong> —</li>
+</ul>
+<p>what <code>install.sh --prefs</code> writes into <code>~/.claude/CLAUDE.md</code>.</p>
+<h2>Decisions</h2>
+<p>Dated records of choices that changed how work happens. See <a href="decisions/"><code>decisions/</code></a>.</p>
+<hr>
+<h2>Where this is used</h2>
+<div class="tablewrap"><table><thead><tr><th>Repo</th><th>What it is</th></tr></thead><tbody><tr><td><code>Optoguy/SpecBuildr</code></td><td>Conversation → build-ready product spec (web product)</td></tr><tr><td><code>Optoguy/NewCoEndotest</code></td><td>Endoscope test-instrument company brain (research/strategy)</td></tr><tr><td><code>Optoguy/medtech-intel-QMSR</code></td><td>FDA clearance + QMSR enforcement intelligence</td></tr></tbody></table></div>
+<p>Each keeps its own <code>CLAUDE.md</code> and installed <code>.claude/skills/</code>; this repo is what they install <em>from</em>. After editing a skill here, re-run <code>install.sh --repo &amp;lt;project&amp;gt;</code> in each project that should pick up the change.</p>
+</div>
+</body>
+</html>

@@ -66,7 +66,11 @@ Most projects want a bit of both. Scaffold the overlap, offer the rest.
      with the real first tasks from the interview, each tagged `owner`
      (`me` | `agent`), `priority` (`P0`/`P1`/`P2`), and `status`. Run
      `python src/build_dashboard.py` to generate `dashboard/index.html`.
-   - Add `docs/PLAN.md` (narrative phased plan) and `docs/BACKLOG.md` stubs.
+   - Also copy `plan-track/assets/render_docs.py` to `src/render_docs.py` —
+     every markdown plan or to-do list gets a generated HTML twin (house rule).
+   - Add `docs/PLAN.md` (narrative phased plan) and `docs/BACKLOG.md` stubs,
+     then `python src/render_docs.py docs/PLAN.md docs/BACKLOG.md` so their
+     HTML versions exist from day one.
    - Hand ongoing tracking to `/plan-track`.
 
 5. **Lay down the rest of the skeleton** for the project shape:

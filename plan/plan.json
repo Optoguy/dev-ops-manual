@@ -17,6 +17,16 @@
   ],
   "tasks": [
     {
+      "id": "html-twin-rule",
+      "title": "Every markdown plan or to-do list gets a generated HTML twin",
+      "owner": "agent",
+      "priority": "P1",
+      "status": "done",
+      "done_date": "2026-07-28",
+      "phase": "grow",
+      "note": "Owner rule 2026-07-28: plans and checklists must be readable without a markdown viewer. Added plan-track/assets/render_docs.py (dependency-free, self-contained output: inline CSS, no external assets, no JS, light/dark aware; renders task checkboxes, nested lists, tables, code, blockquotes; rejects javascript:/data: hrefs) plus --check staleness mode. Rule written into conventions/house-rules.md, plan-track SKILL.md, and project-init step 4. Applies to PLAN/BACKLOG/ROADMAP/OWNER-TASKS/launch plans/content plans."
+    },
+    {
       "id": "claim-signal-fix",
       "title": "Remove the branch-ahead claim test from the protocol (squash merges poison it)",
       "owner": "agent",
