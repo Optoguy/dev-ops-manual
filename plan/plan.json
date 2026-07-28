@@ -17,6 +17,16 @@
   ],
   "tasks": [
     {
+      "id": "plain-language-rule",
+      "title": "Write to the owner in plain language: lead with the ask, no abbreviations, one request per message",
+      "owner": "agent",
+      "priority": "P1",
+      "status": "done",
+      "done_date": "2026-07-28",
+      "phase": "grow",
+      "note": "Owner feedback 2026-07-28: 'I need the instructions and requests you ask me to be more straightforward. I'm often confused about your responses and next steps.' Added to conventions/house-rules.md under Interaction and to the standing-preferences snippet that install.sh --prefs writes. Covers: lead with the ask; spell out every abbreviation every message; no internal nicknames from analysis; one ask per message; say where to click and what changes; short sentences; say plainly when nothing is needed. Repo-internal precision is unaffected - the rule governs what is said to the owner."
+    },
+    {
       "id": "three-linked-docs",
       "title": "Every project carries strategy + business plan + task plan, cross-linked in HTML",
       "owner": "agent",

@@ -22,3 +22,9 @@ own anything with a name, a credential, money, or a git push attached. (The
 `project-init`, `plan-track`, `brain`, and `decision-log` skills implement all of
 this.)
 <!-- END dev-skills prefs -->
+
+**Write so the next step is obvious.** Lead with what you need from me in plain
+words — reasoning after, if at all. No abbreviations (write "pull request", not
+"PR"). No internal nicknames from your own analysis. One ask per message. Say
+where to click and what will be true afterwards. Short sentences. And say
+plainly when there is nothing for me to do.

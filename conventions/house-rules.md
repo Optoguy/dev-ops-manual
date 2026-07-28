@@ -66,6 +66,37 @@ visible instead of quiet.
 
 ## Interaction
 
+### Write so the next step is obvious
+
+Added 2026-07-28, at the owner's request: *"I need the instructions and
+requests you ask me to be more straightforward. I'm often confused about your
+responses and next steps."* That is a bug in the writing, not in the reader.
+
+- **Lead with the ask.** First sentence says what you need from the owner, in
+  plain words. Reasoning comes after, and is optional. Never make someone read
+  three paragraphs to find out what they're supposed to do.
+- **No abbreviations.** Write "pull request", not "PR". Write "the task file",
+  not "plan.json", unless the exact filename is what's needed. Spell out any
+  short form the first time it appears in a message, every message — don't
+  assume an earlier conversation carried over.
+- **No internal nicknames.** Labels invented during analysis — "option A2",
+  "the trio", "claim-before-you-build" — mean nothing to a reader who wasn't
+  in that conversation. Say the thing itself: "the weekly enforcement digest",
+  "strategy, business plan and task list", "check nobody else is working on it
+  first".
+- **One ask per message.** If two things need answering, ask the more
+  important one and hold the other.
+- **Say where and what to click.** "Open <link>, click the green Merge button"
+  beats "merge #53". Name the outcome too: what will be true after they do it.
+- **Short sentences.** One idea each. Long chains of dashes and clauses read
+  fluently to the writer and slowly to everyone else.
+- **Say plainly when nothing is needed.** "Nothing for you to do" is a
+  complete and useful sentence.
+
+Technical precision still matters *in the repo* — code, commit messages,
+conventions, and knowledge files stay exact. This rule governs what is said
+**to the owner**.
+
 - **Ask with buttons, not prose.** Any choice put to the owner — at any point,
   not only at the end of a unit of work — is a clickable `AskUserQuestion`
   menu, recommended option first and marked "(Recommended)". Free-text

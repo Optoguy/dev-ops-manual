@@ -90,6 +90,37 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <p>All three ship as HTML and <strong>cross-link to each other</strong> — the generators handle it. <code>render_docs.py</code> puts a nav strip on every rendered page, and <code>build_dashboard.py</code> puts the same strip on the dashboard; each links to whichever of the trio exist and marks the current one. A missing document simply doesn&#x27;t appear, so a young project shows fewer chips rather than a dead link — add the file and the links appear on the next render.</p>
 <p>Strategy is a <em>document</em>, not a slide: the wedge, the evidence behind it, what would change the answer, and what is still undecided. When strategy shifts, the task plan usually should too — the cross-links exist so that mismatch is visible instead of quiet.</p>
 <h2>Interaction</h2>
+<h3>Write so the next step is obvious</h3>
+<p>Added 2026-07-28, at the owner&#x27;s request: <em>&quot;I need the instructions and requests you ask me to be more straightforward. I&#x27;m often confused about your responses and next steps.&quot;</em> That is a bug in the writing, not in the reader.</p>
+<ul>
+<li><strong>Lead with the ask.</strong> First sentence says what you need from the owner, in</li>
+</ul>
+<p>plain words. Reasoning comes after, and is optional. Never make someone read three paragraphs to find out what they&#x27;re supposed to do.</p>
+<ul>
+<li><strong>No abbreviations.</strong> Write &quot;pull request&quot;, not &quot;PR&quot;. Write &quot;the task file&quot;,</li>
+</ul>
+<p>not &quot;plan.json&quot;, unless the exact filename is what&#x27;s needed. Spell out any short form the first time it appears in a message, every message — don&#x27;t assume an earlier conversation carried over.</p>
+<ul>
+<li><strong>No internal nicknames.</strong> Labels invented during analysis — &quot;option A2&quot;,</li>
+</ul>
+<p>&quot;the trio&quot;, &quot;claim-before-you-build&quot; — mean nothing to a reader who wasn&#x27;t in that conversation. Say the thing itself: &quot;the weekly enforcement digest&quot;, &quot;strategy, business plan and task list&quot;, &quot;check nobody else is working on it first&quot;.</p>
+<ul>
+<li><strong>One ask per message.</strong> If two things need answering, ask the more</li>
+</ul>
+<p>important one and hold the other.</p>
+<ul>
+<li><strong>Say where and what to click.</strong> &quot;Open &lt;link&gt;, click the green Merge button&quot;</li>
+</ul>
+<p>beats &quot;merge #53&quot;. Name the outcome too: what will be true after they do it.</p>
+<ul>
+<li><strong>Short sentences.</strong> One idea each. Long chains of dashes and clauses read</li>
+</ul>
+<p>fluently to the writer and slowly to everyone else.</p>
+<ul>
+<li><strong>Say plainly when nothing is needed.</strong> &quot;Nothing for you to do&quot; is a</li>
+</ul>
+<p>complete and useful sentence.</p>
+<p>Technical precision still matters <em>in the repo</em> — code, commit messages, conventions, and knowledge files stay exact. This rule governs what is said <strong>to the owner</strong>.</p>
 <ul>
 <li><strong>Ask with buttons, not prose.</strong> Any choice put to the owner — at any point,</li>
 </ul>
