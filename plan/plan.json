@@ -1,0 +1,14 @@
+{
+  "project": "Dev Ops Manual",
+  "updated": "2026-07-28",
+  "phases": [
+    {"id": "sync", "title": "Keep the fleet in sync", "goal": "Every project runs the same, current method.", "deliverable": "No drift between this source of record and any project's installed copies."},
+    {"id": "grow", "title": "Grow the method", "goal": "Capture what's actually practiced but not yet written down.", "deliverable": "Conventions and skills that match how work really happens."}
+  ],
+  "tasks": [
+    {"id": "install-into-medtech", "title": "Install the skill suite into medtech-intel-QMSR once it has code", "owner": "agent", "priority": "P1", "status": "todo", "phase": "sync", "note": "New venture repo created 2026-07-28, still empty pending the app import. Run ./install.sh --repo <clone> and add it to the fleet table in README.md."},
+    {"id": "skills-drift-check", "title": "Drift check: installed .claude/skills/ copies vs this repo's source", "owner": "agent", "priority": "P2", "status": "todo", "phase": "sync", "note": "Two copies of a skill always drift eventually — that risk is why this repo exists. Diff each project's installed copies against skills/, report differences, and open a PR re-installing where they've diverged."},
+    {"id": "conventions-coverage", "title": "Audit: conventions practiced but not written down", "owner": "agent", "priority": "P2", "status": "todo", "phase": "grow", "note": "Several rules were learned in conversation and only partly recorded (e.g. file-first deliverable delivery, plan-file union merges, regenerate-don't-hand-merge). Sweep recent project history for rules being followed that conventions/ doesn't state, and propose additions."},
+    {"id": "evaluate-skill-gaps", "title": "Evaluate which built-in Claude skills are worth adopting into the house suite", "owner": "me", "priority": "P2", "status": "todo", "phase": "grow", "note": "Candidates seen in use: /security-review before a traffic push, skill-creator for authoring/evaluating skills properly, fewer-permission-prompts to cut interruptions. Owner call on which become house practice."}
+  ]
+}
