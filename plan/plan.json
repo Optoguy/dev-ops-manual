@@ -34,7 +34,7 @@
       "status": "done",
       "done_date": "2026-07-28",
       "phase": "sync",
-      "note": "Owner correction 2026-07-28: a dev-ops session had opened PRs into SpecBuildr (#56) and NewCoEndotest (#15) — one repo modifying two it does not own, the largest version of the ownership problem the day had already hit twice. Rule + decision record added; those two PRs stand as the transitional exception. Projects adopt via ./install.sh --repo <path> in their own session."
+      "note": "Owner correction 2026-07-28: a dev-ops session had opened PRs into SpecBuildr (#56) and NewCoEndotest (#15) — one repo modifying two it does not own, the largest version of the ownership problem the day had already hit twice. Rule + decision record added; the claim-signal PRs (SpecBuildr #53, NewCo #14) were merged as a live bug fix; the HTML-twin PRs (#56, #15) were CLOSED unmerged so each project pulls the rule itself. Carve-out added: the cross-project night shift DOES open a draft PR per repo, because it executes the project's own approved tasks rather than importing a rule the project did not choose. Projects adopt via ./install.sh --repo <path> in their own session."
     },
     {
       "id": "html-twin-rule",

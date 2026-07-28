@@ -65,9 +65,12 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <h2>This repo never pushes to project repos</h2>
 <p>Added 2026-07-28. <strong>The method flows by reference, not by push.</strong> Changes to skills or conventions land <em>here</em>; each project repo <strong>pulls and re-installs in its own session</strong>, when that project is ready for them.</p>
 <ul>
-<li>A session working in <code>dev-ops-manual</code> **does not open PRs against SpecBuildr,</li>
+<li>A session working in <code>dev-ops-manual</code> **does not open method PRs against</li>
 </ul>
-<p>NewCoEndotest, or any other project.** It may note that an update is available; adopting it is the project&#x27;s own decision, in the project&#x27;s own chat, on the project&#x27;s own schedule.</p>
+<p>SpecBuildr, NewCoEndotest, or any other project.** It may note that an update is available; adopting it is the project&#x27;s own decision, in the project&#x27;s own chat, on the project&#x27;s own schedule.</p>
+<p><strong>The one carve-out: the night shift.</strong> The cross-project night shift lives in the method&#x27;s chat by design and <em>does</em> open a draft PR in each project it works. That is not a contradiction, because the two directions are opposites:</p>
+<div class="tablewrap"><table><thead><tr><th></th><th>Night shift</th><th>Method trickle-down</th></tr></thead><tbody><tr><td>Whose work</td><td>The <strong>project&#x27;s own</strong> tasks, from its own plan</td><td>The <strong>method&#x27;s</strong> changes</td></tr><tr><td>Gate</td><td>The owner approved that slate, that night</td><td>Nobody asked</td></tr><tr><td>Effect</td><td>Advances what the project already decided</td><td>Changes what the project <em>is</em></td></tr></tbody></table></div>
+<p>A cross-repo PR is legitimate when it executes work the project&#x27;s own plan already contains and the owner approved. It is not legitimate when it imports a rule the project didn&#x27;t choose.</p>
 <ul>
 <li>Each project adopts with <code>./install.sh --repo /path/to/&amp;lt;project&amp;gt;</code> from a</li>
 </ul>

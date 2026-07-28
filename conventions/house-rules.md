@@ -9,10 +9,24 @@ Added 2026-07-28. **The method flows by reference, not by push.** Changes to
 skills or conventions land *here*; each project repo **pulls and re-installs in
 its own session**, when that project is ready for them.
 
-- A session working in `dev-ops-manual` **does not open PRs against SpecBuildr,
-  NewCoEndotest, or any other project.** It may note that an update is
-  available; adopting it is the project's own decision, in the project's own
+- A session working in `dev-ops-manual` **does not open method PRs against
+  SpecBuildr, NewCoEndotest, or any other project.** It may note that an update
+  is available; adopting it is the project's own decision, in the project's own
   chat, on the project's own schedule.
+
+**The one carve-out: the night shift.** The cross-project night shift lives in
+the method's chat by design and *does* open a draft PR in each project it works.
+That is not a contradiction, because the two directions are opposites:
+
+| | Night shift | Method trickle-down |
+|---|---|---|
+| Whose work | The **project's own** tasks, from its own plan | The **method's** changes |
+| Gate | The owner approved that slate, that night | Nobody asked |
+| Effect | Advances what the project already decided | Changes what the project *is* |
+
+A cross-repo PR is legitimate when it executes work the project's own plan
+already contains and the owner approved. It is not legitimate when it imports a
+rule the project didn't choose.
 - Each project adopts with `./install.sh --repo /path/to/<project>` from a
   `dev-ops-manual` clone, then commits the re-installed `.claude/skills/` and
   whatever conventions it chose to restate.

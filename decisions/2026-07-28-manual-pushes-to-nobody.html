@@ -73,6 +73,18 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <li>a claim protocol that could not tell shipped work from live work.</li>
 </ul>
 <p>Both had one root cause: <strong>unclear ownership of a repo&#x27;s writes.</strong> Fixing the first two while leaving the manual free to push into everything would have left the biggest version of the problem in place — one repo able to modify all of them, with no project-side decision.</p>
+<h2>The carve-out: the night shift</h2>
+<p>The cross-project night shift lives in the method&#x27;s chat by design (owner instruction, 2026-07-28: &quot;the night shift is cross-project, so it needs access to everything and should be in this chat&quot;) and <strong>does</strong> open a draft PR per repo. That is not an exception to the principle — it is the other side of it:</p>
+<ul>
+<li>The night shift executes a <strong>project&#x27;s own approved tasks</strong>, from that</li>
+</ul>
+<p>project&#x27;s plan, on a slate the owner approved that night. It advances what the project already decided.</p>
+<ul>
+<li>Method trickle-down imports a <strong>rule the project didn&#x27;t choose</strong>. It changes</li>
+</ul>
+<p>what the project is.</p>
+<p>A cross-repo PR is legitimate when it does the first. It is not when it does the second.</p>
+<p><em>(This section was added the same day, after the original wording — &quot;a session working here does not open PRs against project repos&quot; — was read back and found to forbid the night shift outright.)</em></p>
 <h2>What this does not change</h2>
 <p>Claude Code loads skills from a repo&#x27;s own <code>.claude/skills/</code>, so a physical installed copy is unavoidable. This rule doesn&#x27;t remove the copy; it fixes <strong>who creates it and when</strong>. A project should never wake up to a method change it didn&#x27;t choose to adopt.</p>
 <p>A project running an older version of the method is a <strong>valid state</strong>, not drift to be corrected from outside. Pinning the installed commit in a project&#x27;s CLAUDE.md makes that explicit.</p>

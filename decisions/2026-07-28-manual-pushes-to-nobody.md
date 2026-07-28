@@ -28,6 +28,26 @@ first two while leaving the manual free to push into everything would have left
 the biggest version of the problem in place — one repo able to modify all of
 them, with no project-side decision.
 
+## The carve-out: the night shift
+
+The cross-project night shift lives in the method's chat by design (owner
+instruction, 2026-07-28: "the night shift is cross-project, so it needs access
+to everything and should be in this chat") and **does** open a draft PR per
+repo. That is not an exception to the principle — it is the other side of it:
+
+- The night shift executes a **project's own approved tasks**, from that
+  project's plan, on a slate the owner approved that night. It advances what the
+  project already decided.
+- Method trickle-down imports a **rule the project didn't choose**. It changes
+  what the project is.
+
+A cross-repo PR is legitimate when it does the first. It is not when it does the
+second.
+
+*(This section was added the same day, after the original wording — "a session
+working here does not open PRs against project repos" — was read back and found
+to forbid the night shift outright.)*
+
 ## What this does not change
 
 Claude Code loads skills from a repo's own `.claude/skills/`, so a physical
