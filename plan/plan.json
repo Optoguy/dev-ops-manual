@@ -18,13 +18,13 @@
   "tasks": [
     {
       "id": "plain-language-rule",
-      "title": "Write to the owner in plain language: lead with the ask, no abbreviations, one request per message",
+      "title": "Write to the owner in plain language, and end every response with clearly marked options",
       "owner": "agent",
       "priority": "P1",
       "status": "done",
       "done_date": "2026-07-28",
       "phase": "grow",
-      "note": "Owner feedback 2026-07-28: 'I need the instructions and requests you ask me to be more straightforward. I'm often confused about your responses and next steps.' Added to conventions/house-rules.md under Interaction and to the standing-preferences snippet that install.sh --prefs writes. Covers: lead with the ask; spell out every abbreviation every message; no internal nicknames from analysis; one ask per message; say where to click and what changes; short sentences; say plainly when nothing is needed. Repo-internal precision is unaffected - the rule governs what is said to the owner."
+      "note": "Owner feedback 2026-07-28: 'I need the instructions and requests you ask me to be more straightforward. I'm often confused about your responses and next steps.' Added to conventions/house-rules.md under Interaction and to the standing-preferences snippet that install.sh --prefs writes. Covers: lead with the ask; spell out every abbreviation every message; no internal nicknames from analysis; one ask per message; say where to click and what changes; short sentences; say plainly when nothing is needed. Repo-internal precision is unaffected - the rule governs what is said to the owner. Extended same day at the owner's request: every response ends with a numbered 'Your options' section (or 'Nothing for you to do'), recommended option marked, do-nothing option included when real, written out even when a clickable menu is also shown; never end with an open-ended 'let me know what you think'."
     },
     {
       "id": "three-linked-docs",

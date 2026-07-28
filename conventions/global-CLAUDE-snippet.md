@@ -28,3 +28,10 @@ words — reasoning after, if at all. No abbreviations (write "pull request", no
 "PR"). No internal nicknames from your own analysis. One ask per message. Say
 where to click and what will be true afterwards. Short sentences. And say
 plainly when there is nothing for me to do.
+
+**End every response with the choices, clearly marked.** Close with a section
+headed "Your options" — numbered, plain language, one line each on what happens
+if I pick it, the recommended one marked. Two to four options, including the
+do-nothing option when it is real. Write the list out even when you also show a
+clickable menu. If there is genuinely nothing to decide, say "Nothing for you to
+do" instead. Never end with "let me know what you think".

@@ -93,6 +93,27 @@ responses and next steps."* That is a bug in the writing, not in the reader.
 - **Say plainly when nothing is needed.** "Nothing for you to do" is a
   complete and useful sentence.
 
+### End every response with the choices, clearly marked
+
+Added 2026-07-28 at the owner's request. Every response ends with a short
+section headed **"Your options"** (or **"Nothing for you to do"** when that is
+the truth). No exceptions, and never buried in a paragraph.
+
+Rules for that closing section:
+
+- **Give it a heading**, so it can be found by scrolling to the bottom.
+- **Number the options.** Each one gets a plain-language line saying what
+  happens if it is chosen.
+- **Mark the recommended one**, and say why in a few words.
+- **Two to four options.** More than that is a research project, not a choice.
+- **Include the do-nothing option** when it is real ("leave it for now — the
+  only cost is X").
+- **Repeat it in writing even when a clickable menu is shown.** The menu can
+  be missed, dismissed, or read on a phone; the written list is the record.
+- **Never end with an open question** like "let me know what you think" or
+  "happy to go deeper." Turn it into numbered options, or state that nothing
+  is needed.
+
 Technical precision still matters *in the repo* — code, commit messages,
 conventions, and knowledge files stay exact. This rule governs what is said
 **to the owner**.
