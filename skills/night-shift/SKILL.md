@@ -29,9 +29,17 @@ declares), a task qualifies for the night shift only if ALL of these hold:
 1. **`owner: agent`** — never pick up the owner's tasks, even easy ones.
 2. **`status: todo` and unblocked** — nothing in `blocked_by` still open, and
    not already claimed. A task is claimed (in flight, not available) if it is
-   `status: in-progress`, OR an open/unmerged PR touches it, OR a branch is
-   ahead of the default branch on the same files. `in-progress` is a live
-   session's claim — respect it exactly like an open PR.
+   `status: in-progress`, OR an **open PR** touches its files. `in-progress` is
+   a live session's claim — respect it exactly like an open PR.
+
+   **Do not test "is a branch ahead of the default branch."** Under squash
+   merging — the house default — a merged branch's commits never become
+   ancestors of the default branch, so every past branch reads as "ahead,
+   touching these files" *forever*, and the false claims accumulate nightly.
+   (Found 2026-07-28: thirteen SpecBuildr branches all read as ahead,
+   including one merged four minutes earlier.) The two authoritative signals
+   are **open PR state** and **task status** — both self-clear when work
+   lands. A stale branch with no open PR is not a claim.
 3. **Needs no credential, no identity, no outside contact** — no API keys the
    repo doesn't have, no posting, no emailing, nothing under the owner's name.
    Drafting *for* the owner is fine; sending is not.

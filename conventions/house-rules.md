@@ -44,8 +44,10 @@ parallel. See [the decision record](../decisions/2026-07-26-claim-before-you-bui
 Before starting non-trivial work that matches a tracked task:
 
 1. Re-read the plan. A task is **available** only if it is `todo` **and** has no
-   open PR and no branch ahead of the default branch touching its files.
-   `in-progress` is someone's claim — respect it exactly like an open PR.
+   **open PR** touching its files. `in-progress` is someone's claim — respect it
+   exactly like an open PR. **Don't test branch-ahead-of-default**: with squash
+   merging, shipped branches read as "ahead" forever (see
+   [the 2026-07-28 decision](../decisions/2026-07-28-squash-merge-breaks-branch-claims.md)).
 2. **Claim it first**: set `status: in-progress` with a note
    `claimed <date> <who>`, regenerate the dashboard, and **push that one-line
    claim commit before building**.
