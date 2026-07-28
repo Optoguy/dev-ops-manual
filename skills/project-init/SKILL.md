@@ -68,9 +68,17 @@ Most projects want a bit of both. Scaffold the overlap, offer the rest.
      `python src/build_dashboard.py` to generate `dashboard/index.html`.
    - Also copy `plan-track/assets/render_docs.py` to `src/render_docs.py` —
      every markdown plan or to-do list gets a generated HTML twin (house rule).
+   - **Write the other two of the three linked documents** (house rule): 
+     `docs/STRATEGY.md` — why this exists, who it's for, the wedge, the evidence,
+     and what's still undecided — and `docs/BUSINESS-PLAN.md` — how it makes
+     money and what has to be true. Both come out of the step-1 interview; if an
+     answer isn't known yet, write the question down rather than inventing an
+     answer.
    - Add `docs/PLAN.md` (narrative phased plan) and `docs/BACKLOG.md` stubs,
-     then `python src/render_docs.py docs/PLAN.md docs/BACKLOG.md` so their
-     HTML versions exist from day one.
+     then `python src/render_docs.py docs/STRATEGY.md docs/BUSINESS-PLAN.md
+     docs/PLAN.md docs/BACKLOG.md` so the HTML twins exist from day one. The
+     renderer and the dashboard generator cross-link the trio automatically —
+     verify the nav strip appears on all three.
    - Hand ongoing tracking to `/plan-track`.
 
 5. **Lay down the rest of the skeleton** for the project shape:

@@ -3,6 +3,53 @@
 The operating contract every project inherits. Project `CLAUDE.md` files restate
 the parts that bind their repo; this file is the source of record.
 
+## This repo never pushes to project repos
+
+Added 2026-07-28. **The method flows by reference, not by push.** Changes to
+skills or conventions land *here*; each project repo **pulls and re-installs in
+its own session**, when that project is ready for them.
+
+- A session working in `dev-ops-manual` **does not open PRs against SpecBuildr,
+  NewCoEndotest, or any other project.** It may note that an update is
+  available; adopting it is the project's own decision, in the project's own
+  chat, on the project's own schedule.
+- Each project adopts with `./install.sh --repo /path/to/<project>` from a
+  `dev-ops-manual` clone, then commits the re-installed `.claude/skills/` and
+  whatever conventions it chose to restate.
+- **Why the copy still exists:** Claude Code loads skills from a repo's
+  `.claude/skills/`, so a physical install is unavoidable. What this rule fixes
+  is *who* installs and *when* — a project should never wake up to changes it
+  didn't ask for, and one chat should not be editing another project's repo.
+- **Version pinning is explicit:** a project's CLAUDE.md may name the
+  `dev-ops-manual` commit it installed from. A project running an older method
+  is a valid state, not drift to be "corrected" from outside.
+
+The reverse direction is encouraged: a project that discovers a better rule
+proposes it *here*, where it can benefit every project.
+
+## Every project carries three linked documents
+
+Added 2026-07-28. A project is legible when three questions have written
+answers, and each answer points at the other two:
+
+| Document | Answers | Lives at |
+|---|---|---|
+| **Strategy** | Why this exists, who it's for, what the wedge is | `docs/STRATEGY.md` |
+| **Business plan** | How it makes money, and what has to be true | `docs/BUSINESS-PLAN.md` |
+| **Task plan** | What happens next, and who owns it | `plan/plan.json` → `dashboard/index.html` |
+
+All three ship as HTML and **cross-link to each other** — the generators handle
+it. `render_docs.py` puts a nav strip on every rendered page, and
+`build_dashboard.py` puts the same strip on the dashboard; each links to
+whichever of the trio exist and marks the current one. A missing document
+simply doesn't appear, so a young project shows fewer chips rather than a dead
+link — add the file and the links appear on the next render.
+
+Strategy is a *document*, not a slide: the wedge, the evidence behind it, what
+would change the answer, and what is still undecided. When strategy shifts, the
+task plan usually should too — the cross-links exist so that mismatch is
+visible instead of quiet.
+
 ## Interaction
 
 - **Ask with buttons, not prose.** Any choice put to the owner — at any point,

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>External agents</title>
+<title>The manual pushes to nobody — projects pull</title>
 <style>
 :root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
   --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
@@ -59,44 +59,34 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </head>
 <body>
 <div class="wrap">
-<p class="src">Generated from external-agents.md — edit the markdown, not this file</p>
-<h1>External agents</h1>
-<p>Added 2026-07-27, after five parallel Devin sessions opened PRs that all collided on the same generated files in one repo.</p>
-<p>Any non-Claude agent working these repos follows <strong>the same contract</strong> as a Claude session. The rules aren&#x27;t Claude-specific; they&#x27;re what keeps parallel workers from destroying each other&#x27;s work.</p>
-<h2>The contract</h2>
-<ol>
-<li><strong>Point it at the repo&#x27;s <code>CLAUDE.md</code> first.</strong> That file is the contract; an</li>
-</ol>
-<p>agent that hasn&#x27;t read it can&#x27;t honor it.</p>
-<ol>
-<li><strong>Claim before you build.</strong> Claim as <code>(claimed &amp;lt;date&amp;gt; devin)</code> /</li>
-</ol>
-<p><code>status: in-progress</code> with a devin note, <strong>pushed before building</strong> — same protocol as everyone else. See <a href="house-rules.md">house-rules.md</a>.</p>
-<ol>
-<li><strong>Draft PRs only</strong>, one concern per PR.</li>
-<li><strong>Never hand-edit generated files</strong> — regenerate them.</li>
-<li><strong>Never two agents on overlapping file sets at once.</strong> This is the rule the</li>
-</ol>
-<p>five colliding PRs violated; the collision was in the <em>generated dashboards</em> every PR rebuilt.</p>
-<h2>What to dispatch</h2>
-<p><strong>Suitable:</strong> well-scoped, mechanically verifiable, self-contained file scope — tests, refactors, security hardening, migrations, mechanical fixes.</p>
-<p><strong>Not suitable:</strong> business content, judgment-laden positions, credentials, identity, plan reprioritization, anything under the owner&#x27;s name, or work that needs an approval gate mid-run.</p>
-<h2>The best use</h2>
-<p><strong>Adversarial review of agent-built work.</strong> A second, independently-built agent reviewing the first one&#x27;s output catches blind spots that more of the same agent will not. The most valuable Devin PR in this account&#x27;s history was the one that reviewed Claude-authored skills and found two real defects — a scaffold step that would clobber an existing generator, and a skill contradicting the repo&#x27;s own declared task source of truth.</p>
-<p>Run it in both directions: have Devin audit Claude&#x27;s work, and have Claude review and integrate Devin&#x27;s PRs rather than merging them blind.</p>
-<h2>Dispatch tagging</h2>
-<p>When proposing a slate of agent tasks, tag each one:</p>
+<p class="src">Generated from 2026-07-28-manual-pushes-to-nobody.md — edit the markdown, not this file</p>
+<h1>The manual pushes to nobody — projects pull</h1>
+<p><strong>Date:</strong> 2026-07-28</p>
+<h2>The decision</h2>
+<p><code>dev-ops-manual</code> is a <strong>source, not a controller.</strong> A session working here does not open PRs against project repos. Method changes land here; each project <strong>pulls and re-installs in its own session</strong>, on its own schedule.</p>
+<p>The reverse direction stays open: a project that finds a better rule proposes it here, where every project can inherit it.</p>
+<h2>Why</h2>
+<p>The owner asked the question directly, and it&#x27;s the right one. On this date a single dev-ops session pushed skill and convention changes into SpecBuildr (PR #56) and NewCoEndotest (PR #15) — landing changes in two project repos from a chat that owns neither.</p>
+<p>That is the same failure pattern the day had already produced twice:</p>
 <ul>
-<li><strong>run-here</strong> — bookkeeping, approval gates, judgment content, Routines,</li>
+<li>two chats writing the same repo, generating adjacent duplicate work;</li>
+<li>a claim protocol that could not tell shipped work from live work.</li>
 </ul>
-<p>credentials, identity.</p>
+<p>Both had one root cause: <strong>unclear ownership of a repo&#x27;s writes.</strong> Fixing the first two while leaving the manual free to push into everything would have left the biggest version of the problem in place — one repo able to modify all of them, with no project-side decision.</p>
+<h2>What this does not change</h2>
+<p>Claude Code loads skills from a repo&#x27;s own <code>.claude/skills/</code>, so a physical installed copy is unavoidable. This rule doesn&#x27;t remove the copy; it fixes <strong>who creates it and when</strong>. A project should never wake up to a method change it didn&#x27;t choose to adopt.</p>
+<p>A project running an older version of the method is a <strong>valid state</strong>, not drift to be corrected from outside. Pinning the installed commit in a project&#x27;s CLAUDE.md makes that explicit.</p>
+<h2>The transitional exception</h2>
+<p>SpecBuildr #56 and NewCoEndotest #15 were already open when this rule was written. Their content is verified and useful; the <em>process</em> was wrong, not the change. They may be merged as-is — the rule binds from here forward.</p>
+<h2>Trickle-down</h2>
 <ul>
-<li><strong>Devin-suitable</strong> — mechanically verifiable, self-contained, no house</li>
+<li><code>conventions/house-rules.md</code> — new leading section, &quot;This repo never pushes to</li>
 </ul>
-<p>bookkeeping.</p>
-<p>The owner decides; the tag just makes the choice one click instead of a conversation.</p>
-<h2>Merging external PRs</h2>
-<p>Expect conflicts in generated output when several land together. The house resolution is always the same: <strong>merge one, regenerate, then rebase the next</strong> — never hand-merge a generated file. For plan files, union by task id and prefer the more-progressed status. Verify after each merge (tests, lint gate, build) before taking the next one.</p>
+<p>project repos.&quot;</p>
+<ul>
+<li>Each project&#x27;s CLAUDE.md, when that project next adopts: state which</li>
+</ul>
+<p><code>dev-ops-manual</code> version it installed from, and that updates arrive by pull.</p>
 </div>
 </body>
 </html>

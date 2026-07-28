@@ -33,6 +33,12 @@ body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
 .wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
 .src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
   margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
 h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
 h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
   border-bottom:1px solid var(--line); }
@@ -188,7 +194,58 @@ def render(md):
     return "\n".join(out)
 
 
-def page(md, src_name):
+# The three linked documents every project carries, plus the narrative plan.
+# Each generated page navigates to whichever of these exist — see house-rules.
+TRIO = [
+    ("docs/STRATEGY.html", "Strategy"),
+    ("docs/BUSINESS-PLAN.html", "Business plan"),
+    ("dashboard/index.html", "Task plan"),
+    ("docs/PLAN.html", "Roadmap"),
+]
+
+
+def repo_root(start):
+    """Walk up from a file to the repo root (.git, or a plan/ + docs/ pair)."""
+    d = os.path.dirname(os.path.abspath(start)) or "."
+    while True:
+        if (os.path.isdir(os.path.join(d, ".git"))
+                or os.path.isdir(os.path.join(d, "plan"))
+                or os.path.isdir(os.path.join(d, "dashboard"))):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            return None
+        d = parent
+
+
+def nav(md_path, planned=()):
+    """Cross-links to the project's strategy / business plan / task plan.
+
+    Emitted only for targets that exist or are being written in this same run
+    (`planned`), so a project without a business plan yet simply shows fewer
+    links — never a dead one, and never one that depends on render order.
+    """
+    root = repo_root(md_path)
+    if not root:
+        return ""
+    here = os.path.abspath(md_path[:-3] + ".html")
+    items = []
+    for rel, label in TRIO:
+        target = os.path.join(root, rel)
+        if not (os.path.exists(target) or os.path.abspath(target) in planned):
+            continue
+        if os.path.abspath(target) == here:
+            items.append("<span>%s</span>" % html.escape(label))
+        else:
+            href = os.path.relpath(target, os.path.dirname(here)).replace(os.sep, "/")
+            items.append('<a href="%s">%s</a>' % (html.escape(href, quote=True),
+                                                  html.escape(label)))
+    if len(items) < 2:
+        return ""
+    return '<nav class="nav">%s</nav>' % "".join(items)
+
+
+def page(md, src_name, md_path=None, planned=()):
     title = "Plan"
     for line in md.split("\n"):
         if line.startswith("# "):
@@ -203,12 +260,13 @@ def page(md, src_name):
 </head>
 <body>
 <div class="wrap">
-<p class="src">Generated from %s — edit the markdown, not this file</p>
+%s<p class="src">Generated from %s — edit the markdown, not this file</p>
 %s
 </div>
 </body>
 </html>
-""" % (html.escape(title), CSS, html.escape(src_name), render(md)))
+""" % (html.escape(title), CSS, nav(md_path, planned) if md_path else "",
+       html.escape(src_name), render(md)))
 
 
 def main():
@@ -217,13 +275,16 @@ def main():
     if not args:
         sys.exit("usage: render_docs.py [--check] <file.md> [file.md ...]")
 
+    planned = {os.path.abspath(p[:-3] + ".html")
+               for p in args if p.endswith(".md") and os.path.isfile(p)}
+
     stale, wrote = [], 0
     for path in args:
         if not path.endswith(".md") or not os.path.isfile(path):
             print("skip (not a markdown file): %s" % path); continue
         md = open(path, encoding="utf-8").read()
         out_path = path[:-3] + ".html"
-        rendered = page(md, os.path.basename(path))
+        rendered = page(md, os.path.basename(path), path, planned)
         if check:
             current = (open(out_path, encoding="utf-8").read()
                        if os.path.exists(out_path) else None)

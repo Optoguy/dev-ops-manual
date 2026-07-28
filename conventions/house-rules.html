@@ -17,6 +17,12 @@ body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
 .wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
 .src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
   margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
 h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
 h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
   border-bottom:1px solid var(--line); }
@@ -56,6 +62,30 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <p class="src">Generated from house-rules.md — edit the markdown, not this file</p>
 <h1>House rules</h1>
 <p>The operating contract every project inherits. Project <code>CLAUDE.md</code> files restate the parts that bind their repo; this file is the source of record.</p>
+<h2>This repo never pushes to project repos</h2>
+<p>Added 2026-07-28. <strong>The method flows by reference, not by push.</strong> Changes to skills or conventions land <em>here</em>; each project repo <strong>pulls and re-installs in its own session</strong>, when that project is ready for them.</p>
+<ul>
+<li>A session working in <code>dev-ops-manual</code> **does not open PRs against SpecBuildr,</li>
+</ul>
+<p>NewCoEndotest, or any other project.** It may note that an update is available; adopting it is the project&#x27;s own decision, in the project&#x27;s own chat, on the project&#x27;s own schedule.</p>
+<ul>
+<li>Each project adopts with <code>./install.sh --repo /path/to/&amp;lt;project&amp;gt;</code> from a</li>
+</ul>
+<p><code>dev-ops-manual</code> clone, then commits the re-installed <code>.claude/skills/</code> and whatever conventions it chose to restate.</p>
+<ul>
+<li><strong>Why the copy still exists:</strong> Claude Code loads skills from a repo&#x27;s</li>
+</ul>
+<p><code>.claude/skills/</code>, so a physical install is unavoidable. What this rule fixes is <em>who</em> installs and <em>when</em> — a project should never wake up to changes it didn&#x27;t ask for, and one chat should not be editing another project&#x27;s repo.</p>
+<ul>
+<li><strong>Version pinning is explicit:</strong> a project&#x27;s CLAUDE.md may name the</li>
+</ul>
+<p><code>dev-ops-manual</code> commit it installed from. A project running an older method is a valid state, not drift to be &quot;corrected&quot; from outside.</p>
+<p>The reverse direction is encouraged: a project that discovers a better rule proposes it <em>here</em>, where it can benefit every project.</p>
+<h2>Every project carries three linked documents</h2>
+<p>Added 2026-07-28. A project is legible when three questions have written answers, and each answer points at the other two:</p>
+<div class="tablewrap"><table><thead><tr><th>Document</th><th>Answers</th><th>Lives at</th></tr></thead><tbody><tr><td><strong>Strategy</strong></td><td>Why this exists, who it&#x27;s for, what the wedge is</td><td><code>docs/STRATEGY.md</code></td></tr><tr><td><strong>Business plan</strong></td><td>How it makes money, and what has to be true</td><td><code>docs/BUSINESS-PLAN.md</code></td></tr><tr><td><strong>Task plan</strong></td><td>What happens next, and who owns it</td><td><code>plan/plan.json</code> → <code>dashboard/index.html</code></td></tr></tbody></table></div>
+<p>All three ship as HTML and <strong>cross-link to each other</strong> — the generators handle it. <code>render_docs.py</code> puts a nav strip on every rendered page, and <code>build_dashboard.py</code> puts the same strip on the dashboard; each links to whichever of the trio exist and marks the current one. A missing document simply doesn&#x27;t appear, so a young project shows fewer chips rather than a dead link — add the file and the links appear on the next render.</p>
+<p>Strategy is a <em>document</em>, not a slide: the wedge, the evidence behind it, what would change the answer, and what is still undecided. When strategy shifts, the task plan usually should too — the cross-links exist so that mismatch is visible instead of quiet.</p>
 <h2>Interaction</h2>
 <ul>
 <li><strong>Ask with buttons, not prose.</strong> Any choice put to the owner — at any point,</li>

@@ -17,6 +17,26 @@
   ],
   "tasks": [
     {
+      "id": "three-linked-docs",
+      "title": "Every project carries strategy + business plan + task plan, cross-linked in HTML",
+      "owner": "agent",
+      "priority": "P1",
+      "status": "done",
+      "done_date": "2026-07-28",
+      "phase": "grow",
+      "note": "Owner rule 2026-07-28. render_docs.py and build_dashboard.py both emit a nav strip linking docs/STRATEGY.html, docs/BUSINESS-PLAN.html and dashboard/index.html, marking the current page and skipping targets that do not exist (no dead links). Nav is order-independent: a render run counts its own planned outputs, so cross-links do not depend on which file renders first (bug found and fixed in test). Rule written into house-rules.md, plan-track SKILL.md and project-init step 4."
+    },
+    {
+      "id": "no-push-to-projects",
+      "title": "The manual pushes to nobody — projects pull and install themselves",
+      "owner": "agent",
+      "priority": "P1",
+      "status": "done",
+      "done_date": "2026-07-28",
+      "phase": "sync",
+      "note": "Owner correction 2026-07-28: a dev-ops session had opened PRs into SpecBuildr (#56) and NewCoEndotest (#15) — one repo modifying two it does not own, the largest version of the ownership problem the day had already hit twice. Rule + decision record added; those two PRs stand as the transitional exception. Projects adopt via ./install.sh --repo <path> in their own session."
+    },
+    {
       "id": "html-twin-rule",
       "title": "Every markdown plan or to-do list gets a generated HTML twin",
       "owner": "agent",

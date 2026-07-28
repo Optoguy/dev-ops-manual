@@ -131,6 +131,33 @@ def render_next_up(tasks, phase_titles):
     return f'<div class="next-up"><h2>⏭ Next up <span class="count">by priority</span></h2><ul class="tasks">{"".join(rows)}</ul></div>'
 
 
+# The three linked documents every project carries (see house-rules.md).
+# Paths are relative to the repo root; the dashboard lives in dashboard/.
+TRIO = [
+    ("docs/STRATEGY.html", "Strategy"),
+    ("docs/BUSINESS-PLAN.html", "Business plan"),
+    ("dashboard/index.html", "Task plan"),
+    ("docs/PLAN.html", "Roadmap"),
+]
+
+
+def render_nav():
+    """Cross-links to the project's strategy and business plan.
+
+    Only emits links whose targets exist, so a project that hasn't written its
+    business plan yet shows fewer chips rather than a dead link.
+    """
+    items = []
+    for rel, label in TRIO:
+        target = ROOT / rel
+        if rel == "dashboard/index.html":
+            items.append(f"<span>{esc(label)}</span>")
+            continue
+        if target.exists():
+            items.append(f'<a href="../{rel}">{esc(label)}</a>')
+    return f'<nav class="nav">{"".join(items)}</nav>' if len(items) > 1 else ""
+
+
 def render(data):
     tasks = data.get("tasks", [])
     phase_titles = {p["id"]: p.get("title", p["id"]) for p in data.get("phases", []) if "id" in p}
@@ -170,6 +197,7 @@ def render(data):
         total=total,
         tiles=tile(total, "tasks") + tile(done, "done") + tile(in_prog, "in progress")
         + tile(blocked, "blocked") + tile(len(me), "yours") + tile(len(agent), "agent"),
+        nav=render_nav(),
         next_up=render_next_up(tasks, phase_titles),
         me_col=render_owner_column("me", me, phase_titles),
         agent_col=render_owner_column("agent", agent, phase_titles)
@@ -200,6 +228,12 @@ TEMPLATE = """<!doctype html>
   .wrap {{ max-width:1100px; margin:0 auto; padding:28px 20px 60px; }}
   header {{ display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:6px; }}
   header h1 {{ font-size:24px; margin:0; }}
+  .nav {{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }}
+  .nav a, .nav span {{ font-size:13px; padding:6px 13px; border-radius:20px;
+    text-decoration:none; border:1px solid var(--line); color:var(--muted); background:var(--card); }}
+  .nav a:hover {{ border-color:var(--accent); color:var(--accent); }}
+  .nav span {{ background:var(--accent-soft, rgba(31,111,74,.12)); border-color:var(--accent);
+    color:var(--accent); font-weight:600; }}
   header .updated {{ color:var(--dim); font-size:13px; }}
   .bar {{ height:10px; background:var(--panel2); border-radius:6px; overflow:hidden; margin:14px 0 4px; }}
   .bar > i {{ display:block; height:100%; width:{pct}%; background:var(--done); }}
@@ -255,6 +289,7 @@ TEMPLATE = """<!doctype html>
     <h1>{project}</h1>
     <span class="updated">updated {updated}</span>
   </header>
+  {nav}
   <div class="bar"><i></i></div>
   <div class="barlabel">{done} of {total} tasks done · {pct}%</div>
   <div class="tiles">{tiles}</div>

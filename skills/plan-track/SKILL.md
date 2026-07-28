@@ -76,6 +76,24 @@ The markdown is the source; **the HTML is generated and never hand-edited** —
 same contract as the dashboard. Render and commit both in the same commit, or
 the pair goes stale and the HTML starts lying.
 
+## The three linked documents
+
+Every project answers three questions in writing, and each answer links to the
+other two: **strategy** (`docs/STRATEGY.md` — why this exists and what the
+wedge is), **business plan** (`docs/BUSINESS-PLAN.md` — how it makes money and
+what must be true), and **task plan** (`plan/plan.json` → `dashboard/index.html`
+— what's next and who owns it).
+
+Cross-linking is automatic: `render_docs.py` puts a nav strip on every page it
+renders and `build_dashboard.py` puts the same strip on the dashboard. Each
+links to whichever of the trio exist and marks the current one, so a project
+without a business plan yet shows fewer chips instead of a dead link — write
+the file and the links appear on the next render.
+
+Keep them honest together. A strategy change that leaves the task plan
+untouched is usually a strategy nobody is executing; the links exist to make
+that visible.
+
 ## Procedure
 
 1. **Create/refresh `plan/plan.json`.** Break the work into tasks; give each an
