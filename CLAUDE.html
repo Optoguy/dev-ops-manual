@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLAUDE.md — Dev Ops Manual</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="src">Generated from CLAUDE.md — edit the markdown, not this file</p>
+<h1>CLAUDE.md — Dev Ops Manual</h1>
+<p>Context file for Claude Code sessions. Read this before doing anything in this repo.</p>
+<h2>What this repo is</h2>
+<p>The <strong>source of record for how work happens</strong> across every project — the portable skill suite, the operating conventions, and the dated decisions behind them. Nothing here is project-specific. Project repos install <em>from</em> here.</p>
+<p>Its companion is the &quot;Dev Operating Manual&quot; chat session, which owns this repo and the cross-project night shift. Project-specific work and Routines live in each project&#x27;s own chat (see <code>conventions/routines.md</code>).</p>
+<h2>Repo map</h2>
+<ul>
+<li><code>README.md</code> — the front door: install commands, the skill index, where the</li>
+</ul>
+<p>method is used. Written to read well on GitHub from a phone.</p>
+<ul>
+<li><code>skills/</code> — the 14 portable skills, each a directory with <code>SKILL.md</code> and</li>
+</ul>
+<p>optional <code>assets/</code>. <strong>This is the source of record</strong>; project repos hold installed copies under their own <code>.claude/skills/</code>.</p>
+<ul>
+<li><code>install.sh</code> — copies skills into <code>~/.claude/skills/</code> (<code>--global</code>) or a</li>
+</ul>
+<p>project&#x27;s <code>.claude/skills/</code> (<code>--repo &amp;lt;path&amp;gt;</code>), and optionally writes the standing preferences block into <code>~/.claude/CLAUDE.md</code> (<code>--prefs</code>).</p>
+<ul>
+<li><code>conventions/</code> — <code>house-rules.md</code> (the operating contract), <code>routines.md</code></li>
+</ul>
+<p>(scheduled agents, session binding, the container model), <code>external-agents.md</code> (the Devin contract), <code>global-CLAUDE-snippet.md</code> (what <code>--prefs</code> writes).</p>
+<ul>
+<li><code>decisions/</code> — dated records of choices that changed how work happens.</li>
+</ul>
+<h2>Conventions for working <em>in</em> this repo</h2>
+<ul>
+<li><strong>A skill edit is a fleet-wide change.</strong> After editing anything under</li>
+</ul>
+<p><code>skills/</code>, note which project repos need <code>./install.sh --repo &amp;lt;path&amp;gt;</code> re-run. An installed copy that has drifted from source is the failure mode this repo exists to prevent.</p>
+<ul>
+<li><strong>Skills stay portable.</strong> No project-specific paths, names, or domain</li>
+</ul>
+<p>assumptions inside <code>skills/</code> — if a rule only applies to one project, it belongs in that project&#x27;s <code>CLAUDE.md</code>, not here.</p>
+<ul>
+<li><strong>Conventions get dated provenance.</strong> When a rule changes because something</li>
+</ul>
+<p>broke, say what broke and when, and add a <code>decisions/</code> record if it changes the contract. The rules are more persuasive with the scar tissue attached.</p>
+<ul>
+<li><strong><code>README.md</code> is a real deliverable</strong>, not an afterthought — the owner reads</li>
+</ul>
+<p>it on a phone. Keep the index accurate when skills are added or renamed.</p>
+<ul>
+<li><strong>Git:</strong> scoped staging (<code>git add &amp;lt;paths&amp;gt;</code>, never <code>git add -A</code>), plain dated</li>
+</ul>
+<p>commit messages, don&#x27;t rewrite history, PR-based for substantive changes, <strong>never push without the owner&#x27;s go-ahead.</strong></p>
+<h2>Interaction — how to talk to the owner</h2>
+<p>Write so the next step is obvious. (Owner instruction, 2026-07-28: dense, jargon-heavy replies are hard to act on.)</p>
+<ul>
+<li><strong>Lead with the ask.</strong> The first sentence says what you need from</li>
+</ul>
+<p>the owner. Reasoning comes after, and is optional.</p>
+<ul>
+<li><strong>No abbreviations.</strong> Write &quot;pull request&quot;, not &quot;PR&quot;. Spell out every short</li>
+</ul>
+<p>form the first time it appears — in every message, not just the first one of the conversation.</p>
+<ul>
+<li><strong>No nicknames invented during your own analysis.</strong> Labels like &quot;option A2&quot;</li>
+</ul>
+<p>or &quot;the trio&quot; mean nothing to a reader who wasn&#x27;t in that thread. Name the actual thing.</p>
+<ul>
+<li><strong>One ask per message.</strong> If two things need deciding, ask the more important</li>
+</ul>
+<p>one and hold the other.</p>
+<ul>
+<li><strong>Say where to click and what changes.</strong> &quot;Open this link and click the green</li>
+</ul>
+<p>Merge button&quot; beats &quot;merge #53&quot;. Then say what will be true afterwards.</p>
+<ul>
+<li><strong>Short sentences, one idea each.</strong></li>
+<li><strong>Send deliverables as files</strong>, not buried in chat text. A report that exists</li>
+</ul>
+<p>only inside a reply gets missed.</p>
+<p><strong>End every response with the choices, clearly marked.</strong> Close with a section headed <strong>&quot;Your options&quot;</strong>: numbered, plain language, one line each on what happens if that option is chosen, the recommended one marked, two to four options, and include the do-nothing option when it is a real choice. Show the clickable menu as well, but always write the list out too — a menu can be missed or read on a phone. When there is genuinely nothing to decide, write <strong>&quot;Nothing for you to do&quot;</strong> instead. Never end with an open-ended &quot;let me know what you think&quot;.</p>
+<p>This governs what is said <strong>to the owner</strong>. Everything inside the repo — code, commit messages, conventions and knowledge files — stays technically precise.</p>
+<p>Everything else in <code>conventions/house-rules.md</code> applies here too.</p>
+<h2>Local copy</h2>
+<p>The owner keeps a clone at <code>C:\Users\dancg\OneDrive\Projects\dev-ops-manual</code> for reading offline. Git is the only sync channel between that copy, this repo, and any session&#x27;s container.</p>
+</div>
+</body>
+</html>

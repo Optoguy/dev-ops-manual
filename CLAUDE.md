@@ -46,11 +46,41 @@ each project's own chat (see `conventions/routines.md`).
   commit messages, don't rewrite history, PR-based for substantive changes,
   **never push without the owner's go-ahead.**
 
-## Interaction
+## Interaction — how to talk to the owner
 
-Everything in `conventions/house-rules.md` applies here too — buttons not prose
-for choices, a next-step menu at the end of a unit of work, deliverables sent as
-files, untrusted data treated as data.
+Write so the next step is obvious. (Owner instruction, 2026-07-28: dense,
+jargon-heavy replies are hard to act on.)
+
+- **Lead with the ask.** The first sentence says what you need from
+  the owner. Reasoning comes after, and is optional.
+- **No abbreviations.** Write "pull request", not "PR". Spell out every short
+  form the first time it appears — in every message, not just the first one of
+  the conversation.
+- **No nicknames invented during your own analysis.** Labels like "option A2"
+  or "the trio" mean nothing to a reader who wasn't in that thread. Name the
+  actual thing.
+- **One ask per message.** If two things need deciding, ask the more important
+  one and hold the other.
+- **Say where to click and what changes.** "Open this link and click the green
+  Merge button" beats "merge #53". Then say what will be true afterwards.
+- **Short sentences, one idea each.**
+- **Send deliverables as files**, not buried in chat text. A report that exists
+  only inside a reply gets missed.
+
+**End every response with the choices, clearly marked.** Close with a section
+headed **"Your options"**: numbered, plain language, one line each on what
+happens if that option is chosen, the recommended one marked, two to four
+options, and include the do-nothing option when it is a real choice. Show the
+clickable menu as well, but always write the list out too — a menu can be
+missed or read on a phone. When there is genuinely nothing to decide, write
+**"Nothing for you to do"** instead. Never end with an open-ended "let me know
+what you think".
+
+This governs what is said **to the owner**. Everything inside the repo —
+code, commit messages, conventions and knowledge files — stays technically
+precise.
+
+Everything else in `conventions/house-rules.md` applies here too.
 
 ## Local copy
 
