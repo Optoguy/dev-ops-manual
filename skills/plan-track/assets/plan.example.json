@@ -1,0 +1,20 @@
+{
+  "_comment": "Single source of truth for the plan and dashboard. Edit THIS file, then regenerate the dashboard with `python src/build_dashboard.py`. Every task carries owner (me|agent), priority (P0|P1|P2), and status (todo|in-progress|blocked|done).",
+  "project": "Example Project",
+  "updated": "2026-07-22",
+  "phases": [
+    { "id": "p0", "title": "Phase 0 — Foundation", "goal": "Stand the project up and make it run locally.", "deliverable": "Repo scaffolded, dev server runs, one page renders." },
+    { "id": "p1", "title": "Phase 1 — Core loop", "goal": "The one thing the product does, end to end.", "deliverable": "A user can complete the core flow and get output." },
+    { "id": "p2", "title": "Phase 2 — Ship", "goal": "Deploy, harden, instrument.", "deliverable": "Live on a real URL, funnel measured." }
+  ],
+  "tasks": [
+    { "id": "t1", "title": "Set the production API key / secrets", "owner": "me", "priority": "P0", "status": "blocked", "phase": "p2", "note": "Agents can't provision credentials — everything downstream waits on this." },
+    { "id": "t2", "title": "Register the domain", "owner": "me", "priority": "P1", "status": "todo", "phase": "p2", "note": "Needed before the deploy step can point DNS." },
+    { "id": "t3", "title": "Approve the launch post before it goes out", "owner": "me", "priority": "P2", "status": "todo", "phase": "p2", "note": "Agent drafts it; you press send under your own name." },
+    { "id": "t4", "title": "Scaffold repo (CLAUDE.md, .claude, docs/plan)", "owner": "agent", "priority": "P0", "status": "done", "phase": "p0", "done_date": "2026-07-20" },
+    { "id": "t5", "title": "Build the shared engine + one thin view", "owner": "agent", "priority": "P0", "status": "in-progress", "phase": "p1", "note": "Stable /api contract; provider behind a switch." },
+    { "id": "t6", "title": "Wire the funnel beacon (instrument first)", "owner": "agent", "priority": "P1", "status": "todo", "phase": "p2", "blocked_by": ["t5"] },
+    { "id": "t7", "title": "Security-hardening pass before real traffic", "owner": "agent", "priority": "P1", "status": "todo", "phase": "p2", "blocked_by": ["t5"] },
+    { "id": "t8", "title": "Draft the first SEO landing page", "owner": "agent", "priority": "P2", "status": "todo", "phase": "p2" }
+  ]
+}

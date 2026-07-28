@@ -1,0 +1,20 @@
+{
+  "_comment": "Permission allowlist for autonomous work. Safe read-only git + the lint gate are pre-allowed; anything that leaves the repo (push) asks first. Add repo-specific safe commands to 'allow' as they earn their place — see the /fewer-permission-prompts skill.",
+  "permissions": {
+    "allow": [
+      "Edit",
+      "Write",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git mv:*)",
+      "Bash(python src/brain_lint.py:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)"
+    ]
+  }
+}
