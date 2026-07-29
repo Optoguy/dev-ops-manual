@@ -80,9 +80,9 @@
       "title": "Drift check: installed .claude/skills/ copies vs this repo's source",
       "owner": "agent",
       "priority": "P2",
-      "status": "todo",
+      "status": "done",
       "phase": "sync",
-      "note": "Two copies of a skill always drift eventually — that risk is why this repo exists. Diff each project's installed copies against skills/, report differences, and open a PR re-installing where they've diverged."
+      "note": "Two copies of a skill always drift eventually — that risk is why this repo exists. Diff each project's installed copies against skills/, report differences, and open a PR re-installing where they've diverged. Claimed 2026-07-29 night-shift; scoped to report-only (this repo never pushes into project repos, 2026-07-28). Done 2026-07-29 night-shift: reports/2026-07-29-skills-drift.md + scripts/skills_drift.py; fleet is one commit behind (2026-07-28), no in-place edits found."
     },
     {
       "id": "conventions-coverage",

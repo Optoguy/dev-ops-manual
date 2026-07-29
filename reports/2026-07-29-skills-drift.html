@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skill drift report — 2026-07-29</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<p class="src">Generated from 2026-07-29-skills-drift.md — edit the markdown, not this file</p>
+<h1>Skill drift report — 2026-07-29</h1>
+<p><strong>Source of record:</strong> <code>dev-ops-manual</code> @ <code>ddad547</code> (<code>origin/main</code>), 24 files under <code>skills/</code>. Last change under <code>skills/</code>: <code>b2e99af</code>, 2026-07-28 — <em>&quot;manual pushes to nobody; three linked documents cross-linked in HTML.&quot;</em></p>
+<p><strong>Scope:</strong> the installed <code>.claude/skills/</code> copies in SpecBuildr, NewCoEndotest and medtech-intel-QMSR, each read from that project&#x27;s default branch, plus the <em>live</em> generator scripts each project actually runs.</p>
+<p><strong>This report changes nothing in any project.</strong> Adopting an update is the project&#x27;s own decision, in the project&#x27;s own session — see <code>conventions/house-rules.md</code>, &quot;This repo never pushes to project repos.&quot; The task&#x27;s original wording (&quot;open a PR re-installing where they&#x27;ve diverged&quot;) was written before that rule and is superseded by it.</p>
+<p>Reproduce with:</p>
+<pre><code>python scripts/skills_drift.py /path/to/SpecBuildr /path/to/NewCoEndotest /path/to/medtech-intel-QMSR</code></pre>
+<hr>
+<h2>Headline</h2>
+<p><strong>The fleet is one change behind, and it is the same change everywhere.</strong> Every divergence found traces to the 2026-07-28 commit that added the HTML-twin rule and the cross-links between strategy, business plan and task plan. No project has drifted in the dangerous sense — nobody has locally edited an installed skill and let it diverge from source. Twenty of 24 files are byte-identical in all three projects.</p>
+<p>One divergence is <strong>not</strong> drift and must not be &quot;corrected&quot;: NewCoEndotest&#x27;s own generator scripts are a deliberate fork on a different task schema. Details below.</p>
+<hr>
+<h2>Per project</h2>
+<h3>SpecBuildr — <code>origin/main</code></h3>
+<p>23 installed, <strong>20 identical</strong>, 3 behind, 1 missing, 0 unexpected.</p>
+<div class="tablewrap"><table><thead><tr><th>File</th><th>Source</th><th>Installed</th><th>What is missing</th></tr></thead><tbody><tr><td><code>plan-track/SKILL.md</code></td><td>149 lines</td><td>106</td><td>The HTML-twin section and the three-linked-documents section</td></tr><tr><td><code>plan-track/assets/build_dashboard.py</code></td><td>340 lines</td><td>305</td><td>The cross-link navigation strip (<code>TRIO</code>, <code>render_nav()</code>, <code>.nav</code> styling)</td></tr><tr><td><code>project-init/SKILL.md</code></td><td>115 lines</td><td>103</td><td>Scaffolding steps for <code>render_docs.py</code>, <code>STRATEGY.md</code> and <code>BUSINESS-PLAN.md</code></td></tr><tr><td><code>plan-track/assets/render_docs.py</code></td><td>311 lines</td><td><em>absent</em></td><td>The markdown-to-HTML renderer itself</td></tr></tbody></table></div>
+<p><strong>Already addressed.</strong> Open draft pull request <a href="https://github.com/Optoguy/SpecBuildr/pull/58">#58</a> updates all three files and adds the renderer. Nothing to do here beyond merging it.</p>
+<p><strong>Live script — do not overwrite.</strong> SpecBuildr runs <code>scripts/build_dashboard.py</code>, not the copy under <code>.claude/skills/</code>. It is the source version with the <code>src/</code> paths corrected to <code>scripts/</code>. A wholesale re-install would break those paths. Pull request #58 takes the correct approach: port the navigation feature in, keep the path corrections.</p>
+<p><code>brain_lint.py</code> is byte-identical to source.</p>
+<h3>NewCoEndotest — <code>origin/master</code></h3>
+<p>29 installed, <strong>20 identical</strong>, 3 behind, 1 missing, 6 project-owned.</p>
+<p>Behind on exactly the same four files as SpecBuildr, for the same reason.</p>
+<p><strong>Declared, not accidental.</strong> Its <code>CLAUDE.md</code> pins the installed version to <code>dev-ops-manual</code> commit <code>ecb67e5</code> (2026-07-28) and states the manual is a read-only reference to be adopted on this repo&#x27;s own schedule. Under the house rules a project running an older method is a valid state, not drift to be corrected from outside. This entry is informational.</p>
+<p><strong>Six skills are NewCoEndotest&#x27;s own</strong> and correctly absent from this repo: <code>brain-capture</code>, <code>brain-maintain</code>, <code>brain-query</code>, <code>brain-sync</code>, <code>brain-verify</code>, <code>decision</code>. They predate the portable suite and encode that project&#x27;s own brain conventions.</p>
+<p><strong>Its live generator scripts are a deliberate fork, not drift.</strong> <code>src/build_dashboard.py</code> differs from the portable version across ~513 lines because it reads <code>brain/_meta/launch-plan.json</code> — a different schema, with a different owner vocabulary (<code>founder</code> / <code>agents</code> / <code>optoguy</code> rather than <code>me</code> / <code>agent</code>). <code>src/brain_lint.py</code> and the two test files under <code>tests/</code> are likewise that project&#x27;s own. <strong>Re-installing any of these would destroy working code.</strong> They should never appear in a drift-remediation list.</p>
+<h3>medtech-intel-QMSR — <code>origin/main</code></h3>
+<p>24 installed, <strong>20 identical</strong>, 4 behind, 0 missing, 0 unexpected.</p>
+<div class="tablewrap"><table><thead><tr><th>File</th><th>Source</th><th>Installed</th></tr></thead><tbody><tr><td><code>plan-track/SKILL.md</code></td><td>149 lines</td><td>131</td></tr><tr><td><code>plan-track/assets/build_dashboard.py</code></td><td>340 lines</td><td>305</td></tr><tr><td><code>plan-track/assets/render_docs.py</code></td><td>311 lines</td><td>250</td></tr><tr><td><code>project-init/SKILL.md</code></td><td>115 lines</td><td>107</td></tr></tbody></table></div>
+<p><strong>One concrete consequence, worth fixing.</strong> This repo was scaffolded on 2026-07-28 and picked up a mid-day copy of <code>render_docs.py</code> — the version before the cross-link navigation was added. Its copy has no <code>TRIO</code> table, no <code>nav()</code> function and no <code>planned</code> set. Two effects:</p>
+<ol>
+<li>Rendered pages in this project carry **no navigation between strategy,</li>
+</ol>
+<p>business plan and task plan**, so the house rule that the three documents cross-link is silently unmet there.</p>
+<ol>
+<li>It also predates the fix for the render-order bug, where documents rendered in</li>
+</ol>
+<p>the same pass could not see each other&#x27;s output files. Adopting the current version fixes both at once.</p>
+<p>Unlike SpecBuildr, medtech-intel-QMSR&#x27;s live <code>scripts/build_dashboard.py</code> and <code>scripts/render_docs.py</code> are byte-identical to its own installed copies, with no local path edits — so a straight re-install is safe here.</p>
+<p><strong>Caution on timing.</strong> Open draft pull request <a href="https://github.com/Optoguy/medtech-intel-QMSR/pull/1">#1</a> rewrites that repo&#x27;s task list and adds four documents, and it tracks this exact gap as <code>render-docs-generator</code>. Adopting the update should happen after that pull request lands, in that project&#x27;s own session, or the two will collide.</p>
+<hr>
+<h2>What this says about the process</h2>
+<ul>
+<li><strong>The guard is working.</strong> The failure this repo exists to prevent — an installed</li>
+</ul>
+<p>copy quietly edited in place until nobody knows which version is real — has not happened. Every difference is &quot;older&quot;, none is &quot;changed&quot;.</p>
+<ul>
+<li><strong>Drift is now measurable on demand.</strong> <code>scripts/skills_drift.py</code> is committed,</li>
+</ul>
+<p>dependency-free, and runs against shipped branches rather than whatever a local clone is sitting on. Worth running whenever <code>skills/</code> changes.</p>
+<ul>
+<li><strong>The check needs a fork list.</strong> A naive &quot;re-install everything that differs&quot;</li>
+</ul>
+<p>reading of this data would overwrite NewCoEndotest&#x27;s schema-specific generators and SpecBuildr&#x27;s corrected paths. Divergence and drift are different things, and the tool reports the first while only a human can classify the second.</p>
+<ul>
+<li><strong>A worthwhile follow-on:</strong> state in <code>conventions/house-rules.md</code> which files a</li>
+</ul>
+<p>project is expected to fork, so the distinction lives in the conventions rather than in this report.</p>
+<h2>Adoption commands, for reference only</h2>
+<p>Each of these is run <strong>by that project&#x27;s own session</strong>, from a <code>dev-ops-manual</code> clone, when that project decides to adopt:</p>
+<pre><code>./install.sh --repo /path/to/SpecBuildr           # covered by SpecBuildr #58
+./install.sh --repo /path/to/medtech-intel-QMSR   # after medtech #1 lands
+./install.sh --repo /path/to/NewCoEndotest        # only if it chooses to unpin from ecb67e5</code></pre>
+<p>After installing, that project copies <code>plan-track/assets/render_docs.py</code> to its own <code>scripts/</code> (or <code>src/</code>) location and re-renders, per the plan-track skill.</p>
+</div>
+</body>
+</html>
