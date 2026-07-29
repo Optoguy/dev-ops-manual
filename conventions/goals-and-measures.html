@@ -149,7 +149,34 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <h2>Cadence — who does what, and when</h2>
 <p>The owner sets the goals. Agents do the preparation so that setting them takes minutes, not an evening.</p>
 <div class="tablewrap"><table><thead><tr><th>When</th><th>Who</th><th>What</th></tr></thead><tbody><tr><td><strong>Start of the month</strong></td><td>Agent drafts, owner decides</td><td>Propose 2–3 candidate monthly goals with the evidence behind each, as a clickable menu. Owner picks or writes their own.</td></tr><tr><td><strong>Start of the week</strong></td><td>Agent drafts, owner decides</td><td>Report last week&#x27;s measure against its target, then propose this week&#x27;s goal. Same menu pattern.</td></tr><tr><td><strong>Any slate of work</strong></td><td>Agent</td><td>Every option carries its goal and its one-line justification.</td></tr><tr><td><strong>End of the period</strong></td><td>Agent</td><td>Move the goal to <code>history</code> with its outcome and final number. Never quietly delete a missed goal.</td></tr></tbody></table></div>
-<p>The <a href="../skills/weekly-review/SKILL.md">weekly review</a> is where the weekly goal gets set; the monthly goal is set in the first weekly review of the month.</p>
+<h2>The goal review — weekly and monthly</h2>
+<p><strong>A goal that is set and never scored is decoration.</strong> Every period ends with a review, and the review is what updates and re-prioritizes. The ritual is <a href="../skills/goal-review/SKILL.md"><code>/goal-review</code></a>; the <a href="../skills/weekly-review/SKILL.md">weekly review</a> runs it as its opening section.</p>
+<p>Both cadences do the same five things:</p>
+<ol>
+<li><strong>Score the goal with a number</strong> — baseline → target → actual, then one word:</li>
+</ol>
+<p><code>hit</code>, <code>missed</code>, or <code>abandoned</code>. If the number can&#x27;t be produced, say so; that is the most important finding a review can return, because every decision made against that goal was made blind.</p>
+<ol>
+<li><strong>Audit the justifications.</strong> For each task completed this period, did its</li>
+</ol>
+<p>justification turn out true — <em>held</em>, <em>didn&#x27;t move it</em>, <em>unmeasurable</em>, or <em>wasn&#x27;t really about the goal</em>? <strong>This is what makes the justification rule real rather than ceremonial</strong>, and it is the only thing that catches a fabricated one after the fact. A period where everything &quot;held&quot; is suspicious, not excellent.</p>
+<ol>
+<li><strong>Feedback in both directions.</strong> On the work: what actually moved the number</li>
+</ol>
+<p>versus what was busy. On the goal: was it specific enough to select work against, was the measure honest, was the target real, and did something outside the goal turn out to matter more.</p>
+<ol>
+<li><strong>Re-prioritize the open work</strong> against the current goal — promote, demote,</li>
+</ol>
+<p>re-justify, or backlog. <strong>Proposed as a menu, never applied silently.</strong> Priority is the owner&#x27;s signal about their own attention.</p>
+<ol>
+<li><strong>Set the next goal</strong>, owner-decided from prepared candidates, and move the</li>
+</ol>
+<p>finished one into <code>history</code> with its outcome.</p>
+<p><strong>The monthly review additionally asks the direction question:</strong> read the whole <code>history</code>, not the last entry — every goal hit means targets are too low, every goal missed means fantasy or an unseen blocker, measures that keep changing mean nothing is comparable. Then check the month&#x27;s goal against the project&#x27;s strategy document. If they have drifted apart, that mismatch is the review&#x27;s headline.</p>
+<p><strong>Order matters at a month boundary:</strong> the monthly review runs first, because the weekly goal has to support the monthly one.</p>
+<p>Suggested schedule — each project&#x27;s own chat owns its Routines:</p>
+<div class="tablewrap"><table><thead><tr><th>Review</th><th>When</th><th>Why then</th></tr></thead><tbody><tr><td>Weekly</td><td>End of the working week</td><td>The next goal is set before the week starts, not three days in</td></tr><tr><td>Monthly</td><td>Last working day of the month</td><td>Ahead of the first weekly review of the new month</td></tr></tbody></table></div>
+<p>Both need to ask the owner questions, so both must fire into a persistent session. A review that cannot ask cannot re-prioritize.</p>
 <p><strong>Stale goals are a blocking condition, not a note.</strong> If the weekly goal started more than seven days ago, the first thing an agent asks the owner is for a new one — before proposing any work. Work selected against an expired goal is work selected against nothing. <code>build_dashboard.py</code> prints a staleness warning every time it runs, so this is caught mechanically rather than remembered.</p>
 <h2>Honest failure modes</h2>
 <p>Naming these because the convention is more likely to fail in one of these ways than to be ignored outright:</p>

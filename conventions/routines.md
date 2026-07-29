@@ -59,6 +59,20 @@ Current map:
 | SpecBuildr daily traffic report | 6:30am ET daily | SpecBuildr chat |
 | SpecBuildr weekly growth strategy | Mondays 15:00 UTC | SpecBuildr chat |
 
+**Every project should also carry a weekly and a monthly goal review** (added
+2026-07-29; see [goals-and-measures.md](goals-and-measures.md) and the
+[`goal-review`](../skills/goal-review/SKILL.md) skill). Recommended cadence: the
+weekly one at the end of the working week, so the next goal is set before that
+week starts; the monthly one on the last working day of the month, ahead of the
+first weekly review of the new month.
+
+Both **must fire into a persistent session**, never a fresh one. They ask the
+owner to choose the next goal and to approve re-prioritizing, and a headless
+fired session has no `AskUserQuestion` — a review that cannot ask cannot
+re-prioritize, and would silently degrade into a report nobody acts on. Each
+project's goal reviews live in **that project's own chat**, like all its other
+Routines.
+
 ## Writing a Routine that behaves unattended
 
 See [`/routine-design`](../skills/routine-design/SKILL.md) for the full skill.

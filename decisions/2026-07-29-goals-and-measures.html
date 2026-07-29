@@ -72,6 +72,19 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <p><strong>&quot;Serves no goal&quot; is a legitimate answer.</strong> This is the part most likely to be misread as a loophole. It isn&#x27;t: requiring a justification for every piece of work creates a strong incentive to invent one, and a fabricated link is indistinguishable from a real one right up until the measure doesn&#x27;t move. Giving honest non-goal work a name (<code>keeping-the-lights-on</code> — security, breakage, legal, forced platform changes) keeps the justifications that <em>are</em> offered meaningful.</p>
 <p><strong>Warnings, not failures, during adoption.</strong> <code>build_dashboard.py --check</code> reports missing goals and unjustified tasks loudly but still exits zero; <code>--strict-goals</code> makes them fatal. Three project repositories have open tasks written before this convention existed. A rule that breaks every build the day it lands gets reverted, not adopted.</p>
 <p><strong>Staleness is checked mechanically.</strong> A weekly goal more than seven days old is expired, and the night shift&#x27;s first test — before ownership, before blocking, before claims — is whether the goal is current. Written rules get forgotten; a warning printed on every dashboard build does not. The staleness check is terminal-only and never written into the page, so generated output stays deterministic and <code>--check</code> keeps meaning &quot;you forgot to rebuild.&quot;</p>
+<h2>The review is part of the decision, not an add-on</h2>
+<p>Added the same day, on the owner&#x27;s follow-up: <em>&quot;There needs to be a weekly and monthly goal review where feedback is given and goals are updated and re prioritized.&quot;</em></p>
+<p>Without it the rest of this decision decays into paperwork. A goal that is set and never scored is decoration, and — more sharply — <strong>a justification that is never audited is free to be fictional.</strong> The reviews are what make both real:</p>
+<ul>
+<li><strong>Weekly</strong>: score the number, audit whether each shipped task&#x27;s justification</li>
+</ul>
+<p>turned out true, give feedback on the work <em>and on the goal</em>, re-prioritize the open tasks, set the next goal.</p>
+<ul>
+<li><strong>Monthly</strong>: the same, plus the direction question the weekly never asks — read</li>
+</ul>
+<p>the whole <code>history</code> for pattern (always hit means targets too low, always missed means fantasy or an unseen blocker) and check the goal against the project&#x27;s strategy document.</p>
+<p>The justification audit is the load-bearing part. Requiring a reason for every task creates an incentive to invent one; classifying each shipped task&#x27;s justification afterwards as <em>held</em>, <em>didn&#x27;t move it</em>, <em>unmeasurable</em>, or <em>wasn&#x27;t really about the goal</em> is the only mechanism that catches invention after the fact. A period in which every justification &quot;held&quot; is treated as suspicious, not excellent — it usually means the measure is too coarse to distinguish anything.</p>
+<p>Re-prioritizing is <strong>proposed, never applied</strong>. Priority is the owner&#x27;s signal about their own attention; an agent that silently re-ranks the list has taken that signal away.</p>
 <h2>What changes for agents</h2>
 <p>Before: propose available work. After: propose available work <strong>that serves the current goal</strong>, say which measure it moves, and if the goal has expired, ask for a new one instead of proposing anything.</p>
 <h2>Fleet impact</h2>

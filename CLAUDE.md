@@ -16,7 +16,7 @@ each project's own chat (see `conventions/routines.md`).
 
 - `README.md` — the front door: install commands, the skill index, where the
   method is used. Written to read well on GitHub from a phone.
-- `skills/` — the 14 portable skills, each a directory with `SKILL.md` and
+- `skills/` — the 15 portable skills, each a directory with `SKILL.md` and
   optional `assets/`. **This is the source of record**; project repos hold
   installed copies under their own `.claude/skills/`.
 - `install.sh` — copies skills into `~/.claude/skills/` (`--global`) or a

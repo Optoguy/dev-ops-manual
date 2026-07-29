@@ -62,6 +62,35 @@ warning printed on every dashboard build does not. The staleness check is
 terminal-only and never written into the page, so generated output stays
 deterministic and `--check` keeps meaning "you forgot to rebuild."
 
+## The review is part of the decision, not an add-on
+
+Added the same day, on the owner's follow-up: *"There needs to be a weekly and
+monthly goal review where feedback is given and goals are updated and re
+prioritized."*
+
+Without it the rest of this decision decays into paperwork. A goal that is set
+and never scored is decoration, and — more sharply — **a justification that is
+never audited is free to be fictional.** The reviews are what make both real:
+
+- **Weekly**: score the number, audit whether each shipped task's justification
+  turned out true, give feedback on the work *and on the goal*, re-prioritize the
+  open tasks, set the next goal.
+- **Monthly**: the same, plus the direction question the weekly never asks — read
+  the whole `history` for pattern (always hit means targets too low, always
+  missed means fantasy or an unseen blocker) and check the goal against the
+  project's strategy document.
+
+The justification audit is the load-bearing part. Requiring a reason for every
+task creates an incentive to invent one; classifying each shipped task's
+justification afterwards as *held*, *didn't move it*, *unmeasurable*, or *wasn't
+really about the goal* is the only mechanism that catches invention after the
+fact. A period in which every justification "held" is treated as suspicious, not
+excellent — it usually means the measure is too coarse to distinguish anything.
+
+Re-prioritizing is **proposed, never applied**. Priority is the owner's signal
+about their own attention; an agent that silently re-ranks the list has taken
+that signal away.
+
 ## What changes for agents
 
 Before: propose available work.

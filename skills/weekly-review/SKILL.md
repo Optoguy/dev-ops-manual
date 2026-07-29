@@ -17,14 +17,14 @@ honest, and what matters next. Short enough to read; honest enough to sting.
    committed reports, and the dashboard. The review is generated from evidence;
    a review written from recollection inherits recollection's optimism.
 
-2. **Score last week's goal — first, and with a number.** Read
-   `plan/goals.json`, take the weekly goal's measure, and report where it
-   actually landed against its target: baseline → target → final. Then say `hit`,
-   `missed`, or `abandoned`. **Move the finished goal into `history` with that
-   outcome and the final number** — append-only, never quietly delete a missed
-   goal. A run of goals that are always hit means they are set too low; a run of
-   goals with no final number means the measure was never real. Both are
-   findings worth reporting.
+2. **Run the goal review — first, and with a number.** Hand this section to
+   [`/goal-review`](../goal-review/SKILL.md) (weekly mode) and put its output at
+   the top: last week's measure as baseline → target → actual with a `hit` /
+   `missed` / `abandoned` verdict, the audit of whether each shipped task's
+   justification held, and feedback on the goal itself. Move the finished goal
+   into `history` with its outcome and final number — append-only, never quietly
+   delete a missed goal. **At the start of a month, run the monthly goal review
+   first**, since the weekly goal has to support the monthly one.
 
 3. **What moved.** Tasks done this week (with dates), meaningful commits,
    metrics that improved. Credit both owners — the human's cleared blockers
@@ -56,15 +56,12 @@ honest, and what matters next. Short enough to read; honest enough to sting.
    names its owner and its "done" looks like. If the honest answer is "same as
    last week because nothing cleared," write that — repetition is information.
 
-9. **Set next week's goal — the owner decides, you prepare.** Propose two or
-   three candidate weekly goals as a clickable menu, each with the measure it
-   would be scored on, its baseline today, and the evidence for picking it.
-   Say which month goal each would support. The owner picks one or writes their
-   own; write it into `plan/goals.json` with `starts` set to this week and
-   regenerate the dashboard. **At the start of a month, do the same for the
-   monthly goal first**, since the weekly goal has to support it. Never set a
-   goal on the owner's behalf — an agent-invented goal that nobody chose is
-   worse than no goal.
+9. **Set next week's goal and re-prioritize against it** — the closing half of
+   [`/goal-review`](../goal-review/SKILL.md). Two or three candidate goals as a
+   menu, each with its measure, a baseline that exists today, and the evidence
+   for picking it; then the proposed promote / demote / re-justify / backlog
+   moves for the open tasks under whichever goal the owner picks. Never set a
+   goal, and never change a priority, on the owner's behalf.
 
 10. **Output:** a dated summary in the reply (and committed to `reports/` if the
    repo keeps them), then regenerate the dashboard and commit any plan edits,

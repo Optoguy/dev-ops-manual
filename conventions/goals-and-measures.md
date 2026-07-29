@@ -139,8 +139,53 @@ minutes, not an evening.
 | **Any slate of work** | Agent | Every option carries its goal and its one-line justification. |
 | **End of the period** | Agent | Move the goal to `history` with its outcome and final number. Never quietly delete a missed goal. |
 
-The [weekly review](../skills/weekly-review/SKILL.md) is where the weekly goal
-gets set; the monthly goal is set in the first weekly review of the month.
+## The goal review — weekly and monthly
+
+**A goal that is set and never scored is decoration.** Every period ends with a
+review, and the review is what updates and re-prioritizes. The ritual is
+[`/goal-review`](../skills/goal-review/SKILL.md); the
+[weekly review](../skills/weekly-review/SKILL.md) runs it as its opening section.
+
+Both cadences do the same five things:
+
+1. **Score the goal with a number** — baseline → target → actual, then one word:
+   `hit`, `missed`, or `abandoned`. If the number can't be produced, say so;
+   that is the most important finding a review can return, because every decision
+   made against that goal was made blind.
+2. **Audit the justifications.** For each task completed this period, did its
+   justification turn out true — *held*, *didn't move it*, *unmeasurable*, or
+   *wasn't really about the goal*? **This is what makes the justification rule
+   real rather than ceremonial**, and it is the only thing that catches a
+   fabricated one after the fact. A period where everything "held" is suspicious,
+   not excellent.
+3. **Feedback in both directions.** On the work: what actually moved the number
+   versus what was busy. On the goal: was it specific enough to select work
+   against, was the measure honest, was the target real, and did something
+   outside the goal turn out to matter more.
+4. **Re-prioritize the open work** against the current goal — promote, demote,
+   re-justify, or backlog. **Proposed as a menu, never applied silently.**
+   Priority is the owner's signal about their own attention.
+5. **Set the next goal**, owner-decided from prepared candidates, and move the
+   finished one into `history` with its outcome.
+
+**The monthly review additionally asks the direction question:** read the whole
+`history`, not the last entry — every goal hit means targets are too low, every
+goal missed means fantasy or an unseen blocker, measures that keep changing mean
+nothing is comparable. Then check the month's goal against the project's strategy
+document. If they have drifted apart, that mismatch is the review's headline.
+
+**Order matters at a month boundary:** the monthly review runs first, because the
+weekly goal has to support the monthly one.
+
+Suggested schedule — each project's own chat owns its Routines:
+
+| Review | When | Why then |
+|---|---|---|
+| Weekly | End of the working week | The next goal is set before the week starts, not three days in |
+| Monthly | Last working day of the month | Ahead of the first weekly review of the new month |
+
+Both need to ask the owner questions, so both must fire into a persistent
+session. A review that cannot ask cannot re-prioritize.
 
 **Stale goals are a blocking condition, not a note.** If the weekly goal started
 more than seven days ago, the first thing an agent asks the owner is for a new
