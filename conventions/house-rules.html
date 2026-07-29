@@ -173,6 +173,10 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </ul>
 <p>scripts/build_dashboard.py`); edit the JSON, never the HTML.</p>
 <ul>
+<li><strong>Never reformat the plan file as a side effect.</strong> Marking a task claimed or</li>
+</ul>
+<p>done is a one-line diff. Reading the file and writing it back — <code>json.load</code> then <code>json.dump(..., indent=2)</code> — reformats every task in it and turns a two-line change into a three-hundred-line one. The content survives; the review does not, and every other open branch touching the plan now conflicts. Change the matching line with a targeted edit, then check <code>git diff --stat plan/plan.json</code> before committing — a claim or a completion touches two to four lines. If it doesn&#x27;t, discard and redo it as a line edit. Reformatting <em>on purpose</em>, as its own commit that changes nothing else, is fine. (Happened twice: 2026-07-23 in SpecBuildr, where a claim produced a 535-line diff; and 2026-07-29 in medtech-intel-QMSR, where marking one task done produced a 324-line diff that had to be checked by parsing both versions and comparing them field by field, because the text diff was unreadable.)</p>
+<ul>
 <li><strong>Every plan or to-do list ships in HTML as well as markdown.</strong> Any</li>
 </ul>
 <p><code>PLAN.md</code>, <code>BACKLOG.md</code>, <code>ROADMAP.md</code>, <code>OWNER-TASKS.md</code>, launch plan, content plan, or checklist gets a generated <code>.html</code> sibling so it opens and reads anywhere without a markdown viewer — phone, browser, shared link. Generate with <code>python scripts/render_docs.py &amp;lt;file.md&amp;gt; …</code> (from <code>plan-track/assets/render_docs.py</code>); check freshness with <code>--check</code>. The markdown is the source; <strong>the HTML is generated and never hand-edited</strong>, same as the dashboard. Write the markdown, render, and commit both together.</p>
