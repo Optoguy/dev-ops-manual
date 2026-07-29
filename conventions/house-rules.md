@@ -142,6 +142,19 @@ conventions, and knowledge files stay exact. This rule governs what is said
   `done`).
 - **Regenerate the dashboard after every change** (`python
   scripts/build_dashboard.py`); edit the JSON, never the HTML.
+- **Never reformat the plan file as a side effect.** Marking a task claimed or
+  done is a one-line diff. Reading the file and writing it back — `json.load`
+  then `json.dump(..., indent=2)` — reformats every task in it and turns a
+  two-line change into a three-hundred-line one. The content survives; the
+  review does not, and every other open branch touching the plan now conflicts.
+  Change the matching line with a targeted edit, then check `git diff --stat
+  plan/plan.json` before committing — a claim or a completion touches two to
+  four lines. If it doesn't, discard and redo it as a line edit. Reformatting
+  *on purpose*, as its own commit that changes nothing else, is fine.
+  (Happened twice: 2026-07-23 in SpecBuildr, where a claim produced a 535-line
+  diff; and 2026-07-29 in medtech-intel-QMSR, where marking one task done
+  produced a 324-line diff that had to be checked by parsing both versions and
+  comparing them field by field, because the text diff was unreadable.)
 - **Every plan or to-do list ships in HTML as well as markdown.** Any
   `PLAN.md`, `BACKLOG.md`, `ROADMAP.md`, `OWNER-TASKS.md`, launch plan, content
   plan, or checklist gets a generated `.html` sibling so it opens and reads
