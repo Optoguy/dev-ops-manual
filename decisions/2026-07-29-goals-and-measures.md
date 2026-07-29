@@ -91,6 +91,44 @@ Re-prioritizing is **proposed, never applied**. Priority is the owner's signal
 about their own attention; an agent that silently re-ranks the list has taken
 that signal away.
 
+## The gate: a stop, not a warning
+
+Added the same day, on the owner's second follow-up: *"Add a check to the dev
+ops to not allow any further work unless there is a defined goal to work
+against."*
+
+This reverses a choice made a few hours earlier in this same decision. The
+original design made goal problems **advisory** — loud warnings, exit zero — on
+the reasoning that a rule which breaks every build on day one gets reverted
+rather than adopted. The owner overruled that, and the overrule is right: an
+advisory rule about not doing unjustified work is precisely the rule that gets
+ignored, because ignoring it is free.
+
+`src/goal_gate.py` is the mechanism. Exit `0` = work may proceed, exit `1` =
+blocked with the reasons and the permitted alternatives printed.
+`build_dashboard.py --check` now fails on the same conditions, so a repo that has
+not adopted goals fails its own build check. The adoption ramp is gone
+deliberately: the first permitted work in a goal-less repo is writing its goals.
+
+**Three standing exemptions, without which the rule deadlocks** — you could not
+fix the goals file, because fixing it would be work:
+
+1. Setting or updating the goals, and running the goal review.
+2. `keeping-the-lights-on` work. **This one outranks the gate**, not merely
+   passes it: a task labelled `keeping-the-lights-on` is permitted even in a repo
+   with no goals file at all. Security and breakage cannot wait for a planning
+   ritual. (Found while testing: the first implementation checked the repo gate
+   before the task's label, so it blocked exactly the work that must never be
+   blocked.)
+3. Answering the owner. Conversation is not work.
+
+**The honest cost.** A blocked repo is a real stop, and it makes agent work
+depend on one person being available to set a goal. That is deliberate — the
+alternative is agents working against a goal nobody has looked at in a month —
+but if it starts biting, the correct response is to lengthen the goal period, not
+to quietly widen the exemptions. Widening the exemptions is how a gate becomes a
+warning again.
+
 ## What changes for agents
 
 Before: propose available work.

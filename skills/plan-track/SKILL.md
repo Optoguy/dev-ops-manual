@@ -101,9 +101,32 @@ warning for any missing goal, weak measure, or unjustified task. Warnings are
 advisory by default so a project mid-adoption still builds; add `--strict-goals`
 to make them fail once that project has finished adopting.
 
-**Stale goals block work.** If `week.starts` is more than seven days old, the
-first thing you ask the owner for is a new weekly goal — before proposing any
-work at all. The builder prints the staleness warning every run.
+## The gate — run it before you start
+
+`assets/goal_gate.py` (drop it at `src/goal_gate.py`) is the stop:
+
+```sh
+python src/goal_gate.py                # may work proceed in this repo at all?
+python src/goal_gate.py --task <id>    # may work proceed on THIS task?
+```
+
+Exit `0` = clear; exit `1` = blocked, with the reasons and the permitted
+alternatives printed. It blocks on a missing goals file, a missing or unmeasured
+goal, a measure without a baseline / target / date / source, a target not above
+its baseline, or a weekly goal older than seven days. `--task` also blocks a task
+that names no goal, names one no longer current, or carries no justification.
+
+`build_dashboard.py --check` fails on the same conditions, so a repo that has not
+adopted goals fails its own build check. That is the intended pressure: the first
+permitted work is writing `plan/goals.json`.
+
+**Three things are always permitted**, or the rule deadlocks — you could not fix
+the goals file, because fixing it would be work:
+
+1. Setting or updating the goals, and running the goal review.
+2. `keeping-the-lights-on` work. **This outranks the gate**: such a task is
+   permitted even in a repo with no goals file at all.
+3. Answering the owner. Conversation is not work.
 
 ## The dashboard — `dashboard/index.html`
 

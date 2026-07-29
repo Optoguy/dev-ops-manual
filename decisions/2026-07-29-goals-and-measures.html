@@ -85,6 +85,20 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <p>the whole <code>history</code> for pattern (always hit means targets too low, always missed means fantasy or an unseen blocker) and check the goal against the project&#x27;s strategy document.</p>
 <p>The justification audit is the load-bearing part. Requiring a reason for every task creates an incentive to invent one; classifying each shipped task&#x27;s justification afterwards as <em>held</em>, <em>didn&#x27;t move it</em>, <em>unmeasurable</em>, or <em>wasn&#x27;t really about the goal</em> is the only mechanism that catches invention after the fact. A period in which every justification &quot;held&quot; is treated as suspicious, not excellent — it usually means the measure is too coarse to distinguish anything.</p>
 <p>Re-prioritizing is <strong>proposed, never applied</strong>. Priority is the owner&#x27;s signal about their own attention; an agent that silently re-ranks the list has taken that signal away.</p>
+<h2>The gate: a stop, not a warning</h2>
+<p>Added the same day, on the owner&#x27;s second follow-up: <em>&quot;Add a check to the dev ops to not allow any further work unless there is a defined goal to work against.&quot;</em></p>
+<p>This reverses a choice made a few hours earlier in this same decision. The original design made goal problems <strong>advisory</strong> — loud warnings, exit zero — on the reasoning that a rule which breaks every build on day one gets reverted rather than adopted. The owner overruled that, and the overrule is right: an advisory rule about not doing unjustified work is precisely the rule that gets ignored, because ignoring it is free.</p>
+<p><code>src/goal_gate.py</code> is the mechanism. Exit <code>0</code> = work may proceed, exit <code>1</code> = blocked with the reasons and the permitted alternatives printed. <code>build_dashboard.py --check</code> now fails on the same conditions, so a repo that has not adopted goals fails its own build check. The adoption ramp is gone deliberately: the first permitted work in a goal-less repo is writing its goals.</p>
+<p><strong>Three standing exemptions, without which the rule deadlocks</strong> — you could not fix the goals file, because fixing it would be work:</p>
+<ol>
+<li>Setting or updating the goals, and running the goal review.</li>
+<li><code>keeping-the-lights-on</code> work. <strong>This one outranks the gate</strong>, not merely</li>
+</ol>
+<p>passes it: a task labelled <code>keeping-the-lights-on</code> is permitted even in a repo with no goals file at all. Security and breakage cannot wait for a planning ritual. (Found while testing: the first implementation checked the repo gate before the task&#x27;s label, so it blocked exactly the work that must never be blocked.)</p>
+<ol>
+<li>Answering the owner. Conversation is not work.</li>
+</ol>
+<p><strong>The honest cost.</strong> A blocked repo is a real stop, and it makes agent work depend on one person being available to set a goal. That is deliberate — the alternative is agents working against a goal nobody has looked at in a month — but if it starts biting, the correct response is to lengthen the goal period, not to quietly widen the exemptions. Widening the exemptions is how a gate becomes a warning again.</p>
 <h2>What changes for agents</h2>
 <p>Before: propose available work. After: propose available work <strong>that serves the current goal</strong>, say which measure it moves, and if the goal has expired, ask for a new one instead of proposing anything.</p>
 <h2>Fleet impact</h2>

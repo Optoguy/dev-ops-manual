@@ -84,9 +84,9 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <p>(scheduled agents, session binding, the container model), <code>external-agents.md</code> (the Devin contract), <code>global-CLAUDE-snippet.md</code> (what <code>--prefs</code> writes).</p>
 <ul>
 <li><code>decisions/</code> — dated records of choices that changed how work happens.</li>
-<li><code>scripts/</code> — <code>build_dashboard.py</code>, <code>build_goals.py</code>, <code>render_docs.py</code>, and <code>skills_drift.py</code></li>
+<li><code>scripts/</code> — <code>goal_gate.py</code> (**run it before starting work — no goal, no</li>
 </ul>
-<p>(compares each project&#x27;s installed <code>.claude/skills/</code> against <code>skills/</code> here; <strong>reports only, never fixes</strong> — adoption is the project&#x27;s own call).</p>
+<p>work<strong>), <code>build_dashboard.py</code>, <code>build_goals.py</code>, <code>render_docs.py</code>, and <code>skills_drift.py</code> (compares each project&#x27;s installed <code>.claude/skills/</code> against <code>skills/</code> here; </strong>reports only, never fixes** — adoption is the project&#x27;s own call).</p>
 <ul>
 <li><code>reports/</code> — dated findings that aren&#x27;t decisions, each with an HTML twin.</li>
 </ul>

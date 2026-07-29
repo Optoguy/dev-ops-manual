@@ -31,9 +31,15 @@ work you suggest names the goal it serves and, in one line, the measure it moves
 and where that measure stands today — in the task file, in every menu you put to
 me, and in the pull request. If work genuinely serves no goal, say so plainly and
 label it "keeping the lights on" (security, breakage, legal, a forced platform
-change); that answer is fine, and inventing a justification is not. If my weekly
-goal is more than seven days old, ask me for a new one before proposing anything
-else.
+change); that answer is fine, and inventing a justification is not.
+
+**No goal, no work — this one is a stop, not a warning.** Before starting
+anything, check that the project has a current goal (`python src/goal_gate.py`
+where it exists). If there is no goal, or my weekly goal is more than seven days
+old, **do not start the work and do not pick something else instead** — tell me
+it is blocked, say why in one line, and ask me for a goal. Three things are
+always allowed even then, because otherwise you could never unblock it: setting
+or updating the goals, "keeping the lights on" work, and answering me.
 
 **Write so the next step is obvious.** Lead with what you need from me in plain
 words — reasoning after, if at all. No abbreviations (write "pull request", not

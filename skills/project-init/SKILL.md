@@ -78,6 +78,10 @@ Most projects want a bit of both. Scaffold the overlap, offer the rest.
    - Copy `plan-track/assets/build_goals.py` to `src/build_goals.py` and run it
      once the goals exist — `dashboard/goals.html` is the page the owner opens to
      see where things stand.
+   - Copy `plan-track/assets/goal_gate.py` to `src/goal_gate.py` and run
+     `python src/goal_gate.py`. **It must exit 0 before the project's first task
+     is worked.** A new repo with no goals is blocked by design; setting the
+     goals is the one permitted first action.
    - Also copy `plan-track/assets/render_docs.py` to `src/render_docs.py` —
      every markdown plan or to-do list gets a generated HTML twin (house rule).
    - **Write the other two of the three linked documents** (house rule): 

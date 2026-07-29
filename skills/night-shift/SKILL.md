@@ -26,11 +26,13 @@ its CLAUDE.md hard constraints).
 From the repo's task source of truth (`plan/plan.json` or whatever CLAUDE.md
 declares), a task qualifies for the night shift only if ALL of these hold:
 
-0. **Read `plan/goals.json` before anything else.** If the weekly goal is
-   missing, or `week.starts` is more than seven days old, **stop and ask the
-   owner for a new weekly goal before proposing any work.** A slate selected
-   against an expired goal is a slate selected against nothing. This test comes
-   first, and it applies per repo.
+0. **Run the goal gate first, per repo — `python src/goal_gate.py`.** Exit
+   nonzero means **stop**: propose nothing from that repo and ask the owner for
+   a goal instead. A slate selected against an expired or missing goal is a
+   slate selected against nothing. The only slate entries permitted from a
+   blocked repo are `keeping-the-lights-on` tasks, which outrank the gate. Say
+   plainly in the message which repos are blocked and why — a silently empty
+   repo reads as "nothing to do" when it means "nobody set a goal."
 1. **`owner: agent`** — never pick up the owner's tasks, even easy ones.
 2. **`status: todo` and unblocked** — nothing in `blocked_by` still open, and
    not already claimed. A task is claimed (in flight, not available) if it is
