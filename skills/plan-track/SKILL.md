@@ -33,6 +33,8 @@ Start from `assets/plan.example.json`. Every task carries:
 | `priority` | `P0` \| `P1` \| `P2` | P0 = must / blocks other work · P1 = strong · P2 = nice-to-have |
 | `status` | `todo` \| `in-progress` \| `blocked` \| `done` | Current state |
 | `phase` | a phase id | Optional; groups tasks under a phase |
+| `goal` | a goal id, or `keeping-the-lights-on` | Which goal this serves. Required on open tasks. |
+| `justification` | text | One line naming the **measure** it moves. Required unless the goal is `keeping-the-lights-on`. |
 | `blocked_by` | `[task-id, …]` | Optional; what must finish first |
 | `note`, `done_date` | text / date | Optional context |
 
@@ -52,6 +54,47 @@ git diff --stat plan/plan.json   # a claim or a completion touches 2-4 lines
 
 If the diff is large, you reformatted — discard and redo it as a line edit.
 Reformatting deliberately is fine as its own commit that changes nothing else.
+
+## Goals — `plan/goals.json`
+
+**A plan without goals is a list of things somebody felt like doing.** Every
+project carries a current monthly goal and a current weekly goal, each with one
+measurable number, and **the owner sets both**. Full convention:
+[goals-and-measures.md](../../conventions/goals-and-measures.md). Start from
+`assets/goals.example.json`.
+
+```json
+{
+  "month": { "id": "2026-08", "goal": "…",
+             "measure": {"name": "…", "baseline": 0, "target": 5,
+                         "unit": "people", "as_of": "2026-07-29",
+                         "source": "where the number comes from"} },
+  "week":  { "id": "2026-W31", "starts": "2026-07-29", "supports": "2026-08",
+             "goal": "…", "measure": { … } },
+  "history": []
+}
+```
+
+Four things make a measure real: a **baseline**, a **target**, an **as_of** date,
+and a named **source**. If nobody can produce the number today, it is not a
+measure — say so, and make producing it the first task.
+
+**Every open task names the goal it serves and how it moves that goal's
+measure.** The justification names the measure and the direction, not the goal's
+title: *"Moves completed-specs-per-week, which is at 0"*, not *"supports the
+August goal."* Work that genuinely serves no goal is labelled
+`"goal": "keeping-the-lights-on"` — security, breakage, legal, forced platform
+changes. That answer is legitimate and carries no penalty; **inventing a
+justification is the failure mode, not admitting there isn't one.**
+
+`build_dashboard.py` renders the goals at the top of the page and prints a
+warning for any missing goal, weak measure, or unjustified task. Warnings are
+advisory by default so a project mid-adoption still builds; add `--strict-goals`
+to make them fail once that project has finished adopting.
+
+**Stale goals block work.** If `week.starts` is more than seven days old, the
+first thing you ask the owner for is a new weekly goal — before proposing any
+work at all. The builder prints the staleness warning every run.
 
 ## The dashboard — `dashboard/index.html`
 

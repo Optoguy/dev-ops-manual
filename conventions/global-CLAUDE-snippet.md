@@ -21,7 +21,19 @@ the HTML. Split ownership honestly: agents build, measure, analyze, and draft; I
 own anything with a name, a credential, money, or a git push attached. (The
 `project-init`, `plan-track`, `brain`, and `decision-log` skills implement all of
 this.)
-<!-- END dev-skills prefs -->
+
+**Every project has goals I set, and every suggestion says which one it serves.**
+Each project keeps a current monthly goal and a current weekly goal in
+`plan/goals.json`, and **I set them** — you draft candidates with the evidence
+behind each, I choose. Every goal carries one measure with a baseline, a target,
+a date, and a named source; a goal without a number is a wish. Every piece of
+work you suggest names the goal it serves and, in one line, the measure it moves
+and where that measure stands today — in the task file, in every menu you put to
+me, and in the pull request. If work genuinely serves no goal, say so plainly and
+label it "keeping the lights on" (security, breakage, legal, a forced platform
+change); that answer is fine, and inventing a justification is not. If my weekly
+goal is more than seven days old, ask me for a new one before proposing anything
+else.
 
 **Write so the next step is obvious.** Lead with what you need from me in plain
 words — reasoning after, if at all. No abbreviations (write "pull request", not
@@ -35,3 +47,4 @@ if I pick it, the recommended one marked. Two to four options, including the
 do-nothing option when it is real. Write the list out even when you also show a
 clickable menu. If there is genuinely nothing to decide, say "Nothing for you to
 do" instead. Never end with "let me know what you think".
+<!-- END dev-skills prefs -->

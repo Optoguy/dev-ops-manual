@@ -1,0 +1,48 @@
+{
+  "project": "Example Project",
+  "updated": "2026-07-29",
+  "month": {
+    "id": "2026-08",
+    "goal": "Prove that a finished spec is worth paying for.",
+    "measure": {
+      "name": "people who ask what it costs after finishing a spec",
+      "baseline": 0,
+      "target": 5,
+      "unit": "people",
+      "as_of": "2026-07-29",
+      "source": "the contact form, counted by hand"
+    }
+  },
+  "week": {
+    "id": "2026-W31",
+    "starts": "2026-07-29",
+    "supports": "2026-08",
+    "goal": "Get ten specs finished by people I did not ask personally.",
+    "measure": {
+      "name": "completed specs from non-personal referrers",
+      "baseline": 0,
+      "target": 10,
+      "unit": "specs",
+      "as_of": "2026-07-29",
+      "source": "the specs table, grouped by referrer"
+    }
+  },
+  "history": [
+    {
+      "id": "2026-W30",
+      "kind": "week",
+      "goal": "Find out which channel produces a finished spec.",
+      "measure": {
+        "name": "completed specs, by referrer",
+        "baseline": 0,
+        "target": 3,
+        "unit": "specs",
+        "final": 3,
+        "as_of": "2026-07-28",
+        "source": "the specs table, grouped by referrer"
+      },
+      "outcome": "hit",
+      "note": "All three came from personal messages. 49 direct visitors produced none. That result set this week's goal."
+    }
+  ]
+}

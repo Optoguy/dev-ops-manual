@@ -68,6 +68,8 @@
     },
     {
       "id": "install-into-medtech",
+      "goal": "2026-08",
+      "justification": "Moves projects-with-a-current-weekly-goal: a project cannot adopt the goals convention without the current plan-track skill installed.",
       "title": "Install the skill suite into medtech-intel-QMSR once it has code",
       "owner": "agent",
       "priority": "P1",
@@ -86,6 +88,8 @@
     },
     {
       "id": "conventions-coverage",
+      "goal": "2026-08",
+      "justification": "Moves projects-with-a-current-weekly-goal: rules that are practiced but unwritten cannot be adopted by a project that only reads the manual.",
       "title": "Audit: conventions practiced but not written down",
       "owner": "agent",
       "priority": "P2",
@@ -95,6 +99,7 @@
     },
     {
       "id": "evaluate-skill-gaps",
+      "goal": "keeping-the-lights-on",
       "title": "Evaluate which built-in Claude skills are worth adopting into the house suite",
       "owner": "me",
       "priority": "P2",
