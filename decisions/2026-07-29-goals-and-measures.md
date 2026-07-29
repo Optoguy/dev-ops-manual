@@ -55,7 +55,8 @@ makes them fatal. Three project repositories have open tasks written before this
 convention existed. A rule that breaks every build the day it lands gets reverted,
 not adopted.
 
-**Staleness is checked mechanically.** A weekly goal more than seven days old is
+**Staleness is checked mechanically.** (Softened later the same day — see "Ageing
+is reported" below.) A weekly goal more than seven days old is
 expired, and the night shift's first test — before ownership, before blocking,
 before claims — is whether the goal is current. Written rules get forgotten; a
 warning printed on every dashboard build does not. The staleness check is
@@ -128,6 +129,39 @@ alternative is agents working against a goal nobody has looked at in a month —
 but if it starts biting, the correct response is to lengthen the goal period, not
 to quietly widen the exemptions. Widening the exemptions is how a gate becomes a
 warning again.
+
+## Ageing is reported, not silent — the block moves to fourteen days
+
+Third owner instruction the same day: *"soften to 14 days but report on this
+issue each time."*
+
+The seven-day hard stop was too sharp for a one-person operation. A goal set on a
+Monday expiring the following Monday means agent work halts on any week the owner
+is travelling, ill, or simply busy — and the failure mode is the worst kind,
+because the block lands without warning.
+
+So the deadline doubles, and the difference is paid for in reporting:
+
+| Age | State | Gate | What is said |
+|---|---|---|---|
+| 0–7 days | current | clear | the age, on every run |
+| 8–14 days | **ageing** | **clear** | the age, plus how many days until it blocks, on every run, in every slate, and on the goals page in amber |
+| 15+ days | expired | **blocked** | the reasons and the permitted alternatives |
+
+**The reporting is the point, not a consolation.** Doubling a deadline and saying
+nothing simply buys a longer silence: the goal rots exactly as before, and nobody
+learns until work stops. So an ageing goal is announced by the gate on every run,
+warned by the dashboard build, shown in amber on the goals page, and — the part
+that actually reaches a human — **stated in every slate of proposed work**, not
+swallowed because it did not block anything.
+
+"Ageing" is the single goal note that does not fail `--check`. Everything else
+about goals stays fatal. That exception is deliberate and narrow: it is a report,
+and a report that fails a build is a block by another name.
+
+This is a softening of the gate, not a widening of the exemptions — which is the
+distinction the previous section asked future readers to hold. The set of work
+permitted without a goal is unchanged; only the definition of "current" moved.
 
 ## What changes for agents
 

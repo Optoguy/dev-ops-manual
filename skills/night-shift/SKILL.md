@@ -33,6 +33,12 @@ declares), a task qualifies for the night shift only if ALL of these hold:
    blocked repo are `keeping-the-lights-on` tasks, which outrank the gate. Say
    plainly in the message which repos are blocked and why — a silently empty
    repo reads as "nothing to do" when it means "nobody set a goal."
+
+   **Report every repo's goal age in the message, every night** — not only when
+   blocked. A weekly goal that has outlived its week reports as `AGEING` and
+   still passes the gate; say so, with how many days until it blocks, and offer
+   the goal review. Suppressing that is how a fourteen-day deadline becomes a
+   fortnight of silence.
 1. **`owner: agent`** — never pick up the owner's tasks, even easy ones.
 2. **`status: todo` and unblocked** — nothing in `blocked_by` still open, and
    not already claimed. A task is claimed (in flight, not available) if it is

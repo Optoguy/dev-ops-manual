@@ -156,7 +156,9 @@ Added 2026-07-29 at the owner's request. Full convention:
 - **No work proceeds without a goal to work against.** This is a stop, not a
   warning. `python src/goal_gate.py` (add `--task <id>` for one task) exits
   nonzero and prints why; `build_dashboard.py --check` fails on the same
-  conditions. A weekly goal more than seven days old is expired and blocks.
+  conditions. A weekly goal is **reported as ageing after seven days and blocks
+  after fourteen** — and the age is stated on every run and in every slate, so a
+  softer deadline does not become a quieter one.
   **Three things are always permitted**, or the rule deadlocks: setting or
   updating the goals, `keeping-the-lights-on` work (which outranks the gate —
   permitted even with no goals file at all), and answering the owner.

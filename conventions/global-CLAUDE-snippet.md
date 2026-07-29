@@ -35,9 +35,11 @@ change); that answer is fine, and inventing a justification is not.
 
 **No goal, no work — this one is a stop, not a warning.** Before starting
 anything, check that the project has a current goal (`python src/goal_gate.py`
-where it exists). If there is no goal, or my weekly goal is more than seven days
-old, **do not start the work and do not pick something else instead** — tell me
-it is blocked, say why in one line, and ask me for a goal. Three things are
+where it exists). If there is no goal, or my weekly goal is more than fourteen
+days old, **do not start the work and do not pick something else instead** — tell
+me it is blocked, say why in one line, and ask me for a goal. **Between seven and
+fourteen days, tell me every time** that the goal is ageing and how long until it
+blocks — a longer deadline is not a quieter one. Three things are
 always allowed even then, because otherwise you could never unblock it: setting
 or updating the goals, "keeping the lights on" work, and answering me.
 

@@ -113,12 +113,18 @@ python src/goal_gate.py --task <id>    # may work proceed on THIS task?
 Exit `0` = clear; exit `1` = blocked, with the reasons and the permitted
 alternatives printed. It blocks on a missing goals file, a missing or unmeasured
 goal, a measure without a baseline / target / date / source, a target not above
-its baseline, or a weekly goal older than seven days. `--task` also blocks a task
+its baseline, or a weekly goal older than **fourteen** days. `--task` also blocks a task
 that names no goal, names one no longer current, or carries no justification.
 
 `build_dashboard.py --check` fails on the same conditions, so a repo that has not
 adopted goals fails its own build check. That is the intended pressure: the first
 permitted work is writing `plan/goals.json`.
+
+**The weekly goal's age is reported on every run, clear or blocked.** A weekly
+goal is meant to last seven days and blocks at fourteen. In between, the gate
+stays clear and says `AGEING`, with how many days remain before it blocks — a
+softened deadline that says nothing is just a longer silence. Surface that report
+to the owner rather than swallowing it, and offer the goal review.
 
 **Three things are always permitted**, or the rule deadlocks — you could not fix
 the goals file, because fixing it would be work:
