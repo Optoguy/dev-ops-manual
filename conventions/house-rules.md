@@ -132,6 +132,33 @@ conventions, and knowledge files stay exact. This rule governs what is said
   memo that lives only in a reply gets buried; send it with `SendUserFile` and
   summarize in prose afterward.
 
+## Goals and measures
+
+Added 2026-07-29 at the owner's request. Full convention:
+[goals-and-measures.md](goals-and-measures.md). The binding parts:
+
+- **Every project carries a current monthly goal and a current weekly goal, and
+  the owner sets both.** They live in `plan/goals.json`. Agents draft candidates
+  with evidence; only the owner decides. This binds `dev-ops-manual` too.
+- **Every goal carries one measure** with a **baseline**, a **target**, an
+  **as_of** date, and a named **source**. A goal without a number is a wish. If
+  nobody can produce the number today, say so and make producing it the first
+  task.
+- **Every agent-suggested task names the goal it serves and how it moves that
+  goal's measure** — in the task file, in every menu put to the owner, and in the
+  pull request. One line, naming the measure and its current value, not the
+  goal's title.
+- **"This serves no current goal" is a valid answer.** Label it
+  `goal: keeping-the-lights-on` — security, breakage, legal, forced platform
+  changes. Requiring a justification for everything is an incentive to invent
+  one, and a fabricated link is worse than an admitted gap. Work that is neither
+  goal-serving nor keeping-the-lights-on can wait; that is the point of goals.
+- **Stale goals block work.** A weekly goal more than seven days old is expired;
+  ask for a new one before proposing anything. `build_dashboard.py` warns on
+  every run.
+- **Finished goals move to `history` with their outcome and final number** —
+  append-only. A history with no misses means the goals are set too low.
+
 ## Tasks and priorities
 
 - **One source of truth per repo**, declared in its `CLAUDE.md`. Usually

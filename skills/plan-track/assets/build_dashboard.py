@@ -12,17 +12,29 @@ Each task carries:
     priority: "P0" | "P1" | "P2"        (P0 = must, P1 = strong, P2 = nice)
     status:   "todo" | "in-progress" | "blocked" | "done"
     phase:    optional phase id
+    goal:     the goal id it serves, or "keeping-the-lights-on"
+    justification: one line naming the measure it moves
     note, blocked_by, done_date: optional
+
+Goals live in plan/goals.json (see conventions/goals-and-measures.md). They are
+rendered at the top of the dashboard; problems with them are printed to the
+terminal, never written into the page, so the generated HTML stays deterministic.
 """
 
 import html
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 PLAN = ROOT / "plan" / "plan.json"
+GOALS = ROOT / "plan" / "goals.json"
 OUT = ROOT / "dashboard" / "index.html"
+
+# Work that legitimately serves no goal (see conventions/goals-and-measures.md).
+EXEMPT_GOALS = {"keeping-the-lights-on"}
+WEEK_STALE_DAYS = 7
 
 OWNERS = {"me": "🧑 Your tasks", "agent": "🤖 Agent tasks"}
 PRIORITIES = ["P0", "P1", "P2"]
@@ -41,8 +53,79 @@ def load_plan():
     return data
 
 
-def validate(data):
+def load_goals():
+    """plan/goals.json is optional on disk but required by convention.
+
+    Returns None when absent so a project mid-adoption still builds; the missing
+    file is reported as a warning, not a failure.
+    """
+    if not GOALS.exists():
+        return None
+    try:
+        return json.loads(GOALS.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        sys.exit(f"plan/goals.json is invalid JSON: {e}")
+
+
+def measure_problems(m, where):
+    """A measure needs a baseline, a target, a date and a named source."""
+    if not isinstance(m, dict):
+        return [f"{where}: no measure — a goal without a number is a wish"]
+    missing = [k for k in ("name", "baseline", "target", "as_of", "source") if m.get(k) in (None, "")]
+    out = []
+    if missing:
+        out.append(f"{where}: measure is missing {', '.join(missing)}")
+    try:
+        if float(m["target"]) <= float(m["baseline"]):
+            out.append(f"{where}: target ({m['target']}) is not above the baseline ({m['baseline']}) — goal theater check")
+    except (KeyError, TypeError, ValueError):
+        pass
+    return out
+
+
+def goal_warnings(goals):
+    """Terminal-only warnings. Nothing here reaches the HTML, so the generated
+    page stays deterministic and --check keeps meaning 'you forgot to rebuild'."""
+    if goals is None:
+        return ["no plan/goals.json — every project defines a monthly and a weekly goal "
+                "(conventions/goals-and-measures.md)"]
+    out = []
+    for period in ("month", "week"):
+        g = goals.get(period)
+        if not g:
+            out.append(f"goals: no {period} goal set — the owner sets both")
+            continue
+        if not g.get("goal"):
+            out.append(f"goals: {period} has no goal text")
+        out.extend(measure_problems(g.get("measure"), f"goals.{period}"))
+    week = goals.get("week") or {}
+    starts = week.get("starts")
+    if starts:
+        try:
+            age = (date.today() - date.fromisoformat(str(starts))).days
+            if age > WEEK_STALE_DAYS:
+                out.append(f"goals: the weekly goal started {age} days ago — STALE. "
+                           f"Ask the owner for a new one before proposing any work.")
+        except ValueError:
+            out.append(f"goals: week.starts is not a date ({starts!r})")
+    elif goals.get("week"):
+        out.append("goals: week has no 'starts' date, so staleness cannot be checked")
+    return out
+
+
+def known_goal_ids(goals):
+    ids = set(EXEMPT_GOALS)
+    if goals:
+        for period in ("month", "week"):
+            gid = (goals.get(period) or {}).get("id")
+            if gid:
+                ids.add(gid)
+    return ids
+
+
+def validate(data, goals=None):
     warnings = []
+    valid_goals = known_goal_ids(goals)
     for i, t in enumerate(data.get("tasks", [])):
         tid = t.get("id", f"#{i}")
         if t.get("owner") not in OWNERS:
@@ -51,6 +134,17 @@ def validate(data):
             warnings.append(f"task {tid}: priority should be P0|P1|P2 (got {t.get('priority')!r})")
         if t.get("status") not in STATUS_RANK:
             warnings.append(f"task {tid}: status should be todo|in-progress|blocked|done (got {t.get('status')!r})")
+        if t.get("status") == "done":
+            continue
+        goal = t.get("goal")
+        if not goal:
+            warnings.append(f"task {tid}: no goal — name the goal it serves, or "
+                            f"'keeping-the-lights-on' if it serves none")
+        elif goals is not None and goal not in valid_goals:
+            warnings.append(f"task {tid}: goal {goal!r} is not a current goal id "
+                            f"({', '.join(sorted(valid_goals))})")
+        if goal and goal not in EXEMPT_GOALS and not t.get("justification"):
+            warnings.append(f"task {tid}: no justification — one line naming the measure it moves")
     return warnings
 
 
@@ -87,6 +181,13 @@ def render_task(t, phase_titles):
         meta.append(f'<span class="done-date">done {esc(t["done_date"])}</span>')
     if meta:
         parts.append(f'<div class="task-meta">{"".join(meta)}</div>')
+    if t.get("goal"):
+        gid = t["goal"]
+        cls = "goal-tag lights" if gid in EXEMPT_GOALS else "goal-tag"
+        label = "no goal · keeping the lights on" if gid in EXEMPT_GOALS else f"serves {gid}"
+        parts.append(f'<div class="task-meta"><span class="{cls}">{esc(label)}</span></div>')
+    if t.get("justification"):
+        parts.append(f'<div class="task-just">{esc(t["justification"])}</div>')
     if t.get("note"):
         parts.append(f'<div class="task-note">{esc(t["note"])}</div>')
     parts.append("</li>")
@@ -131,11 +232,61 @@ def render_next_up(tasks, phase_titles):
     return f'<div class="next-up"><h2>⏭ Next up <span class="count">by priority</span></h2><ul class="tasks">{"".join(rows)}</ul></div>'
 
 
+def render_measure(m):
+    if not isinstance(m, dict):
+        return '<div class="measure none">no measure — a goal without a number is a wish</div>'
+    unit = f" {m['unit']}" if m.get("unit") else ""
+    parts = [f'<div class="measure"><span class="m-name">{esc(m.get("name", "unnamed measure"))}</span>']
+    parts.append(f'<span class="m-nums">{esc(m.get("baseline", "?"))}{esc(unit)} '
+                 f'<span class="m-arrow">&rarr;</span> '
+                 f'<strong>{esc(m.get("target", "?"))}{esc(unit)}</strong></span>')
+    tail = []
+    if m.get("as_of"):
+        tail.append(f'baseline as of {esc(m["as_of"])}')
+    if m.get("source"):
+        tail.append(f'from {esc(m["source"])}')
+    if tail:
+        parts.append(f'<span class="m-src">{" · ".join(tail)}</span>')
+    parts.append("</div>")
+    return "".join(parts)
+
+
+def render_goal(g, kind):
+    if not g:
+        return (f'<div class="goal empty"><div class="goal-h">{esc(kind)}</div>'
+                f'<div class="goal-text">Not set — the owner sets this.</div></div>')
+    sub = []
+    if g.get("id"):
+        sub.append(esc(g["id"]))
+    if g.get("supports"):
+        sub.append(f'supports {esc(g["supports"])}')
+    if g.get("starts"):
+        sub.append(f'from {esc(g["starts"])}')
+    head = f'<div class="goal-h">{esc(kind)}<span class="goal-id">{" · ".join(sub)}</span></div>'
+    return (f'<div class="goal">{head}'
+            f'<div class="goal-text">{esc(g.get("goal", "(no goal text)"))}</div>'
+            f'{render_measure(g.get("measure"))}</div>')
+
+
+def render_goals(goals):
+    """The current goals, at the top of the page. Static content only — staleness
+    is a terminal warning so the generated page does not change with the date."""
+    if goals is None:
+        return ('<section class="goals missing"><h2>🎯 Goals</h2>'
+                '<p class="empty">No <code>plan/goals.json</code> yet. Every project carries a '
+                'monthly and a weekly goal, each with one measurable number.</p></section>')
+    return ('<section class="goals"><h2>🎯 Goals <span class="count">set by the owner</span></h2>'
+            + render_goal(goals.get("month"), "This month")
+            + render_goal(goals.get("week"), "This week")
+            + "</section>")
+
+
 # The three linked documents every project carries (see house-rules.md).
 # Paths are relative to the repo root; the dashboard lives in dashboard/.
 TRIO = [
     ("docs/STRATEGY.html", "Strategy"),
     ("docs/BUSINESS-PLAN.html", "Business plan"),
+    ("dashboard/goals.html", "Goals"),
     ("dashboard/index.html", "Task plan"),
     ("docs/PLAN.html", "Roadmap"),
 ]
@@ -158,7 +309,7 @@ def render_nav():
     return f'<nav class="nav">{"".join(items)}</nav>' if len(items) > 1 else ""
 
 
-def render(data):
+def render(data, goals=None):
     tasks = data.get("tasks", [])
     phase_titles = {p["id"]: p.get("title", p["id"]) for p in data.get("phases", []) if "id" in p}
     total = len(tasks)
@@ -198,6 +349,7 @@ def render(data):
         tiles=tile(total, "tasks") + tile(done, "done") + tile(in_prog, "in progress")
         + tile(blocked, "blocked") + tile(len(me), "yours") + tile(len(agent), "agent"),
         nav=render_nav(),
+        goals=render_goals(goals),
         next_up=render_next_up(tasks, phase_titles),
         me_col=render_owner_column("me", me, phase_titles),
         agent_col=render_owner_column("agent", agent, phase_titles)
@@ -228,6 +380,30 @@ TEMPLATE = """<!doctype html>
   .wrap {{ max-width:1100px; margin:0 auto; padding:28px 20px 60px; }}
   header {{ display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-bottom:6px; }}
   header h1 {{ font-size:24px; margin:0; }}
+  .goals {{ background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px; margin:18px 0; }}
+  .goals h2 {{ font-size:15px; margin:0 0 12px; }}
+  .goals .empty {{ color:var(--dim); margin:0; }}
+  .goal {{ padding:10px 0; border-top:1px solid var(--line); }}
+  .goal:first-of-type {{ border-top:none; padding-top:0; }}
+  .goal-h {{ font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--dim);
+    display:flex; flex-wrap:wrap; gap:8px; align-items:baseline; }}
+  .goal-id {{ text-transform:none; letter-spacing:0; font-size:12px; opacity:.8; }}
+  .goal-text {{ font-size:16px; margin:4px 0 6px; }}
+  .goal.empty .goal-text {{ color:var(--dim); font-style:italic; font-size:14px; }}
+  .measure {{ display:flex; flex-wrap:wrap; gap:6px 14px; align-items:baseline;
+    font-size:13px; color:var(--dim); }}
+  .measure.none {{ color:var(--p0); }}
+  .m-name {{ color:var(--ink); }}
+  .m-nums {{ font-variant-numeric:tabular-nums; }}
+  .m-nums strong {{ color:var(--done); }}
+  .m-arrow {{ opacity:.6; }}
+  .m-src {{ opacity:.75; }}
+  .goal-tag {{ font-size:11px; padding:2px 8px; border-radius:10px; border:1px solid var(--accent);
+    color:var(--accent); }}
+  .goal-tag.lights {{ border-color:var(--line); color:var(--dim); }}
+  .task-just {{ font-size:13px; color:var(--dim); margin-top:4px; border-left:2px solid var(--accent);
+    padding-left:8px; }}
   .nav {{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }}
   .nav a, .nav span {{ font-size:13px; padding:6px 13px; border-radius:20px;
     text-decoration:none; border:1px solid var(--line); color:var(--muted); background:var(--card); }}
@@ -293,6 +469,7 @@ TEMPLATE = """<!doctype html>
   <div class="bar"><i></i></div>
   <div class="barlabel">{done} of {total} tasks done · {pct}%</div>
   <div class="tiles">{tiles}</div>
+  {goals}
   {next_up}
   <div class="cols">{me_col}{agent_col}</div>
   {phases}
@@ -303,16 +480,35 @@ TEMPLATE = """<!doctype html>
 """
 
 
+GOAL_WARNING_MARKERS = (
+    "goals:", "goals.month", "goals.week", "no plan/goals.json",
+    ": no goal", ": no justification", "is not a current goal id",
+)
+
+
+def is_goal_warning(w):
+    return any(m in w for m in GOAL_WARNING_MARKERS)
+
+
 def main():
     data = load_plan()
-    warnings = validate(data)
-    html_text = render(data)
+    goals = load_goals()
+    warnings = goal_warnings(goals) + validate(data, goals)
+    html_text = render(data, goals)
 
     check = "--check" in sys.argv[1:]
     if check:
-        # Owner-vocabulary notes stay warnings (a repo may use its own vocabulary;
-        # tasks render in their own columns) — only structural problems fail --check.
-        problems = [w for w in warnings if "rendered in its own column" not in w]
+        # Advisory notes stay warnings; only structural problems fail --check.
+        # Owner vocabulary: a repo may use its own; tasks render in their own column.
+        # Goals: a project mid-adoption must not have its build broken by a missing
+        # goal — the nag is loud, not fatal. Use --strict-goals to make it fatal
+        # once a project has finished adopting.
+        strict_goals = "--strict-goals" in sys.argv[1:]
+        problems = [
+            w for w in warnings
+            if "rendered in its own column" not in w
+            and (strict_goals or not is_goal_warning(w))
+        ]
         for w in warnings:
             if w not in problems:
                 print(f"warning: {w}", file=sys.stderr)

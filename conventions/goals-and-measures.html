@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goals and measures</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from goals-and-measures.md — edit the markdown, not this file</p>
+<h1>Goals and measures</h1>
+<p>Added 2026-07-29 at the owner&#x27;s request: <em>&quot;We need goals and KPIs across all projects… every project [must] have me define monthly, weekly goals, each goal must have a measurable KPI, and all agent suggested work must include justification as to how it supports achieving the current goals and KPIs.&quot;</em></p>
+<p>This convention binds every project, <strong>including this one</strong>.</p>
+<h2>The rule in three sentences</h2>
+<ol>
+<li>**Every project has a current monthly goal and a current weekly goal, and the</li>
+</ol>
+<p>owner sets both.** Agents may draft; only the owner approves.</p>
+<ol>
+<li><strong>Every goal carries one measure</strong> with a baseline, a target, a date, and a</li>
+</ol>
+<p>named source. A goal without a number is a wish.</p>
+<ol>
+<li>**Every piece of agent-suggested work names the goal it serves and how it</li>
+</ol>
+<p>moves that goal&#x27;s measure** — or is explicitly labelled as work that serves no goal, which is allowed and sometimes correct.</p>
+<h2>Where goals live — <code>plan/goals.json</code></h2>
+<p>A separate file from <code>plan/plan.json</code>, deliberately. Goals are written by the owner and change weekly; tasks are written by agents and change hourly. Different authors and different cadences do not belong in one file, and the plan file is already the busiest merge point in every repo.</p>
+<pre><code>{
+  &quot;project&quot;: &quot;Example&quot;,
+  &quot;updated&quot;: &quot;2026-07-29&quot;,
+  &quot;month&quot;: {
+    &quot;id&quot;: &quot;2026-08&quot;,
+    &quot;goal&quot;: &quot;Prove that a finished spec is worth paying for.&quot;,
+    &quot;measure&quot;: {
+      &quot;name&quot;: &quot;people who ask what it costs after finishing a spec&quot;,
+      &quot;baseline&quot;: 0,
+      &quot;target&quot;: 5,
+      &quot;unit&quot;: &quot;people&quot;,
+      &quot;as_of&quot;: &quot;2026-07-29&quot;,
+      &quot;source&quot;: &quot;the contact form, counted by hand&quot;
+    }
+  },
+  &quot;week&quot;: {
+    &quot;id&quot;: &quot;2026-W31&quot;,
+    &quot;starts&quot;: &quot;2026-07-29&quot;,
+    &quot;supports&quot;: &quot;2026-08&quot;,
+    &quot;goal&quot;: &quot;Get ten specs finished by people I did not ask personally.&quot;,
+    &quot;measure&quot;: {
+      &quot;name&quot;: &quot;completed specs from non-personal referrers&quot;,
+      &quot;baseline&quot;: 0,
+      &quot;target&quot;: 10,
+      &quot;unit&quot;: &quot;specs&quot;,
+      &quot;as_of&quot;: &quot;2026-07-29&quot;,
+      &quot;source&quot;: &quot;the specs table, grouped by referrer&quot;
+    }
+  },
+  &quot;history&quot;: []
+}</code></pre>
+<p>Rules for the file:</p>
+<ul>
+<li><strong>Both <code>month</code> and <code>week</code> are required</strong> once a project has any tasks.</li>
+<li><code>week.supports</code> names the month goal it serves. A weekly goal that supports</li>
+</ul>
+<p>nothing is a red flag worth raising, not a validation error.</p>
+<ul>
+<li><strong><code>history</code> is append-only.</strong> When a period ends, move the goal into <code>history</code></li>
+</ul>
+<p>with an <code>outcome</code> (<code>hit</code> | <code>missed</code> | <code>abandoned</code>) and the measure&#x27;s final value. This is how you find out whether goals are being set honestly.</p>
+<ul>
+<li>The same <a href="house-rules.md">never-reformat rule</a> applies: edit lines in place.</li>
+<li><strong><code>dashboard/goals.html</code> is generated from it</strong> by <code>build_goals.py</code> — the</li>
+</ul>
+<p>current goals, a progress meter for each, the work serving each one, the work serving no goal, and the history of finished goals. Regenerate it whenever the goals change, same contract as the task dashboard.</p>
+<h2>What counts as a measure</h2>
+<p>A measure needs four things, and the fourth is the one people skip:</p>
+<div class="tablewrap"><table><thead><tr><th>Part</th><th>Why</th><th>Bad</th><th>Good</th></tr></thead><tbody><tr><td><strong>baseline</strong></td><td>A target without a starting point can&#x27;t show movement</td><td>&quot;get more traffic&quot;</td><td>&quot;49 visitors last week&quot;</td></tr><tr><td><strong>target</strong></td><td>The number that means done</td><td>&quot;improve conversion&quot;</td><td>&quot;3 completed specs&quot;</td></tr><tr><td><strong>as_of</strong></td><td>A baseline with no date rots silently</td><td>—</td><td>&quot;2026-07-29&quot;</td></tr><tr><td><strong>source</strong></td><td>Where the number comes from, and who can check it</td><td>&quot;analytics&quot;</td><td>&quot;the specs table, grouped by referrer&quot;</td></tr></tbody></table></div>
+<p>A fifth field, <strong><code>current</code></strong>, is optional and written by the goal review: where the number stands right now. Without it the goals page says &quot;not measured yet&quot; rather than implying progress — a page that fakes a number is worse than one that admits it has none.</p>
+<p><strong>If nobody can produce the number today, it is not a measure yet.</strong> Say so and make producing it the first task. A goal measured by a number that does not exist is worse than no goal, because it looks like rigour.</p>
+<p>Vanity measures — page views, commits, tasks closed, lines written — are only measures if the project genuinely wants more of them. Usually it doesn&#x27;t. Prefer counting the thing you actually want: people who came back, people who asked the price, defects that didn&#x27;t recur.</p>
+<h2>Justifying work</h2>
+<p><strong>Every agent-suggested task carries two fields:</strong></p>
+<pre><code>{
+  &quot;id&quot;: &quot;share-pitch-lines&quot;,
+  &quot;goal&quot;: &quot;2026-W31&quot;,
+  &quot;justification&quot;: &quot;Moves completed-specs-from-non-personal-referrers: personal messages are the only channel that has ever converted (3 of 3, against 49 direct visitors and 0).&quot;
+}</code></pre>
+<p>A justification names <strong>the measure and the direction</strong>, not the goal&#x27;s title. &quot;Supports the August goal&quot; is noise. &quot;Moves completed-specs-per-week, which is at 0&quot; is checkable.</p>
+<p><strong>The same sentence appears everywhere the work is proposed</strong> — in the task file, in every menu put to the owner, and in the pull request body. One line. If it takes a paragraph to explain how the work serves the goal, it probably doesn&#x27;t.</p>
+<h3>Work that serves no goal — say so plainly</h3>
+<p>Requiring a justification for everything creates a strong incentive to invent one. That failure mode is worse than the problem, because a fabricated link is indistinguishable from a real one until the measure doesn&#x27;t move.</p>
+<p>So <strong>&quot;this serves no current goal&quot; is a valid, non-penalised answer.</strong> Use <code>&amp;quot;goal&amp;quot;: &amp;quot;keeping-the-lights-on&amp;quot;</code> for work that has to happen regardless of strategy:</p>
+<ul>
+<li>security fixes and data-loss risks</li>
+<li>something is broken that used to work</li>
+<li>legal, privacy, or licensing obligations</li>
+<li>a dependency or platform forcing a change</li>
+</ul>
+<p>Anything that is neither goal-serving nor keeping-the-lights-on is, by definition, work that can wait. That is not an insult — it is the entire point of having goals. Put it in the backlog with a note and move on.</p>
+<h2>Cadence — who does what, and when</h2>
+<p>The owner sets the goals. Agents do the preparation so that setting them takes minutes, not an evening.</p>
+<div class="tablewrap"><table><thead><tr><th>When</th><th>Who</th><th>What</th></tr></thead><tbody><tr><td><strong>Start of the month</strong></td><td>Agent drafts, owner decides</td><td>Propose 2–3 candidate monthly goals with the evidence behind each, as a clickable menu. Owner picks or writes their own.</td></tr><tr><td><strong>Start of the week</strong></td><td>Agent drafts, owner decides</td><td>Report last week&#x27;s measure against its target, then propose this week&#x27;s goal. Same menu pattern.</td></tr><tr><td><strong>Any slate of work</strong></td><td>Agent</td><td>Every option carries its goal and its one-line justification.</td></tr><tr><td><strong>End of the period</strong></td><td>Agent</td><td>Move the goal to <code>history</code> with its outcome and final number. Never quietly delete a missed goal.</td></tr></tbody></table></div>
+<h2>The goal review — weekly and monthly</h2>
+<p><strong>A goal that is set and never scored is decoration.</strong> Every period ends with a review, and the review is what updates and re-prioritizes. The ritual is <a href="../skills/goal-review/SKILL.md"><code>/goal-review</code></a>; the <a href="../skills/weekly-review/SKILL.md">weekly review</a> runs it as its opening section.</p>
+<p>Both cadences do the same five things:</p>
+<ol>
+<li><strong>Score the goal with a number</strong> — baseline → target → actual, then one word:</li>
+</ol>
+<p><code>hit</code>, <code>missed</code>, or <code>abandoned</code>. If the number can&#x27;t be produced, say so; that is the most important finding a review can return, because every decision made against that goal was made blind.</p>
+<ol>
+<li><strong>Audit the justifications.</strong> For each task completed this period, did its</li>
+</ol>
+<p>justification turn out true — <em>held</em>, <em>didn&#x27;t move it</em>, <em>unmeasurable</em>, or <em>wasn&#x27;t really about the goal</em>? <strong>This is what makes the justification rule real rather than ceremonial</strong>, and it is the only thing that catches a fabricated one after the fact. A period where everything &quot;held&quot; is suspicious, not excellent.</p>
+<ol>
+<li><strong>Feedback in both directions.</strong> On the work: what actually moved the number</li>
+</ol>
+<p>versus what was busy. On the goal: was it specific enough to select work against, was the measure honest, was the target real, and did something outside the goal turn out to matter more.</p>
+<ol>
+<li><strong>Re-prioritize the open work</strong> against the current goal — promote, demote,</li>
+</ol>
+<p>re-justify, or backlog. <strong>Proposed as a menu, never applied silently.</strong> Priority is the owner&#x27;s signal about their own attention.</p>
+<ol>
+<li><strong>Set the next goal</strong>, owner-decided from prepared candidates, and move the</li>
+</ol>
+<p>finished one into <code>history</code> with its outcome.</p>
+<p><strong>The monthly review additionally asks the direction question:</strong> read the whole <code>history</code>, not the last entry — every goal hit means targets are too low, every goal missed means fantasy or an unseen blocker, measures that keep changing mean nothing is comparable. Then check the month&#x27;s goal against the project&#x27;s strategy document. If they have drifted apart, that mismatch is the review&#x27;s headline.</p>
+<p><strong>Order matters at a month boundary:</strong> the monthly review runs first, because the weekly goal has to support the monthly one.</p>
+<p>Suggested schedule — each project&#x27;s own chat owns its Routines:</p>
+<div class="tablewrap"><table><thead><tr><th>Review</th><th>When</th><th>Why then</th></tr></thead><tbody><tr><td>Weekly</td><td>End of the working week</td><td>The next goal is set before the week starts, not three days in</td></tr><tr><td>Monthly</td><td>Last working day of the month</td><td>Ahead of the first weekly review of the new month</td></tr></tbody></table></div>
+<p>Both need to ask the owner questions, so both must fire into a persistent session. A review that cannot ask cannot re-prioritize.</p>
+<p><strong>Stale goals are a blocking condition, not a note.</strong> If the weekly goal started more than seven days ago, the first thing an agent asks the owner is for a new one — before proposing any work. Work selected against an expired goal is work selected against nothing. <code>build_dashboard.py</code> prints a staleness warning every time it runs, so this is caught mechanically rather than remembered.</p>
+<h2>Honest failure modes</h2>
+<p>Naming these because the convention is more likely to fail in one of these ways than to be ignored outright:</p>
+<ul>
+<li><strong>Goal theater.</strong> Setting targets already known to be met. The <code>baseline</code> and</li>
+</ul>
+<p><code>as_of</code> fields exist to make a target below the baseline visible at a glance.</p>
+<ul>
+<li><strong>Fabricated justifications.</strong> Mitigated by requiring the <em>measure</em> to be</li>
+</ul>
+<p>named, and by making &quot;serves no goal&quot; a legitimate answer rather than a confession.</p>
+<ul>
+<li><strong>Measuring what is easy.</strong> If the honest measure is hard to collect, the right</li>
+</ul>
+<p>first task is to make it collectible — not to substitute a proxy and forget the substitution happened.</p>
+<ul>
+<li><strong>Goals that never fail.</strong> If every goal is hit, they are set too low. A</li>
+</ul>
+<p><code>history</code> with no <code>missed</code> entries after a few months is itself a finding.</p>
+</div>
+</body>
+</html>

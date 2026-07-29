@@ -59,7 +59,7 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </head>
 <body>
 <div class="wrap">
-<p class="src">Generated from routines.md — edit the markdown, not this file</p>
+<nav class="nav"><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from routines.md — edit the markdown, not this file</p>
 <h1>Routines, sessions, and containers</h1>
 <p>How scheduled agents actually work here, and the rules learned by breaking them.</p>
 <h2>The container model</h2>
@@ -101,6 +101,8 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <p>plan file for a repo it doesn&#x27;t own.</p>
 <p>Current map:</p>
 <div class="tablewrap"><table><thead><tr><th>Routine</th><th>Cadence</th><th>Lives in</th></tr></thead><tbody><tr><td>Night shift (all repos)</td><td>8:30pm ET daily</td><td>Dev Operating Manual chat</td></tr><tr><td>SpecBuildr daily traffic report</td><td>6:30am ET daily</td><td>SpecBuildr chat</td></tr><tr><td>SpecBuildr weekly growth strategy</td><td>Mondays 15:00 UTC</td><td>SpecBuildr chat</td></tr></tbody></table></div>
+<p><strong>Every project should also carry a weekly and a monthly goal review</strong> (added 2026-07-29; see <a href="goals-and-measures.md">goals-and-measures.md</a> and the <a href="../skills/goal-review/SKILL.md"><code>goal-review</code></a> skill). Recommended cadence: the weekly one at the end of the working week, so the next goal is set before that week starts; the monthly one on the last working day of the month, ahead of the first weekly review of the new month.</p>
+<p>Both <strong>must fire into a persistent session</strong>, never a fresh one. They ask the owner to choose the next goal and to approve re-prioritizing, and a headless fired session has no <code>AskUserQuestion</code> — a review that cannot ask cannot re-prioritize, and would silently degrade into a report nobody acts on. Each project&#x27;s goal reviews live in <strong>that project&#x27;s own chat</strong>, like all its other Routines.</p>
 <h2>Writing a Routine that behaves unattended</h2>
 <p>See <a href="../skills/routine-design/SKILL.md"><code>/routine-design</code></a> for the full skill. The load-bearing rules:</p>
 <ul>

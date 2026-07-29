@@ -33,6 +33,7 @@ assets. Invoke with `/<name>` in any session where they're installed.
 |---|---|
 | [`project-init`](skills/project-init/SKILL.md) | Scaffold a repo the house way — CLAUDE.md contract, `.claude/` config, docs/brain skeleton, git conventions |
 | [`plan-track`](skills/plan-track/SKILL.md) | `plan/plan.json` as single source of truth + a generated dashboard splitting your tasks from the agent's, ranked P0→P2 |
+| [`goal-review`](skills/goal-review/SKILL.md) | Score the goal against its number, audit whether the work that claimed to move it did, then update and re-prioritize — weekly and monthly |
 | [`weekly-review`](skills/weekly-review/SKILL.md) | The operating cadence: what moved, what stalled, what's blocked on you, is the plan still honest |
 | [`wrap-session`](skills/wrap-session/SKILL.md) | Close-out ritual — capture findings, log decisions, update statuses, regenerate, commit |
 
@@ -62,6 +63,9 @@ assets. Invoke with `/<name>` in any session where they're installed.
 
 ## The conventions
 
+- **[Goals and measures](conventions/goals-and-measures.md)** — owner-set monthly
+  and weekly goals, one measurable number each, and the rule that every suggested
+  task says which goal it serves. Generates `dashboard/goals.html`.
 - **[House rules](conventions/house-rules.md)** — the operating contract: tasks,
   claims, git, ownership split, interaction defaults, untrusted data.
 - **[Routines and sessions](conventions/routines.md)** — how scheduled agents

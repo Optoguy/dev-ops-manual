@@ -199,6 +199,7 @@ def render(md):
 TRIO = [
     ("docs/STRATEGY.html", "Strategy"),
     ("docs/BUSINESS-PLAN.html", "Business plan"),
+    ("dashboard/goals.html", "Goals"),
     ("dashboard/index.html", "Task plan"),
     ("docs/PLAN.html", "Roadmap"),
 ]

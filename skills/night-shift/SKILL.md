@@ -26,6 +26,11 @@ its CLAUDE.md hard constraints).
 From the repo's task source of truth (`plan/plan.json` or whatever CLAUDE.md
 declares), a task qualifies for the night shift only if ALL of these hold:
 
+0. **Read `plan/goals.json` before anything else.** If the weekly goal is
+   missing, or `week.starts` is more than seven days old, **stop and ask the
+   owner for a new weekly goal before proposing any work.** A slate selected
+   against an expired goal is a slate selected against nothing. This test comes
+   first, and it applies per repo.
 1. **`owner: agent`** — never pick up the owner's tasks, even easy ones.
 2. **`status: todo` and unblocked** — nothing in `blocked_by` still open, and
    not already claimed. A task is claimed (in flight, not available) if it is
@@ -59,6 +64,17 @@ Present the slate to the owner as a clickable `AskUserQuestion` menu (per the
 house interaction rule): the proposed tasks with one line each on what will be
 done and how it will be verified, plus what was skipped and why. Offer
 approve-all, pick-a-subset (multiSelect), and none-tonight.
+
+**Every option carries its goal and its justification** (owner rule,
+2026-07-29). One line, naming the **measure** the work moves and its current
+value — *"moves completed-specs-per-week, at 0 today"* — not the goal's title.
+Work that serves no goal is proposed as `keeping-the-lights-on` and says so
+plainly; that is a legitimate slate entry, and dressing it up as goal-serving
+is not. **If a candidate task cannot honestly name either, it does not go on
+the slate** — put it in the skipped list with "serves no current goal" as the
+reason, and let the owner decide whether the goals or the task are wrong.
+Lead the message with the current weekly goal, so the owner is reading the
+slate against it rather than from memory.
 
 **Tag each proposed task with a dispatch recommendation** (owner rule,
 2026-07-27): run-here (a Claude session — this one or the night run) vs

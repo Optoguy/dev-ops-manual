@@ -59,7 +59,7 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </head>
 <body>
 <div class="wrap">
-<p class="src">Generated from house-rules.md — edit the markdown, not this file</p>
+<nav class="nav"><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from house-rules.md — edit the markdown, not this file</p>
 <h1>House rules</h1>
 <p>The operating contract every project inherits. Project <code>CLAUDE.md</code> files restate the parts that bind their repo; this file is the source of record.</p>
 <h2>This repo never pushes to project repos</h2>
@@ -159,6 +159,32 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <li><strong>Deliverables the owner asks about are files, not chat text.</strong> A report or</li>
 </ul>
 <p>memo that lives only in a reply gets buried; send it with <code>SendUserFile</code> and summarize in prose afterward.</p>
+<h2>Goals and measures</h2>
+<p>Added 2026-07-29 at the owner&#x27;s request. Full convention: <a href="goals-and-measures.md">goals-and-measures.md</a>. The binding parts:</p>
+<ul>
+<li>**Every project carries a current monthly goal and a current weekly goal, and</li>
+</ul>
+<p>the owner sets both.** They live in <code>plan/goals.json</code>. Agents draft candidates with evidence; only the owner decides. This binds <code>dev-ops-manual</code> too.</p>
+<ul>
+<li><strong>Every goal carries one measure</strong> with a <strong>baseline</strong>, a <strong>target</strong>, an</li>
+</ul>
+<p><strong>as_of</strong> date, and a named <strong>source</strong>. A goal without a number is a wish. If nobody can produce the number today, say so and make producing it the first task.</p>
+<ul>
+<li>**Every agent-suggested task names the goal it serves and how it moves that</li>
+</ul>
+<p>goal&#x27;s measure** — in the task file, in every menu put to the owner, and in the pull request. One line, naming the measure and its current value, not the goal&#x27;s title.</p>
+<ul>
+<li><strong>&quot;This serves no current goal&quot; is a valid answer.</strong> Label it</li>
+</ul>
+<p><code>goal: keeping-the-lights-on</code> — security, breakage, legal, forced platform changes. Requiring a justification for everything is an incentive to invent one, and a fabricated link is worse than an admitted gap. Work that is neither goal-serving nor keeping-the-lights-on can wait; that is the point of goals.</p>
+<ul>
+<li><strong>Stale goals block work.</strong> A weekly goal more than seven days old is expired;</li>
+</ul>
+<p>ask for a new one before proposing anything. <code>build_dashboard.py</code> warns on every run.</p>
+<ul>
+<li><strong>Finished goals move to <code>history</code> with their outcome and final number</strong> —</li>
+</ul>
+<p>append-only. A history with no misses means the goals are set too low.</p>
 <h2>Tasks and priorities</h2>
 <ul>
 <li><strong>One source of truth per repo</strong>, declared in its <code>CLAUDE.md</code>. Usually</li>

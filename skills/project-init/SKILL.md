@@ -66,6 +66,18 @@ Most projects want a bit of both. Scaffold the overlap, offer the rest.
      with the real first tasks from the interview, each tagged `owner`
      (`me` | `agent`), `priority` (`P0`/`P1`/`P2`), and `status`. Run
      `python src/build_dashboard.py` to generate `dashboard/index.html`.
+   - **Create `plan/goals.json` from `plan-track/assets/goals.example.json` and
+     get the owner to fill it in before any task is worked** (house rule). A
+     project with no current monthly and weekly goal has no basis for choosing
+     what to do first, and every task it seeds will be unjustifiable. Draft two
+     or three candidate goals out of the step-1 interview and put them to the
+     owner as a menu — each with the measure it would be scored on, a baseline
+     that exists today, and a named source for that number. **If the number
+     doesn't exist yet, producing it is the first task.** Tag every seeded task
+     with its `goal` and a one-line `justification`.
+   - Copy `plan-track/assets/build_goals.py` to `src/build_goals.py` and run it
+     once the goals exist — `dashboard/goals.html` is the page the owner opens to
+     see where things stand.
    - Also copy `plan-track/assets/render_docs.py` to `src/render_docs.py` —
      every markdown plan or to-do list gets a generated HTML twin (house rule).
    - **Write the other two of the three linked documents** (house rule): 
