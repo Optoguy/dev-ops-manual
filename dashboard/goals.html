@@ -35,6 +35,7 @@
   .eyebrow .sep { opacity:.45; }
   .clock { text-transform:none; letter-spacing:0; }
   .clock.stale { color:var(--critical); font-weight:600; }
+  .clock.ageing { color:var(--warning); font-weight:600; }
   .goal-text { font-size:19px; font-weight:600; margin:8px 0 18px; line-height:1.35; }
   .card.empty .goal-text { color:var(--dim); font-weight:400; }
   .m-name { font-size:13px; color:var(--dim); margin-bottom:8px; }
@@ -96,13 +97,19 @@
     var startsAt = Date.parse(el.dataset.starts + 'T00:00:00Z');
     if (isNaN(startsAt)) return;
     var weekly = /week/i.test(el.dataset.kind || '');
-    var span = weekly ? 7 : 30;
+    var AGEING = 7, BLOCKS = 14;                 /* reported at 7, blocks at 14 */
+    var span = weekly ? AGEING : 30;
     var elapsed = Math.floor((Date.now() - startsAt) / DAY);
     var left = span - elapsed;
     if (elapsed < 0) { el.textContent = 'starts in ' + (-elapsed) + 'd'; return; }
-    if (weekly && elapsed > 7) {
-      el.textContent = 'STALE — set ' + elapsed + ' days ago';
+    if (weekly && elapsed > BLOCKS) {
+      el.textContent = 'EXPIRED — set ' + elapsed + ' days ago, work is blocked';
       el.className = 'clock stale';
+      return;
+    }
+    if (weekly && elapsed > AGEING) {
+      el.textContent = 'AGEING — ' + elapsed + ' days old, blocks in ' + (BLOCKS - elapsed) + 'd';
+      el.className = 'clock ageing';
       return;
     }
     el.textContent = 'day ' + (elapsed + 1) + ' · ' + (left > 0 ? left + 'd left' : 'over');

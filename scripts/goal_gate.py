@@ -7,6 +7,10 @@ Usage:
     python scripts/goal_gate.py --task <id>     # may work proceed on THIS task?
     python scripts/goal_gate.py --quiet         # exit code only
 
+The weekly goal's age is reported on EVERY run, clear or blocked. Between day 7
+and day 14 the gate stays clear but says the goal is AGEING and when it will
+block — softening the stop without reporting it would just hide staleness.
+
 Exit codes:
     0  CLEAR   — there is a current, measured, unexpired goal
     1  BLOCKED — there is not; the reasons and the permitted actions are printed
@@ -38,7 +42,12 @@ GOALS = ROOT / "plan" / "goals.json"
 PLAN = ROOT / "plan" / "plan.json"
 
 EXEMPT_GOALS = {"keeping-the-lights-on"}
-WEEK_STALE_DAYS = 7
+# A weekly goal is meant to last a week. It is REPORTED as ageing the moment it
+# outlives that (owner rule, 2026-07-29: soften the stop, but say so every time),
+# and it BLOCKS at twice its intended life, where it can no longer be called
+# current by anyone.
+WEEK_AGEING_DAYS = 7
+WEEK_STALE_DAYS = 14
 REQUIRED_MEASURE_FIELDS = ("name", "baseline", "target", "as_of", "source")
 
 PERMITTED = """Permitted right now, and nothing else:
@@ -87,7 +96,12 @@ def week_age(week):
 
 
 def gate(goals):
-    """Returns (blocked_reasons, week_goal, days_elapsed)."""
+    """Returns (blocked_reasons, week_goal, days_elapsed).
+
+    Ageing is not blocking: between WEEK_AGEING_DAYS and WEEK_STALE_DAYS the gate
+    stays clear and `age_note` reports it. That report is not optional — softening
+    the stop without saying anything would simply hide the staleness.
+    """
     if goals is None:
         return (["there is no plan/goals.json — this project has no goals at all"], None, None)
 
@@ -111,6 +125,21 @@ def gate(goals):
             f"A goal older than {WEEK_STALE_DAYS} days is not something to work against."
         )
     return reasons, week, age
+
+
+def age_note(age):
+    """Reported on EVERY run, clear or not. A softened deadline that says nothing
+    is just a longer silence."""
+    if age is None:
+        return "  Age:       unknown — the weekly goal has no 'starts' date."
+    if age > WEEK_STALE_DAYS:
+        return f"  Age:       {age} days — EXPIRED (blocks at {WEEK_STALE_DAYS})."
+    if age > WEEK_AGEING_DAYS:
+        left = WEEK_STALE_DAYS - age
+        return (f"  Age:       {age} days — AGEING. A weekly goal was meant to last "
+                f"{WEEK_AGEING_DAYS} days; this one has outlived that and blocks in "
+                f"{left} day{'s' if left != 1 else ''}. Run the goal review.")
+    return f"  Age:       day {age + 1} of {WEEK_AGEING_DAYS} — current."
 
 
 def find_task(plan, tid):
@@ -143,8 +172,9 @@ def describe(goals, week, age):
     out = []
     w = goals.get("week") or {}
     m = w.get("measure") or {}
-    when = f"day {age + 1} of {WEEK_STALE_DAYS}" if age is not None else "no start date"
-    out.append(f"CLEAR — work may proceed against {w.get('id', 'the current goal')} ({when}).")
+    ageing = age is not None and age > WEEK_AGEING_DAYS
+    head = "CLEAR (goal is ageing)" if ageing else "CLEAR"
+    out.append(f"{head} — work may proceed against {w.get('id', 'the current goal')}.")
     out.append(f"  This week: {w.get('goal', '')}")
     unit = f" {m['unit']}" if m.get("unit") else ""
     if m:
@@ -155,6 +185,7 @@ def describe(goals, week, age):
     mo = goals.get("month") or {}
     if mo.get("goal"):
         out.append(f"  Serving:   {mo.get('id', '')} — {mo['goal']}")
+    out.append(age_note(age))
     return "\n".join(out)
 
 

@@ -180,7 +180,7 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <ul>
 <li><strong>No work proceeds without a goal to work against.</strong> This is a stop, not a</li>
 </ul>
-<p>warning. <code>python src/goal_gate.py</code> (add <code>--task &amp;lt;id&amp;gt;</code> for one task) exits nonzero and prints why; <code>build_dashboard.py --check</code> fails on the same conditions. A weekly goal more than seven days old is expired and blocks. <strong>Three things are always permitted</strong>, or the rule deadlocks: setting or updating the goals, <code>keeping-the-lights-on</code> work (which outranks the gate — permitted even with no goals file at all), and answering the owner.</p>
+<p>warning. <code>python src/goal_gate.py</code> (add <code>--task &amp;lt;id&amp;gt;</code> for one task) exits nonzero and prints why; <code>build_dashboard.py --check</code> fails on the same conditions. A weekly goal is <strong>reported as ageing after seven days and blocks after fourteen</strong> — and the age is stated on every run and in every slate, so a softer deadline does not become a quieter one. <strong>Three things are always permitted</strong>, or the rule deadlocks: setting or updating the goals, <code>keeping-the-lights-on</code> work (which outranks the gate — permitted even with no goals file at all), and answering the owner.</p>
 <ul>
 <li><strong>Finished goals move to <code>history</code> with their outcome and final number</strong> —</li>
 </ul>

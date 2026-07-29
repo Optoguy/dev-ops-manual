@@ -165,13 +165,29 @@ Exit `0` means clear. Exit `1` means blocked, and prints why and what is
 permitted instead. Work is blocked when there is no goals file, when either goal
 is missing or has no measure, when a measure lacks a baseline, target, date or
 source, when a target is not above its baseline, or when the weekly goal is more
-than seven days old. With `--task`, also when that task names no goal, names one
+than **fourteen** days old. With `--task`, also when that task names no goal, names one
 that is no longer current, or carries no justification.
 
 `build_dashboard.py --check` enforces the same rule: **goal problems now fail
 it.** A project that has not adopted goals fails that check, and that is the
 intended pressure rather than a bug — the first permitted work is writing
 `plan/goals.json`.
+
+### Ageing is reported, not silent
+
+**A weekly goal is meant to last seven days. It blocks at fourteen.** Between
+those, the gate stays clear and reports `AGEING` on every single run, with how
+many days remain before work stops.
+
+That report is the price of the softer deadline (owner rule, 2026-07-29:
+*"soften to 14 days but report on this issue each time"*). Doubling a deadline
+without saying anything just buys a longer silence — the goal still rots, and
+nobody notices until work stops. So the age is printed by the gate every time it
+runs, warned by `build_dashboard.py` every build, shown on the goals page in
+amber, and **stated to the owner in every slate of proposed work**, not swallowed.
+
+An ageing goal is the only goal note that does not fail `--check`. Everything
+else about goals is fatal.
 
 ### Three things are always permitted
 
@@ -248,7 +264,7 @@ Both need to ask the owner questions, so both must fire into a persistent
 session. A review that cannot ask cannot re-prioritize.
 
 **Stale goals are a blocking condition, not a note.** If the weekly goal started
-more than seven days ago, the first thing an agent asks the owner is for a new
+more than fourteen days ago, the first thing an agent asks the owner is for a new
 one — before proposing any work. Work selected against an expired goal is work
 selected against nothing. `build_dashboard.py` prints a staleness warning every
 time it runs, so this is caught mechanically rather than remembered.

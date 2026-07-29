@@ -157,8 +157,12 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <p>This is a <strong>stop</strong>, not a warning. <code>src/goal_gate.py</code> answers one question — may work proceed here? — and an agent runs it before starting anything:</p>
 <pre><code>python src/goal_gate.py                # may work proceed in this repo at all?
 python src/goal_gate.py --task &lt;id&gt;    # may work proceed on THIS task?</code></pre>
-<p>Exit <code>0</code> means clear. Exit <code>1</code> means blocked, and prints why and what is permitted instead. Work is blocked when there is no goals file, when either goal is missing or has no measure, when a measure lacks a baseline, target, date or source, when a target is not above its baseline, or when the weekly goal is more than seven days old. With <code>--task</code>, also when that task names no goal, names one that is no longer current, or carries no justification.</p>
+<p>Exit <code>0</code> means clear. Exit <code>1</code> means blocked, and prints why and what is permitted instead. Work is blocked when there is no goals file, when either goal is missing or has no measure, when a measure lacks a baseline, target, date or source, when a target is not above its baseline, or when the weekly goal is more than <strong>fourteen</strong> days old. With <code>--task</code>, also when that task names no goal, names one that is no longer current, or carries no justification.</p>
 <p><code>build_dashboard.py --check</code> enforces the same rule: <strong>goal problems now fail it.</strong> A project that has not adopted goals fails that check, and that is the intended pressure rather than a bug — the first permitted work is writing <code>plan/goals.json</code>.</p>
+<h3>Ageing is reported, not silent</h3>
+<p><strong>A weekly goal is meant to last seven days. It blocks at fourteen.</strong> Between those, the gate stays clear and reports <code>AGEING</code> on every single run, with how many days remain before work stops.</p>
+<p>That report is the price of the softer deadline (owner rule, 2026-07-29: <em>&quot;soften to 14 days but report on this issue each time&quot;</em>). Doubling a deadline without saying anything just buys a longer silence — the goal still rots, and nobody notices until work stops. So the age is printed by the gate every time it runs, warned by <code>build_dashboard.py</code> every build, shown on the goals page in amber, and <strong>stated to the owner in every slate of proposed work</strong>, not swallowed.</p>
+<p>An ageing goal is the only goal note that does not fail <code>--check</code>. Everything else about goals is fatal.</p>
 <h3>Three things are always permitted</h3>
 <p>Without these the rule deadlocks: you could not fix the goals file, because fixing it would be work.</p>
 <ol>
@@ -200,7 +204,7 @@ python src/goal_gate.py --task &lt;id&gt;    # may work proceed on THIS task?</c
 <p>Suggested schedule — each project&#x27;s own chat owns its Routines:</p>
 <div class="tablewrap"><table><thead><tr><th>Review</th><th>When</th><th>Why then</th></tr></thead><tbody><tr><td>Weekly</td><td>End of the working week</td><td>The next goal is set before the week starts, not three days in</td></tr><tr><td>Monthly</td><td>Last working day of the month</td><td>Ahead of the first weekly review of the new month</td></tr></tbody></table></div>
 <p>Both need to ask the owner questions, so both must fire into a persistent session. A review that cannot ask cannot re-prioritize.</p>
-<p><strong>Stale goals are a blocking condition, not a note.</strong> If the weekly goal started more than seven days ago, the first thing an agent asks the owner is for a new one — before proposing any work. Work selected against an expired goal is work selected against nothing. <code>build_dashboard.py</code> prints a staleness warning every time it runs, so this is caught mechanically rather than remembered.</p>
+<p><strong>Stale goals are a blocking condition, not a note.</strong> If the weekly goal started more than fourteen days ago, the first thing an agent asks the owner is for a new one — before proposing any work. Work selected against an expired goal is work selected against nothing. <code>build_dashboard.py</code> prints a staleness warning every time it runs, so this is caught mechanically rather than remembered.</p>
 <h2>Honest failure modes</h2>
 <p>Naming these because the convention is more likely to fail in one of these ways than to be ignored outright:</p>
 <ul>

@@ -35,7 +35,9 @@ OUT = ROOT / "dashboard" / "index.html"
 
 # Work that legitimately serves no goal (see conventions/goals-and-measures.md).
 EXEMPT_GOALS = {"keeping-the-lights-on"}
-WEEK_STALE_DAYS = 7
+# Reported as ageing once it outlives its week; blocks at twice that.
+WEEK_AGEING_DAYS = 7
+WEEK_STALE_DAYS = 14
 
 OWNERS = {"me": "🧑 Your tasks", "agent": "🤖 Agent tasks"}
 PRIORITIES = ["P0", "P1", "P2"]
@@ -105,8 +107,12 @@ def goal_warnings(goals):
         try:
             age = (date.today() - date.fromisoformat(str(starts))).days
             if age > WEEK_STALE_DAYS:
-                out.append(f"goals: the weekly goal started {age} days ago — STALE. "
+                out.append(f"goals: the weekly goal started {age} days ago — EXPIRED. "
                            f"Ask the owner for a new one before proposing any work.")
+            elif age > WEEK_AGEING_DAYS:
+                out.append(f"goals: the weekly goal is ageing — {age} days old, meant to last "
+                           f"{WEEK_AGEING_DAYS}, blocks in {WEEK_STALE_DAYS - age}. "
+                           f"Report this to the owner and offer the goal review.")
         except ValueError:
             out.append(f"goals: week.starts is not a date ({starts!r})")
     elif goals.get("week"):
@@ -507,7 +513,11 @@ def main():
         # fails this check, and that is the intended pressure — the first
         # permitted work is writing plan/goals.json. See scripts/goal_gate.py for
         # the gate itself and its three standing exemptions.
-        problems = [w for w in warnings if "rendered in its own column" not in w]
+        # "ageing" is the one goal note that stays advisory — it is a report, by
+        # design (owner rule, 2026-07-29). Everything else about goals is fatal.
+        problems = [w for w in warnings
+                    if "rendered in its own column" not in w
+                    and "is ageing" not in w]
         for w in warnings:
             if w not in problems:
                 print(f"warning: {w}", file=sys.stderr)
