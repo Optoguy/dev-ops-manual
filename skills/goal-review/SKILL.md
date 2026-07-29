@@ -22,6 +22,10 @@ The weekly review (`/weekly-review`) runs this as its goal section. Run it
 standalone when the owner asks how a goal is tracking, or when a goal feels
 wrong mid-period.
 
+**This review is exempt from the goal gate**, and is usually the reason the gate
+is red. When `src/goal_gate.py` blocks a repo, running this is the permitted way
+out — setting the goals is always allowed.
+
 ## Procedure
 
 ### 1. Score the goal with a number, first

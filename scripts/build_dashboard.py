@@ -4,7 +4,8 @@ Portable, dependency-free (stdlib only). Drop it at `scripts/build_dashboard.py`
 
 Usage:
     python scripts/build_dashboard.py                 # reads plan/plan.json, writes dashboard/index.html
-    python scripts/build_dashboard.py --check          # fail (nonzero) if the dashboard is stale or the plan is invalid
+    python scripts/build_dashboard.py --check          # fail (nonzero) if the dashboard is stale, the plan is invalid,
+                                                   # or any goal/justification is missing (the goal gate)
 
 The plan is the single source of truth — edit plan/plan.json, never the HTML.
 Each task carries:
@@ -498,17 +499,15 @@ def main():
 
     check = "--check" in sys.argv[1:]
     if check:
-        # Advisory notes stay warnings; only structural problems fail --check.
-        # Owner vocabulary: a repo may use its own; tasks render in their own column.
-        # Goals: a project mid-adoption must not have its build broken by a missing
-        # goal — the nag is loud, not fatal. Use --strict-goals to make it fatal
-        # once a project has finished adopting.
-        strict_goals = "--strict-goals" in sys.argv[1:]
-        problems = [
-            w for w in warnings
-            if "rendered in its own column" not in w
-            and (strict_goals or not is_goal_warning(w))
-        ]
+        # Owner-vocabulary notes stay advisory: a repo may use its own vocabulary,
+        # and those tasks still render in their own column.
+        #
+        # Goal problems are FATAL (owner rule, 2026-07-29: no work proceeds
+        # without a goal to work against). A repo that has not adopted goals yet
+        # fails this check, and that is the intended pressure — the first
+        # permitted work is writing plan/goals.json. See scripts/goal_gate.py for
+        # the gate itself and its three standing exemptions.
+        problems = [w for w in warnings if "rendered in its own column" not in w]
         for w in warnings:
             if w not in problems:
                 print(f"warning: {w}", file=sys.stderr)

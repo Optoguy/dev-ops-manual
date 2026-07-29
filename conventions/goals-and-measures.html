@@ -152,6 +152,26 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <h2>Cadence — who does what, and when</h2>
 <p>The owner sets the goals. Agents do the preparation so that setting them takes minutes, not an evening.</p>
 <div class="tablewrap"><table><thead><tr><th>When</th><th>Who</th><th>What</th></tr></thead><tbody><tr><td><strong>Start of the month</strong></td><td>Agent drafts, owner decides</td><td>Propose 2–3 candidate monthly goals with the evidence behind each, as a clickable menu. Owner picks or writes their own.</td></tr><tr><td><strong>Start of the week</strong></td><td>Agent drafts, owner decides</td><td>Report last week&#x27;s measure against its target, then propose this week&#x27;s goal. Same menu pattern.</td></tr><tr><td><strong>Any slate of work</strong></td><td>Agent</td><td>Every option carries its goal and its one-line justification.</td></tr><tr><td><strong>End of the period</strong></td><td>Agent</td><td>Move the goal to <code>history</code> with its outcome and final number. Never quietly delete a missed goal.</td></tr></tbody></table></div>
+<h2>The gate — no work without a goal</h2>
+<p>Added 2026-07-29 at the owner&#x27;s request: <em>&quot;Add a check to the dev ops to not allow any further work unless there is a defined goal to work against.&quot;</em></p>
+<p>This is a <strong>stop</strong>, not a warning. <code>src/goal_gate.py</code> answers one question — may work proceed here? — and an agent runs it before starting anything:</p>
+<pre><code>python src/goal_gate.py                # may work proceed in this repo at all?
+python src/goal_gate.py --task &lt;id&gt;    # may work proceed on THIS task?</code></pre>
+<p>Exit <code>0</code> means clear. Exit <code>1</code> means blocked, and prints why and what is permitted instead. Work is blocked when there is no goals file, when either goal is missing or has no measure, when a measure lacks a baseline, target, date or source, when a target is not above its baseline, or when the weekly goal is more than seven days old. With <code>--task</code>, also when that task names no goal, names one that is no longer current, or carries no justification.</p>
+<p><code>build_dashboard.py --check</code> enforces the same rule: <strong>goal problems now fail it.</strong> A project that has not adopted goals fails that check, and that is the intended pressure rather than a bug — the first permitted work is writing <code>plan/goals.json</code>.</p>
+<h3>Three things are always permitted</h3>
+<p>Without these the rule deadlocks: you could not fix the goals file, because fixing it would be work.</p>
+<ol>
+<li><strong>Setting or updating the goals</strong>, and running the goal review.</li>
+<li><strong><code>keeping-the-lights-on</code> work</strong> — security, data loss, something broken that</li>
+</ol>
+<p>used to work, legal or licensing obligations, a forced platform change. This genuinely cannot wait for a goal, so <strong>the exemption outranks the gate</strong>: a task labelled <code>keeping-the-lights-on</code> is permitted even in a repo with no goals file at all.</p>
+<ol>
+<li><strong>Answering the owner.</strong> Conversation is not work.</li>
+</ol>
+<p>Everything else waits. That is the point: if no goal justifies a piece of work, the honest options are to change the goal or to leave the work undone — not to do it anyway and write a justification afterwards.</p>
+<h3>What this costs, honestly</h3>
+<p>A blocked repo is a real stop. An expired weekly goal halts agent work until the owner sets a new one, which is a dependency on one person being available. That is deliberate — the alternative is agents working against a goal nobody has looked at in a month — but it is a genuine cost, and if it starts biting, the right response is to lengthen the period rather than to quietly widen the exemptions.</p>
 <h2>The goal review — weekly and monthly</h2>
 <p><strong>A goal that is set and never scored is decoration.</strong> Every period ends with a review, and the review is what updates and re-prioritizes. The ritual is <a href="../skills/goal-review/SKILL.md"><code>/goal-review</code></a>; the <a href="../skills/weekly-review/SKILL.md">weekly review</a> runs it as its opening section.</p>
 <p>Both cadences do the same five things:</p>

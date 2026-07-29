@@ -153,9 +153,13 @@ Added 2026-07-29 at the owner's request. Full convention:
   changes. Requiring a justification for everything is an incentive to invent
   one, and a fabricated link is worse than an admitted gap. Work that is neither
   goal-serving nor keeping-the-lights-on can wait; that is the point of goals.
-- **Stale goals block work.** A weekly goal more than seven days old is expired;
-  ask for a new one before proposing anything. `build_dashboard.py` warns on
-  every run.
+- **No work proceeds without a goal to work against.** This is a stop, not a
+  warning. `python src/goal_gate.py` (add `--task <id>` for one task) exits
+  nonzero and prints why; `build_dashboard.py --check` fails on the same
+  conditions. A weekly goal more than seven days old is expired and blocks.
+  **Three things are always permitted**, or the rule deadlocks: setting or
+  updating the goals, `keeping-the-lights-on` work (which outranks the gate —
+  permitted even with no goals file at all), and answering the owner.
 - **Finished goals move to `history` with their outcome and final number** —
   append-only. A history with no misses means the goals are set too low.
 

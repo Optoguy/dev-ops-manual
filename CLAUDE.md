@@ -27,7 +27,8 @@ each project's own chat (see `conventions/routines.md`).
   `external-agents.md` (the Devin contract), `global-CLAUDE-snippet.md` (what
   `--prefs` writes).
 - `decisions/` — dated records of choices that changed how work happens.
-- `scripts/` — `build_dashboard.py`, `build_goals.py`, `render_docs.py`, and `skills_drift.py`
+- `scripts/` — `goal_gate.py` (**run it before starting work — no goal, no
+  work**), `build_dashboard.py`, `build_goals.py`, `render_docs.py`, and `skills_drift.py`
   (compares each project's installed `.claude/skills/` against `skills/` here;
   **reports only, never fixes** — adoption is the project's own call).
 - `reports/` — dated findings that aren't decisions, each with an HTML twin.

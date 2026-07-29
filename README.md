@@ -63,7 +63,8 @@ assets. Invoke with `/<name>` in any session where they're installed.
 
 ## The conventions
 
-- **[Goals and measures](conventions/goals-and-measures.md)** — owner-set monthly
+- **[Goals and measures](conventions/goals-and-measures.md)** — **no work without
+  a goal** (`python src/goal_gate.py` is the stop); owner-set monthly
   and weekly goals, one measurable number each, and the rule that every suggested
   task says which goal it serves. Generates `dashboard/goals.html`.
 - **[House rules](conventions/house-rules.md)** — the operating contract: tasks,

@@ -148,6 +148,57 @@ minutes, not an evening.
 | **Any slate of work** | Agent | Every option carries its goal and its one-line justification. |
 | **End of the period** | Agent | Move the goal to `history` with its outcome and final number. Never quietly delete a missed goal. |
 
+## The gate — no work without a goal
+
+Added 2026-07-29 at the owner's request: *"Add a check to the dev ops to not
+allow any further work unless there is a defined goal to work against."*
+
+This is a **stop**, not a warning. `src/goal_gate.py` answers one question — may
+work proceed here? — and an agent runs it before starting anything:
+
+```sh
+python src/goal_gate.py                # may work proceed in this repo at all?
+python src/goal_gate.py --task <id>    # may work proceed on THIS task?
+```
+
+Exit `0` means clear. Exit `1` means blocked, and prints why and what is
+permitted instead. Work is blocked when there is no goals file, when either goal
+is missing or has no measure, when a measure lacks a baseline, target, date or
+source, when a target is not above its baseline, or when the weekly goal is more
+than seven days old. With `--task`, also when that task names no goal, names one
+that is no longer current, or carries no justification.
+
+`build_dashboard.py --check` enforces the same rule: **goal problems now fail
+it.** A project that has not adopted goals fails that check, and that is the
+intended pressure rather than a bug — the first permitted work is writing
+`plan/goals.json`.
+
+### Three things are always permitted
+
+Without these the rule deadlocks: you could not fix the goals file, because
+fixing it would be work.
+
+1. **Setting or updating the goals**, and running the goal review.
+2. **`keeping-the-lights-on` work** — security, data loss, something broken that
+   used to work, legal or licensing obligations, a forced platform change. This
+   genuinely cannot wait for a goal, so **the exemption outranks the gate**: a
+   task labelled `keeping-the-lights-on` is permitted even in a repo with no
+   goals file at all.
+3. **Answering the owner.** Conversation is not work.
+
+Everything else waits. That is the point: if no goal justifies a piece of work,
+the honest options are to change the goal or to leave the work undone — not to
+do it anyway and write a justification afterwards.
+
+### What this costs, honestly
+
+A blocked repo is a real stop. An expired weekly goal halts agent work until the
+owner sets a new one, which is a dependency on one person being available. That
+is deliberate — the alternative is agents working against a goal nobody has
+looked at in a month — but it is a genuine cost, and if it starts biting, the
+right response is to lengthen the period rather than to quietly widen the
+exemptions.
+
 ## The goal review — weekly and monthly
 
 **A goal that is set and never scored is decoration.** Every period ends with a
