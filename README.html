@@ -59,7 +59,7 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </head>
 <body>
 <div class="wrap">
-<p class="src">Generated from README.md — edit the markdown, not this file</p>
+<nav class="nav"><a href="dashboard/goals.html">Goals</a><a href="dashboard/index.html">Task plan</a></nav><p class="src">Generated from README.md — edit the markdown, not this file</p>
 <h1>Dev Ops Manual</h1>
 <p><strong>How I work with Claude.</strong> This repo is the source of record for the method — the portable skills, the operating conventions, and the decisions behind them. Every project repo installs from here; nothing here is project-specific.</p>
 <p>Readable from anywhere: browse it on GitHub, or clone it locally (<code>C:\Users\dancg\OneDrive\Projects\dev-ops-manual</code> on the PC).</p>
@@ -79,6 +79,10 @@ cd dev-ops-manual
 <p><strong>Working with people and agents</strong> | Skill | What it does | |---|---| | <a href="skills/night-shift/SKILL.md"><code>night-shift</code></a> | Propose overnight agent work, get slate approval, run only what&#x27;s approved → one draft PR | | <a href="skills/routine-design/SKILL.md"><code>routine-design</code></a> | Scheduled agents that run safely unattended — quiet-until-prereqs, untrusted-data guardrails, explicit thresholds | | <a href="skills/discovery-call/SKILL.md"><code>discovery-call</code></a> | Prep a customer/advisor conversation and capture what it taught, with provenance |</p>
 <hr>
 <h2>The conventions</h2>
+<ul>
+<li><strong><a href="conventions/goals-and-measures.md">Goals and measures</a></strong> — owner-set monthly</li>
+</ul>
+<p>and weekly goals, one measurable number each, and the rule that every suggested task says which goal it serves. Generates <code>dashboard/goals.html</code>.</p>
 <ul>
 <li><strong><a href="conventions/house-rules.md">House rules</a></strong> — the operating contract: tasks,</li>
 </ul>

@@ -75,6 +75,9 @@ Most projects want a bit of both. Scaffold the overlap, offer the rest.
      that exists today, and a named source for that number. **If the number
      doesn't exist yet, producing it is the first task.** Tag every seeded task
      with its `goal` and a one-line `justification`.
+   - Copy `plan-track/assets/build_goals.py` to `src/build_goals.py` and run it
+     once the goals exist — `dashboard/goals.html` is the page the owner opens to
+     see where things stand.
    - Also copy `plan-track/assets/render_docs.py` to `src/render_docs.py` —
      every markdown plan or to-do list gets a generated HTML twin (house rule).
    - **Write the other two of the three linked documents** (house rule): 

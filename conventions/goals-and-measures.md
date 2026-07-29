@@ -67,6 +67,10 @@ Rules for the file:
   with an `outcome` (`hit` | `missed` | `abandoned`) and the measure's final
   value. This is how you find out whether goals are being set honestly.
 - The same [never-reformat rule](house-rules.md) applies: edit lines in place.
+- **`dashboard/goals.html` is generated from it** by `build_goals.py` — the
+  current goals, a progress meter for each, the work serving each one, the work
+  serving no goal, and the history of finished goals. Regenerate it whenever the
+  goals change, same contract as the task dashboard.
 
 ## What counts as a measure
 
@@ -78,6 +82,11 @@ A measure needs four things, and the fourth is the one people skip:
 | **target** | The number that means done | "improve conversion" | "3 completed specs" |
 | **as_of** | A baseline with no date rots silently | — | "2026-07-29" |
 | **source** | Where the number comes from, and who can check it | "analytics" | "the specs table, grouped by referrer" |
+
+A fifth field, **`current`**, is optional and written by the goal review: where
+the number stands right now. Without it the goals page says "not measured yet"
+rather than implying progress — a page that fakes a number is worse than one
+that admits it has none.
 
 **If nobody can produce the number today, it is not a measure yet.** Say so and
 make producing it the first task. A goal measured by a number that does not exist

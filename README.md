@@ -63,6 +63,9 @@ assets. Invoke with `/<name>` in any session where they're installed.
 
 ## The conventions
 
+- **[Goals and measures](conventions/goals-and-measures.md)** — owner-set monthly
+  and weekly goals, one measurable number each, and the rule that every suggested
+  task says which goal it serves. Generates `dashboard/goals.html`.
 - **[House rules](conventions/house-rules.md)** — the operating contract: tasks,
   claims, git, ownership split, interaction defaults, untrusted data.
 - **[Routines and sessions](conventions/routines.md)** — how scheduled agents

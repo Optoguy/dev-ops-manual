@@ -30,6 +30,11 @@ Read `plan/goals.json`. Take the current period's measure and report it as
 **baseline → target → actual**, with the date the actual was taken and the
 source it came from. Then one word: `hit`, `missed`, or `abandoned`.
 
+**Write the number back.** Set the measure's `current` field in
+`plan/goals.json` and regenerate `dashboard/goals.html`. A goal whose `current`
+is never updated shows "not measured yet" forever, which is the page telling the
+truth about a review that never happened.
+
 If the number cannot be produced, **say that instead of estimating.** "The
 measure was never collectible" is the most important finding a review can
 return, because it means every decision made against that goal was made blind.

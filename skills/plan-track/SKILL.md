@@ -87,6 +87,15 @@ August goal."* Work that genuinely serves no goal is labelled
 changes. That answer is legitimate and carries no penalty; **inventing a
 justification is the failure mode, not admitting there isn't one.**
 
+`assets/build_goals.py` (drop it at `src/build_goals.py`) generates
+**`dashboard/goals.html`** — a clean goals-and-status page: each goal with a
+baseline → now → target meter, the work serving it, the work serving no goal,
+and the finished-goal history with outcomes. The optional `current` field on a
+measure is what the meter reads; without it the page says "not measured yet"
+rather than implying progress. The page is deterministic — elapsed and remaining
+days are computed in the browser from embedded dates, so `--check` keeps meaning
+"you forgot to rebuild".
+
 `build_dashboard.py` renders the goals at the top of the page and prints a
 warning for any missing goal, weak measure, or unjustified task. Warnings are
 advisory by default so a project mid-adoption still builds; add `--strict-goals`
