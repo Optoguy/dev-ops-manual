@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Backlog — Dev Operating Manual</title>
+<title>History — Dev Operating Manual</title>
 <style>
 :root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
   --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
@@ -59,26 +59,32 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </head>
 <body>
 <div class="wrap">
-<nav class="nav"><a href="STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from BACKLOG.md — edit the markdown, not this file</p>
-<h1>Backlog — Dev Operating Manual</h1>
-<p>Work that is worth doing and <strong>serves no current goal</strong>. That is not a criticism of the items; it is the whole point of having goals. Anything here can be pulled back into <code>plan/plan.json</code> the moment a goal makes it relevant — give it a <code>goal</code> and a one-line <code>justification</code> when you do.</p>
-<p>See <a href="../conventions/goals-and-measures.md">goals-and-measures.md</a>. The rule that sends work here: <em>&quot;Anything that is neither goal-serving nor keeping-the-lights-on is, by definition, work that can wait.&quot;</em></p>
-<hr>
-<h2>Evaluate which built-in Claude skills are worth adopting into the house suite</h2>
-<p><strong>Owner: Dan · was P2 in the plan until 2026-07-30</strong></p>
-<p>Candidates seen in use:</p>
+<nav class="nav"><a href="STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from HISTORY.md — edit the markdown, not this file</p>
+<h1>History — Dev Operating Manual</h1>
+<p>One line per period, newest first. Each links a digest of the chat record for that period: the owner&#x27;s instructions in order, and the reasoning behind them.</p>
+<p><strong>Why this exists.</strong> The repository keeps conclusions — decisions, conventions, reports. The chat kept how they were reached: the options rejected, the corrections, the owner&#x27;s exact words. That record lives in an ephemeral container and does not survive it. These files are what is left when it goes. See <a href="../skills/history-capture/SKILL.md"><code>history-capture</code></a>.</p>
+<p><strong>Append-only.</strong> Never rewrite an earlier period. If an entry was wrong, add a correction dated now — the same supersede-don&#x27;t-delete rule the rest of the method follows.</p>
+<div class="tablewrap"><table><thead><tr><th>Period</th><th>Digest</th><th>What it was about</th></tr></thead><tbody><tr><td>2026-07 (22nd–30th)</td><td><a href="history/2026-07.md">2026-07.md</a></td><td>The method&#x27;s first eight days: mining two existing projects into a portable skill suite, then the run of rules that came from breaking things — claim-before-you-build, squash-merge defeating branch-based claims, the manual pushing to nobody, plain-language writing, goals with measures, the no-goal-no-work gate, the end goal and the ladder, external research and fleet audits, and platform portability.</td></tr></tbody></table></div>
+<h2>What the first period contains</h2>
+<p>95 owner turns across eight days, ~61,000 tokens, extracted from 6,152 transcript records. 1,301 tool calls discarded as reconstructable from git.</p>
+<p>The digest&#x27;s <strong>&quot;What the owner asked for, in order&quot;</strong> section is the project&#x27;s spine — every instruction that shaped the method, dated, in his words. Most of the conventions in <code>conventions/</code> can be traced to a line in it.</p>
+<h2>Honest limits of this record</h2>
 <ul>
-<li><code>/security-review</code> — run before a traffic push.</li>
-<li><code>skill-creator</code> — for authoring and evaluating skills properly, including its</li>
+<li><strong>Assistant replies are truncated to 300 characters</strong> in the digest. Anything</li>
 </ul>
-<p>eval harness, which this repo has no equivalent of.</p>
+<p>important must be promoted into a decision, a convention, or a report — not left in the digest.</p>
 <ul>
-<li><code>fewer-permission-prompts</code> — cuts interruptions by generating a scoped</li>
+<li><strong>Redaction is best-effort.</strong> Known credential shapes are masked and the file was</li>
 </ul>
-<p>allowlist from transcript history.</p>
-<p>Owner call on which become house practice.</p>
-<p><strong>Why it moved here.</strong> It was carrying a <code>keeping-the-lights-on</code> label, which is reserved for security, data loss, breakage, legal obligations, and forced platform changes. Evaluating optional tooling is none of those — the label was applied in error on 2026-07-29, hours after the rule against exactly that was written. It serves neither current goal either, so the backlog is its honest home.</p>
-<p><strong>What would bring it back.</strong> A monthly goal about the quality or coverage of the house method rather than its adoption. If <code>skill-creator</code>&#x27;s eval harness turns out to be the way to test whether a skill actually works, this stops being optional and becomes the tooling for that goal.</p>
+<p>swept before committing, but a secret in an unusual format could survive. Never commit the raw transcript.</p>
+<ul>
+<li><strong>Only this chat&#x27;s history is here.</strong> A transcript is readable only by the session</li>
+</ul>
+<p>that produced it, so each project captures its own. The <a href="../skills/fleet-audit/SKILL.md">fleet audit</a> reports any project whose history has gone stale.</p>
+<ul>
+<li><strong>Sub-agent transcripts are not yet captured</strong> — 10.7 MB across eight files in</li>
+</ul>
+<p>the first period alone, some containing real research findings.</p>
 </div>
 </body>
 </html>

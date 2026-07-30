@@ -59,15 +59,38 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </head>
 <body>
 <div class="wrap">
-<nav class="nav"><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from goals-and-measures.md — edit the markdown, not this file</p>
+<nav class="nav"><a href="../docs/STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from goals-and-measures.md — edit the markdown, not this file</p>
 <h1>Goals and measures</h1>
 <p>Added 2026-07-29 at the owner&#x27;s request: <em>&quot;We need goals and KPIs across all projects… every project [must] have me define monthly, weekly goals, each goal must have a measurable KPI, and all agent suggested work must include justification as to how it supports achieving the current goals and KPIs.&quot;</em></p>
 <p>This convention binds every project, <strong>including this one</strong>.</p>
+<h2>The ladder — three levels, each serving the one above</h2>
+<p>Added 2026-07-30 at the owner&#x27;s request: <em>&quot;we need to also ensure each project has a high level end goal defined that monthly and weekly goals support. This is part of the strategy as well. Why are we doing this project.&quot;</em></p>
+<div class="tablewrap"><table><thead><tr><th>Level</th><th>Answers</th><th>Cadence</th><th>Scored?</th></tr></thead><tbody><tr><td><strong>End goal</strong></td><td>Why are we doing this project at all?</td><td>Years, or a condition</td><td><strong>Reviewed, not scored</strong></td></tr><tr><td><strong>Monthly goal</strong></td><td>What has to be true this month for that to get closer?</td><td>A month</td><td>Scored against a number</td></tr><tr><td><strong>Weekly goal</strong></td><td>What has to happen this week to serve the month?</td><td>A week</td><td>Scored against a number</td></tr></tbody></table></div>
+<p><strong>Every level names what it serves.</strong> The month sets <code>&amp;quot;supports&amp;quot;: &amp;quot;end&amp;quot;</code>; the week sets <code>&amp;quot;supports&amp;quot;: &amp;quot;&amp;lt;month id&amp;gt;&amp;quot;</code>. The gate checks the claim was made, and blocks if the ladder is broken — a month goal that supports nothing above it means the project is busy on something that leads nowhere, which is precisely the failure goals exist to prevent.</p>
+<p>Whether the support is <em>genuine</em> is a judgment call, not a script&#x27;s. That is the monthly review&#x27;s job.</p>
+<h3>The end goal is strategy, restated</h3>
+<p><strong>The end goal is the strategy document&#x27;s answer, in one sentence.</strong> It lives in two places on purpose, the same way the narrative plan and the task file do:</p>
+<ul>
+<li><strong><code>docs/STRATEGY.md</code></strong> — the prose: why this exists, who it is for, the wedge,</li>
+</ul>
+<p>the evidence, and what is still undecided. This is the source.</p>
+<ul>
+<li><strong><code>plan/goals.json</code> → <code>end</code></strong> — the machine-readable restatement, so the</li>
+</ul>
+<p>generators can render the ladder and the gate can check it. It carries a <code>strategy</code> field pointing back at the document.</p>
+<p>If those two disagree, the strategy document wins and the goals file is stale.</p>
+<p>Required fields, and why each one earns its place:</p>
+<div class="tablewrap"><table><thead><tr><th>Field</th><th>What it is</th><th>Why required</th></tr></thead><tbody><tr><td><code>goal</code></td><td>One sentence: what winning looks like</td><td>The thing itself</td></tr><tr><td><code>why</code></td><td>Who it is for, and why it exists at all</td><td>Without this it is a slogan</td></tr><tr><td><code>success</code></td><td><strong>What would have to be true</strong> for it to be achieved</td><td>The falsifiable part. Need not be a number — forcing one on a multi-year ambition produces fake precision — but a person must be able to check it</td></tr><tr><td><code>horizon</code></td><td>Roughly when, or the condition that ends it</td><td>&quot;Ongoing&quot; is a legitimate answer for a standing capability</td></tr><tr><td><code>strategy</code></td><td>Path to the document</td><td>So the prose and the sentence cannot drift silently</td></tr><tr><td><code>reviewed</code></td><td>Date last confirmed still right</td><td>Reported every run; flagged after 90 days</td></tr></tbody></table></div>
+<p><strong>An end goal has no measure and no progress bar.</strong> It is reviewed, not scored: confirmed as still-right, or changed. Changing one is a decision, and gets a dated decision record. A stale end goal is reported on every run but <strong>never blocks</strong> — a north star that needs re-checking is not a reason to stop work.</p>
 <h2>The rule in three sentences</h2>
+<ol>
+<li><strong>Every project has a written end goal</strong> — why it exists at all — that the</li>
+</ol>
+<p>monthly goal serves, restated from its strategy document.</p>
 <ol>
 <li>**Every project has a current monthly goal and a current weekly goal, and the</li>
 </ol>
-<p>owner sets both.** Agents may draft; only the owner approves.</p>
+<p>owner sets all three.** Agents may draft; only the owner approves.</p>
 <ol>
 <li><strong>Every goal carries one measure</strong> with a baseline, a target, a date, and a</li>
 </ol>
@@ -81,7 +104,16 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <pre><code>{
   &quot;project&quot;: &quot;Example&quot;,
   &quot;updated&quot;: &quot;2026-07-29&quot;,
+  &quot;end&quot;: {
+    &quot;goal&quot;: &quot;Any engineer can hand a manufacturer a spec that gets quoted without a phone call.&quot;,
+    &quot;why&quot;: &quot;Small builders lose weeks to specs that come back with questions.&quot;,
+    &quot;success&quot;: &quot;Specs produced here are quoted as-is, and builders come back for a second one.&quot;,
+    &quot;horizon&quot;: &quot;2027 — or earlier if quote-ready is proven and someone pays&quot;,
+    &quot;strategy&quot;: &quot;docs/STRATEGY.md&quot;,
+    &quot;reviewed&quot;: &quot;2026-07-29&quot;
+  },
   &quot;month&quot;: {
+    &quot;supports&quot;: &quot;end&quot;,
     &quot;id&quot;: &quot;2026-08&quot;,
     &quot;goal&quot;: &quot;Prove that a finished spec is worth paying for.&quot;,
     &quot;measure&quot;: {
@@ -111,10 +143,10 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 }</code></pre>
 <p>Rules for the file:</p>
 <ul>
-<li><strong>Both <code>month</code> and <code>week</code> are required</strong> once a project has any tasks.</li>
-<li><code>week.supports</code> names the month goal it serves. A weekly goal that supports</li>
+<li><strong><code>end</code>, <code>month</code> and <code>week</code> are all required</strong> once a project has any tasks.</li>
+<li><strong><code>month.supports</code> is <code>&amp;quot;end&amp;quot;</code>; <code>week.supports</code> is the month&#x27;s id.</strong> A level that</li>
 </ul>
-<p>nothing is a red flag worth raising, not a validation error.</p>
+<p>names nothing above it breaks the ladder, and the gate blocks on it.</p>
 <ul>
 <li><strong><code>history</code> is append-only.</strong> When a period ends, move the goal into <code>history</code></li>
 </ul>

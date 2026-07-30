@@ -281,8 +281,10 @@ def main():
 
     stale, wrote = [], 0
     for path in args:
-        if not path.endswith(".md") or not os.path.isfile(path):
-            print("skip (not a markdown file): %s" % path); continue
+        if not path.endswith(".md"):
+            print("skip (not a .md file): %s" % path); continue
+        if not os.path.isfile(path):
+            print("skip (no such file): %s" % path); continue
         md = open(path, encoding="utf-8").read()
         out_path = path[:-3] + ".html"
         rendered = page(md, os.path.basename(path), path, planned)

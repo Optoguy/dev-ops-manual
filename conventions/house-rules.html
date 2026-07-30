@@ -59,7 +59,7 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </head>
 <body>
 <div class="wrap">
-<nav class="nav"><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from house-rules.md — edit the markdown, not this file</p>
+<nav class="nav"><a href="../docs/STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from house-rules.md — edit the markdown, not this file</p>
 <h1>House rules</h1>
 <p>The operating contract every project inherits. Project <code>CLAUDE.md</code> files restate the parts that bind their repo; this file is the source of record.</p>
 <h2>This repo never pushes to project repos</h2>
@@ -83,6 +83,27 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <li><strong>Version pinning is explicit:</strong> a project&#x27;s CLAUDE.md may name the</li>
 </ul>
 <p><code>dev-ops-manual</code> commit it installed from. A project running an older method is a valid state, not drift to be &quot;corrected&quot; from outside.</p>
+<h3>Every change that affects projects ships with adoption instructions</h3>
+<p>Added 2026-07-29, at the owner&#x27;s request: <em>&quot;any time there is an update in dev ops, give me the instructions for each project.&quot;</em> Chosen over automating the pull, because a scheduled job cannot tell a deliberate fork from stale drift — and getting that wrong destroys working code (see the <a href="../reports/2026-07-29-skills-drift.md">2026-07-29 drift report</a>).</p>
+<p><strong>When a change lands here that touches <code>skills/</code>, <code>conventions/</code>, or anything a project installs, the same session produces a per-project adoption prompt</strong> — one per project, ready to paste into that project&#x27;s own chat. Not a generic &quot;re-run install.sh&quot;: each prompt states</p>
+<ul>
+<li><strong>which commit</strong> the project is moving from and to, and what arrived;</li>
+<li><strong>what is safe to overwrite</strong> (the reference copies under <code>.claude/skills/</code>)</li>
+</ul>
+<p>and <strong>what must not be</strong> — that project&#x27;s own forks, named file by file, with the line counts that show they are forks and not staleness;</p>
+<ul>
+<li><strong>what will break on install</strong>, so nobody &quot;fixes&quot; it by weakening a check. A</li>
+</ul>
+<p>project adopting the goals convention starts failing <code>build_dashboard.py --check</code> until its owner writes <code>plan/goals.json</code> — that is the gate working;</p>
+<ul>
+<li><strong>what only the owner can do</strong>, named as such. Agents never write a goals</li>
+</ul>
+<p>file;</p>
+<ul>
+<li><strong>the verification</strong> to paste back into the pull request.</li>
+</ul>
+<p>Run <code>python scripts/skills_drift.py &amp;lt;project&amp;gt; …</code> first — the prompts are written from its output, not from memory. Deliver them as a file, not as chat text.</p>
+<p>This keeps distribution pull-direction (each project&#x27;s own chat does the work, on its own schedule, opening its own draft pull request) while putting the judgment in a prompt instead of in a script.</p>
 <p>The reverse direction is encouraged: a project that discovers a better rule proposes it <em>here</em>, where it can benefit every project.</p>
 <h2>Every project carries three linked documents</h2>
 <p>Added 2026-07-28. A project is legible when three questions have written answers, and each answer points at the other two:</p>
@@ -185,6 +206,29 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <li><strong>Finished goals move to <code>history</code> with their outcome and final number</strong> —</li>
 </ul>
 <p>append-only. A history with no misses means the goals are set too low.</p>
+<h2>Portability — nothing exclusive to one platform without a reason</h2>
+<p>Added 2026-07-30 at the owner&#x27;s request: <em>&quot;every project including dev ops can be migrated to another AI platform if ever needed in the future. Nothing must be exclusive to Claude unless there is a clear justification.&quot;</em> Full convention and the audited table: <a href="portability.md">portability.md</a>.</p>
+<ul>
+<li>**Anything that only works on one AI platform carries a written justification</li>
+</ul>
+<p>and a stated fallback.** Not a ban — a bar. Something with neither is a defect and gets replaced with the portable version.</p>
+<ul>
+<li><strong>Portable assets stay stdlib-only.</strong> A third-party import is a second thing</li>
+</ul>
+<p>that must exist wherever the method runs. (All twelve scripts pass today.)</p>
+<ul>
+<li><strong>Every scheduled ritual is a skill first, a schedule second.</strong> Never encode the</li>
+</ul>
+<p>work inside a trigger&#x27;s prompt only — losing the platform would lose the ritual.</p>
+<ul>
+<li><strong>No project embeds an AI provider without an abstraction.</strong> SpecBuildr is the</li>
+</ul>
+<p>precedent: a same-origin contract, the provider behind an environment variable, swapping is a one-file change.</p>
+<ul>
+<li><strong>Check it:</strong> <code>python scripts/portability_check.py --strict</code>. It reports, never</li>
+</ul>
+<p>rewrites — new lock-in is a person&#x27;s decision, and the check only makes sure it is not silent.</p>
+<p><strong>What it does not mean:</strong> not vendor neutrality for its own sake, not writing everything twice, and not avoiding new platform features. Adopt them, and write down the fallback. A feature with a known fallback is a dependency with an exit, not lock-in.</p>
 <h2>Tasks and priorities</h2>
 <ul>
 <li><strong>One source of truth per repo</strong>, declared in its <code>CLAUDE.md</code>. Usually</li>

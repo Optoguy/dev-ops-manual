@@ -59,7 +59,7 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </head>
 <body>
 <div class="wrap">
-<nav class="nav"><a href="dashboard/goals.html">Goals</a><a href="dashboard/index.html">Task plan</a></nav><p class="src">Generated from CLAUDE.md — edit the markdown, not this file</p>
+<nav class="nav"><a href="docs/STRATEGY.html">Strategy</a><a href="dashboard/goals.html">Goals</a><a href="dashboard/index.html">Task plan</a></nav><p class="src">Generated from CLAUDE.md — edit the markdown, not this file</p>
 <h1>CLAUDE.md — Dev Ops Manual</h1>
 <p>Context file for Claude Code sessions. Read this before doing anything in this repo.</p>
 <h2>What this repo is</h2>
@@ -71,7 +71,7 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </ul>
 <p>method is used. Written to read well on GitHub from a phone.</p>
 <ul>
-<li><code>skills/</code> — the 15 portable skills, each a directory with <code>SKILL.md</code> and</li>
+<li><code>skills/</code> — the 18 portable skills, each a directory with <code>SKILL.md</code> and</li>
 </ul>
 <p>optional <code>assets/</code>. <strong>This is the source of record</strong>; project repos hold installed copies under their own <code>.claude/skills/</code>.</p>
 <ul>
@@ -86,15 +86,21 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <li><code>decisions/</code> — dated records of choices that changed how work happens.</li>
 <li><code>scripts/</code> — <code>goal_gate.py</code> (**run it before starting work — no goal, no</li>
 </ul>
-<p>work<strong>), <code>build_dashboard.py</code>, <code>build_goals.py</code>, <code>render_docs.py</code>, and <code>skills_drift.py</code> (compares each project&#x27;s installed <code>.claude/skills/</code> against <code>skills/</code> here; </strong>reports only, never fixes** — adoption is the project&#x27;s own call).</p>
+<p>work<strong>), <code>fleet_state.py</code> (mechanical state of every project, for the audit), <code>portability_check.py</code> (</strong>no platform lock-in without a written reason<strong>), <code>chat_distill.py</code> (distil a chat transcript into a committable digest), <code>build_dashboard.py</code>, <code>build_goals.py</code>, <code>render_docs.py</code>, and <code>skills_drift.py</code> (compares each project&#x27;s installed <code>.claude/skills/</code> against <code>skills/</code> here; </strong>reports only, never fixes** — adoption is the project&#x27;s own call).</p>
 <ul>
 <li><code>reports/</code> — dated findings that aren&#x27;t decisions, each with an HTML twin.</li>
+<li><code>docs/history/</code> — <strong>generated</strong> chat-record digests, one per period, indexed by</li>
 </ul>
+<p><code>docs/HISTORY.md</code>. The reasoning behind the method; the transcripts they came from do not survive their containers.</p>
 <h2>Conventions for working <em>in</em> this repo</h2>
 <ul>
 <li><strong>A skill edit is a fleet-wide change.</strong> After editing anything under</li>
 </ul>
 <p><code>skills/</code>, note which project repos need <code>./install.sh --repo &amp;lt;path&amp;gt;</code> re-run. An installed copy that has drifted from source is the failure mode this repo exists to prevent.</p>
+<ul>
+<li><strong>Ship adoption instructions with every change that affects projects.</strong> Run</li>
+</ul>
+<p><code>python scripts/skills_drift.py &amp;lt;project&amp;gt; …</code>, then write <strong>one paste-ready prompt per project</strong> — from/to commit, what is safe to overwrite, which of that project&#x27;s forks must NOT be touched, what will break on install, what only the owner can do, and the verification. Deliver it as a file. See <code>conventions/house-rules.md</code>, &quot;Every change that affects projects ships with adoption instructions.&quot;</p>
 <ul>
 <li><strong>Skills stay portable.</strong> No project-specific paths, names, or domain</li>
 </ul>

@@ -111,6 +111,36 @@ def render_meter(m):
             + (f'<div class="m-src">{" · ".join(src)}</div>' if src else ""))
 
 
+def render_end_goal(end):
+    """The north star, at the top. Reviewed rather than scored, so it gets no
+    meter — a progress bar on a multi-year ambition is fake precision."""
+    if not end:
+        return ('<section class="card end missing"><div class="eyebrow">End goal</div>'
+                '<h2 class="goal-text">Not set.</h2>'
+                '<p class="unmeasured">Why are we doing this project? Without a written '
+                'answer the monthly goal supports nothing above it.</p></section>')
+    rows = []
+    for label, key in (("Why", "why"), ("Done when", "success"), ("Horizon", "horizon")):
+        if end.get(key):
+            rows.append(f'<div class="er"><div class="er-l">{esc(label)}</div>'
+                        f'<div class="er-v">{esc(end[key])}</div></div>')
+    foot = []
+    if end.get("strategy"):
+        rel = str(end["strategy"])
+        href = "../" + rel[:-3] + ".html" if rel.endswith(".md") else "../" + rel
+        target = ROOT / (rel[:-3] + ".html" if rel.endswith(".md") else rel)
+        foot.append(f'<a href="{esc(href)}">the strategy</a>' if target.exists()
+                    else f"strategy: {esc(rel)}")
+    if end.get("reviewed"):
+        foot.append(f'last confirmed {esc(end["reviewed"])}')
+    return ('<section class="card end"><div class="eyebrow">End goal'
+            '<span class="sep">·</span><span class="clock">reviewed, not scored</span></div>'
+            f'<h2 class="goal-text">{esc(end.get("goal", "(no text)"))}</h2>'
+            f'<div class="erows">{"".join(rows)}</div>'
+            + (f'<div class="m-src">{" · ".join(foot)}</div>' if foot else "")
+            + '</section>')
+
+
 def render_goal_card(g, kind, tasks):
     if not g:
         return (f'<section class="card empty"><div class="eyebrow">{esc(kind)}</div>'
@@ -119,8 +149,10 @@ def render_goal_card(g, kind, tasks):
                 f'is being chosen by what is available rather than what matters.</p></section>')
     gid = g.get("id", "")
     meta = [esc(gid)] if gid else []
-    if g.get("supports"):
-        meta.append(f'supports {esc(g["supports"])}')
+    sup = str(g.get("supports") or "")
+    if sup:
+        meta.append("supports the end goal" if sup.lower() in ("end", "end-goal")
+                    else f"supports {esc(sup)}")
     starts = g.get("starts", "")
     clock = (f'<span class="clock" data-starts="{esc(starts)}" data-kind="{esc(kind)}"></span>'
              if starts else "")
@@ -230,6 +262,7 @@ def render(goals, plan):
         updated=esc(goals.get("updated", "")),
         nav=render_nav(),
         draft=('<p class="draft">DRAFT — ' + esc(goals["note"]) + "</p>") if goals.get("note") else "",
+        end=render_end_goal(goals.get("end")),
         month=render_goal_card(goals.get("month"), "This month", tasks),
         week=render_goal_card(goals.get("week"), "This week", tasks),
         unassigned=render_unassigned(tasks, ids),
@@ -277,6 +310,14 @@ TEMPLATE = """<!doctype html>
   .clock.ageing {{ color:var(--warning); font-weight:600; }}
   .goal-text {{ font-size:19px; font-weight:600; margin:8px 0 18px; line-height:1.35; }}
   .card.empty .goal-text {{ color:var(--dim); font-weight:400; }}
+  .card.end {{ border-left:3px solid var(--accent); }}
+  .card.end .goal-text {{ font-size:21px; }}
+  .card.end.missing .goal-text {{ color:var(--dim); font-weight:400; font-size:17px; }}
+  .ladder {{ text-align:center; color:var(--dim); font-size:16px; line-height:1; margin:-6px 0 -6px; }}
+  .erows {{ display:grid; gap:8px; margin-top:4px; }}
+  .er {{ display:grid; grid-template-columns:88px 1fr; gap:12px; align-items:baseline; font-size:13px; }}
+  .er-l {{ color:var(--dim); text-transform:uppercase; letter-spacing:.05em; font-size:11px; }}
+  @media (max-width:560px) {{ .er {{ grid-template-columns:1fr; gap:2px; }} }}
   .m-name {{ font-size:13px; color:var(--dim); margin-bottom:8px; }}
   .meter {{ display:flex; align-items:center; gap:12px; }}
   .track {{ flex:1; height:10px; background:var(--bg); border:1px solid var(--line);
@@ -321,7 +362,10 @@ TEMPLATE = """<!doctype html>
   <header><h1>{project}</h1><span class="sub">goals and status · updated {updated}</span></header>
   {nav}
   {draft}
+  {end}
+  <div class="ladder" aria-hidden="true">&#8595;</div>
   {month}
+  <div class="ladder" aria-hidden="true">&#8595;</div>
   {week}
   {unassigned}
   {history}

@@ -126,7 +126,17 @@ final number, and regenerate the dashboard.
 **Never set a goal on the owner's behalf.** An agent-invented goal that nobody
 chose is worse than no goal, because it looks like direction.
 
-### 6. Monthly only — check the trend before setting direction
+### 6. Every review — check the ladder still holds
+
+One line, every time: **does this month's goal actually serve the end goal, and
+does this week's serve the month?** The gate checks that each level *names* what
+it serves; only you can check whether the claim is true.
+
+When it is not true, say which end is wrong. Either the month drifted, or the end
+goal has quietly changed and nobody wrote it down. Both are findings; the second
+is the more important one.
+
+### 7. Monthly only — check the trend before setting direction
 
 Read the whole `history`, not just the last entry:
 
@@ -142,9 +152,27 @@ Read the whole `history`, not just the last entry:
   not what is actually being pursued.
 
 Then ask the direction question the weekly review never asks: **is this still the
-right thing to be aiming at?** Point at the project's strategy document. If the
-month's goal and the strategy have drifted apart, that mismatch is the review's
-headline finding, not a footnote.
+right thing to be aiming at?** Read the end goal and the strategy document
+together. If the month's goal and the strategy have drifted apart, that mismatch
+is the review's headline finding, not a footnote.
+
+### 8. Quarterly, or whenever it feels wrong — review the end goal itself
+
+The end goal is reviewed, never scored. `goal_gate.py` flags it after 90 days
+without confirmation. Reviewing it means answering three questions in writing:
+
+- **Is the `why` still true?** Who it is for, and whether they still need it.
+- **Is `success` still the right test?** A condition that can no longer be checked
+  is no better than no condition.
+- **Has the horizon moved?** Saying "later than I thought" is information.
+
+Then either **confirm** it — bump `reviewed` and say what evidence confirmed it —
+or **change** it. Changing an end goal is a decision: record it with
+`/decision-log`, update `docs/STRATEGY.md` first (the document is the source; the
+goals file is the restatement), and expect the monthly goal to need re-aiming.
+
+**Never quietly rewrite an end goal.** A north star that moves without a record is
+how a project ends up somewhere nobody chose.
 
 ## Output
 

@@ -88,6 +88,57 @@
       "note": "Two copies of a skill always drift eventually — that risk is why this repo exists. Diff each project's installed copies against skills/, report differences, and open a PR re-installing where they've diverged. Claimed 2026-07-29 night-shift; scoped to report-only (this repo never pushes into project repos, 2026-07-28). Done 2026-07-29 night-shift: reports/2026-07-29-skills-drift.md + scripts/skills_drift.py; fleet is one commit behind (2026-07-28), no in-place edits found."
     },
     {
+      "id": "schedule-fleet-rituals",
+      "goal": "keeping-the-lights-on",
+      "title": "Schedule the weekly fleet audit and the monthly method scan as Routines",
+      "owner": "me",
+      "priority": "P1",
+      "status": "done",
+      "phase": "grow",
+      "note": "Both skills exist as of 2026-07-30 and neither runs. A capability that never fires is indistinguishable from one that does not exist. Recommended: fleet audit weekly before the project reviews, method scan monthly. Both must fire into a persistent session — each ends in a menu, and a ritual that cannot ask cannot propose. Owner-owned because creating Routines is a standing commitment. Done 2026-07-30: both created and bound to the manual's persistent session — fleet audit Sundays 6:00pm ET (0 22 * * 0), method scan 1st of the month 9:00am ET (0 13 1 * *). Recorded in conventions/routines.md per the rule that a Routine is never invisible automation. Neither stores connector grants, so if a firing needs the GitHub API it may not have it — the first audit will show."
+    },
+    {
+      "id": "first-fleet-audit",
+      "goal": "2026-08",
+      "justification": "Moves projects-with-a-current-weekly-goal: the audit's likely lead finding is the shared blocker across SpecBuildr, NewCoEndotest and medtech-intel-QMSR — all three blocked on the same missing goals file.",
+      "title": "Run the first fleet audit and report the five findings",
+      "owner": "agent",
+      "priority": "P2",
+      "status": "todo",
+      "phase": "grow",
+      "note": "Exercises the new skill against real state and tests whether the five-finding cap produces something readable. fleet_state.py already shows the raw material: three projects with no goals file, 24 SpecBuildr and 22 MedTech open tasks carrying no goal, and three different pinned method versions."
+    },
+    {
+      "id": "prove-portability-once",
+      "goal": "keeping-the-lights-on",
+      "title": "Actually test a migration once, on a throwaway copy",
+      "owner": "agent",
+      "priority": "P2",
+      "status": "todo",
+      "phase": "grow",
+      "note": "Added 2026-07-30 with the portability convention. The claim 'a migration would be a day of re-pathing, not a rewrite' is an estimate — nobody has migrated anything. Take a throwaway copy, move .claude/skills elsewhere, rename CLAUDE.md, drive the scripts from a plain shell, and record what actually broke. An untested exit is not an exit. Labelled keeping-the-lights-on because it protects against a platform risk rather than serving a growth goal."
+    },
+    {
+      "id": "history-capture-adoption",
+      "goal": "keeping-the-lights-on",
+      "title": "Get each project's own chat capturing its chat history weekly",
+      "owner": "me",
+      "priority": "P1",
+      "status": "in-progress",
+      "phase": "sync",
+      "note": "Added 2026-07-30. A transcript is readable only from inside the container of the session that produced it, so this is the one ritual that cannot be centralised — SpecBuildr, NewCoEndotest and medtech-intel-QMSR must each schedule it in their own chat. Until they do, every container reclamation loses that project's reasoning permanently. fleet_state.py reports which projects have no docs/history/ at all; all three do as of today. Owner-owned because it means creating a Routine in three other conversations. Claimed 2026-07-30 live-session: adoption prompts for all three projects dispatched by the owner 2026-07-30, each instructing that chat to schedule its own weekly capture Routine. Not done until fleet_state.py reports a captured period for SpecBuildr, newcoendotest and medtech-intel-qmsr; all three read NOT CAPTURED as of dispatch."
+    },
+    {
+      "id": "capture-subagent-transcripts",
+      "goal": "keeping-the-lights-on",
+      "title": "Extend the distiller to sub-agent transcripts",
+      "owner": "agent",
+      "priority": "P2",
+      "status": "todo",
+      "phase": "grow",
+      "note": "Added 2026-07-30. This session alone has 8 sub-agent transcripts totalling 10.7 MB, some containing real research findings, and chat_distill.py reads only the main session file. They are discovered by --find already, so the gap is the reading, not the locating."
+    },
+    {
       "id": "conventions-coverage",
       "goal": "2026-08",
       "justification": "Moves projects-with-a-current-weekly-goal: rules that are practiced but unwritten cannot be adopted by a project that only reads the manual.",

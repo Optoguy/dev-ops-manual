@@ -1,8 +1,17 @@
 {
   "project": "Example Project",
   "updated": "2026-07-29",
+  "end": {
+    "goal": "Any engineer can hand a manufacturer a spec that gets quoted without a phone call.",
+    "why": "Small builders lose weeks to specs that come back with questions. Nobody sells them a physics- and manufacturability-checked spec at a price they will pay.",
+    "success": "Specs produced here are quoted as-is by real manufacturers, and builders come back for a second one.",
+    "horizon": "2027 — or earlier if quote-ready is proven and someone pays",
+    "strategy": "docs/STRATEGY.md",
+    "reviewed": "2026-07-29"
+  },
   "month": {
     "id": "2026-08",
+    "supports": "end",
     "goal": "Prove that a finished spec is worth paying for.",
     "measure": {
       "name": "people who ask what it costs after finishing a spec",

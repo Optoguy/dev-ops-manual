@@ -38,6 +38,38 @@ rule the project didn't choose.
   `dev-ops-manual` commit it installed from. A project running an older method
   is a valid state, not drift to be "corrected" from outside.
 
+### Every change that affects projects ships with adoption instructions
+
+Added 2026-07-29, at the owner's request: *"any time there is an update in dev
+ops, give me the instructions for each project."* Chosen over automating the
+pull, because a scheduled job cannot tell a deliberate fork from stale drift —
+and getting that wrong destroys working code (see the
+[2026-07-29 drift report](../reports/2026-07-29-skills-drift.md)).
+
+**When a change lands here that touches `skills/`, `conventions/`, or anything a
+project installs, the same session produces a per-project adoption prompt** —
+one per project, ready to paste into that project's own chat. Not a generic
+"re-run install.sh": each prompt states
+
+- **which commit** the project is moving from and to, and what arrived;
+- **what is safe to overwrite** (the reference copies under `.claude/skills/`)
+  and **what must not be** — that project's own forks, named file by file, with
+  the line counts that show they are forks and not staleness;
+- **what will break on install**, so nobody "fixes" it by weakening a check. A
+  project adopting the goals convention starts failing
+  `build_dashboard.py --check` until its owner writes `plan/goals.json` — that
+  is the gate working;
+- **what only the owner can do**, named as such. Agents never write a goals
+  file;
+- **the verification** to paste back into the pull request.
+
+Run `python scripts/skills_drift.py <project> …` first — the prompts are written
+from its output, not from memory. Deliver them as a file, not as chat text.
+
+This keeps distribution pull-direction (each project's own chat does the work,
+on its own schedule, opening its own draft pull request) while putting the
+judgment in a prompt instead of in a script.
+
 The reverse direction is encouraged: a project that discovers a better rule
 proposes it *here*, where it can benefit every project.
 
@@ -164,6 +196,32 @@ Added 2026-07-29 at the owner's request. Full convention:
   permitted even with no goals file at all), and answering the owner.
 - **Finished goals move to `history` with their outcome and final number** —
   append-only. A history with no misses means the goals are set too low.
+
+## Portability — nothing exclusive to one platform without a reason
+
+Added 2026-07-30 at the owner's request: *"every project including dev ops can be
+migrated to another AI platform if ever needed in the future. Nothing must be
+exclusive to Claude unless there is a clear justification."* Full convention and
+the audited table: [portability.md](portability.md).
+
+- **Anything that only works on one AI platform carries a written justification
+  and a stated fallback.** Not a ban — a bar. Something with neither is a defect
+  and gets replaced with the portable version.
+- **Portable assets stay stdlib-only.** A third-party import is a second thing
+  that must exist wherever the method runs. (All twelve scripts pass today.)
+- **Every scheduled ritual is a skill first, a schedule second.** Never encode the
+  work inside a trigger's prompt only — losing the platform would lose the ritual.
+- **No project embeds an AI provider without an abstraction.** SpecBuildr is the
+  precedent: a same-origin contract, the provider behind an environment variable,
+  swapping is a one-file change.
+- **Check it:** `python scripts/portability_check.py --strict`. It reports, never
+  rewrites — new lock-in is a person's decision, and the check only makes sure it
+  is not silent.
+
+**What it does not mean:** not vendor neutrality for its own sake, not writing
+everything twice, and not avoiding new platform features. Adopt them, and write
+down the fallback. A feature with a known fallback is a dependency with an exit,
+not lock-in.
 
 ## Tasks and priorities
 
