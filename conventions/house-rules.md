@@ -38,6 +38,38 @@ rule the project didn't choose.
   `dev-ops-manual` commit it installed from. A project running an older method
   is a valid state, not drift to be "corrected" from outside.
 
+### Every change that affects projects ships with adoption instructions
+
+Added 2026-07-29, at the owner's request: *"any time there is an update in dev
+ops, give me the instructions for each project."* Chosen over automating the
+pull, because a scheduled job cannot tell a deliberate fork from stale drift —
+and getting that wrong destroys working code (see the
+[2026-07-29 drift report](../reports/2026-07-29-skills-drift.md)).
+
+**When a change lands here that touches `skills/`, `conventions/`, or anything a
+project installs, the same session produces a per-project adoption prompt** —
+one per project, ready to paste into that project's own chat. Not a generic
+"re-run install.sh": each prompt states
+
+- **which commit** the project is moving from and to, and what arrived;
+- **what is safe to overwrite** (the reference copies under `.claude/skills/`)
+  and **what must not be** — that project's own forks, named file by file, with
+  the line counts that show they are forks and not staleness;
+- **what will break on install**, so nobody "fixes" it by weakening a check. A
+  project adopting the goals convention starts failing
+  `build_dashboard.py --check` until its owner writes `plan/goals.json` — that
+  is the gate working;
+- **what only the owner can do**, named as such. Agents never write a goals
+  file;
+- **the verification** to paste back into the pull request.
+
+Run `python scripts/skills_drift.py <project> …` first — the prompts are written
+from its output, not from memory. Deliver them as a file, not as chat text.
+
+This keeps distribution pull-direction (each project's own chat does the work,
+on its own schedule, opening its own draft pull request) while putting the
+judgment in a prompt instead of in a script.
+
 The reverse direction is encouraged: a project that discovers a better rule
 proposes it *here*, where it can benefit every project.
 

@@ -98,6 +98,10 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </ul>
 <p><code>skills/</code>, note which project repos need <code>./install.sh --repo &amp;lt;path&amp;gt;</code> re-run. An installed copy that has drifted from source is the failure mode this repo exists to prevent.</p>
 <ul>
+<li><strong>Ship adoption instructions with every change that affects projects.</strong> Run</li>
+</ul>
+<p><code>python scripts/skills_drift.py &amp;lt;project&amp;gt; …</code>, then write <strong>one paste-ready prompt per project</strong> — from/to commit, what is safe to overwrite, which of that project&#x27;s forks must NOT be touched, what will break on install, what only the owner can do, and the verification. Deliver it as a file. See <code>conventions/house-rules.md</code>, &quot;Every change that affects projects ships with adoption instructions.&quot;</p>
+<ul>
 <li><strong>Skills stay portable.</strong> No project-specific paths, names, or domain</li>
 </ul>
 <p>assumptions inside <code>skills/</code> — if a rule only applies to one project, it belongs in that project&#x27;s <code>CLAUDE.md</code>, not here.</p>

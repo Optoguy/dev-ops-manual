@@ -45,6 +45,13 @@ each project's own chat (see `conventions/routines.md`).
   `skills/`, note which project repos need `./install.sh --repo <path>` re-run.
   An installed copy that has drifted from source is the failure mode this repo
   exists to prevent.
+- **Ship adoption instructions with every change that affects projects.** Run
+  `python scripts/skills_drift.py <project> …`, then write **one paste-ready
+  prompt per project** — from/to commit, what is safe to overwrite, which of
+  that project's forks must NOT be touched, what will break on install, what
+  only the owner can do, and the verification. Deliver it as a file. See
+  `conventions/house-rules.md`, "Every change that affects projects ships with
+  adoption instructions."
 - **Skills stay portable.** No project-specific paths, names, or domain
   assumptions inside `skills/` — if a rule only applies to one project, it
   belongs in that project's `CLAUDE.md`, not here.
