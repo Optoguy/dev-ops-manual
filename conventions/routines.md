@@ -66,11 +66,16 @@ owner's end goal — the manual owns continuous improvement and regular audits):
 |---|---|---|---|
 | [Fleet audit](../skills/fleet-audit/SKILL.md) | **Weekly** | Dev Operating Manual chat | All projects at once, five ranked findings. Run it *before* each project's own weekly review, so the fleet view says which project deserves the attention. |
 | [Method scan](../skills/method-scan/SKILL.md) | **Monthly** | Dev Operating Manual chat | Read outside, bring back candidates. Monthly, because a weekly scan pads. |
+| [History capture](../skills/history-capture/SKILL.md) | **Weekly**, before the audit | **Each project's own chat** | A transcript is readable only by the session that produced it, so this is the one ritual that cannot be centralised. Weekly because the container can be reclaimed at any time. |
 
-Both are cross-project by nature, so they belong to the method's chat rather than
-any one project's — the same reasoning as the night shift. Both **must fire into a
-persistent session**: each ends in a menu for the owner, and a ritual that cannot
-ask cannot propose.
+The first two are cross-project by nature, so they belong to the method's chat
+rather than any one project's — the same reasoning as the night shift. **History
+capture is the exception and cannot be centralised at all:** a transcript is
+readable only from inside the container of the session that produced it, so every
+chat captures its own and the fleet audit reports the ones that have gone stale.
+
+All three **must fire into a persistent session**: each ends in a menu for the
+owner, and a ritual that cannot ask cannot propose.
 
 **Every project should also carry a weekly and a monthly goal review** (added
 2026-07-29; see [goals-and-measures.md](goals-and-measures.md) and the

@@ -118,6 +118,26 @@
       "note": "Added 2026-07-30 with the portability convention. The claim 'a migration would be a day of re-pathing, not a rewrite' is an estimate — nobody has migrated anything. Take a throwaway copy, move .claude/skills elsewhere, rename CLAUDE.md, drive the scripts from a plain shell, and record what actually broke. An untested exit is not an exit. Labelled keeping-the-lights-on because it protects against a platform risk rather than serving a growth goal."
     },
     {
+      "id": "history-capture-adoption",
+      "goal": "keeping-the-lights-on",
+      "title": "Get each project's own chat capturing its chat history weekly",
+      "owner": "me",
+      "priority": "P1",
+      "status": "todo",
+      "phase": "sync",
+      "note": "Added 2026-07-30. A transcript is readable only from inside the container of the session that produced it, so this is the one ritual that cannot be centralised — SpecBuildr, NewCoEndotest and medtech-intel-QMSR must each schedule it in their own chat. Until they do, every container reclamation loses that project's reasoning permanently. fleet_state.py reports which projects have no docs/history/ at all; all three do as of today. Owner-owned because it means creating a Routine in three other conversations."
+    },
+    {
+      "id": "capture-subagent-transcripts",
+      "goal": "keeping-the-lights-on",
+      "title": "Extend the distiller to sub-agent transcripts",
+      "owner": "agent",
+      "priority": "P2",
+      "status": "todo",
+      "phase": "grow",
+      "note": "Added 2026-07-30. This session alone has 8 sub-agent transcripts totalling 10.7 MB, some containing real research findings, and chat_distill.py reads only the main session file. They are discovered by --find already, so the gap is the reading, not the locating."
+    },
+    {
       "id": "conventions-coverage",
       "goal": "2026-08",
       "justification": "Moves projects-with-a-current-weekly-goal: rules that are practiced but unwritten cannot be adopted by a project that only reads the manual.",

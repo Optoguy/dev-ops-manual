@@ -48,9 +48,11 @@ BINDINGS = {
     "provider SDK or endpoint": r"\b(anthropic|openai|gemini|api\.anthropic\.com)\b",
 }
 
-# Directories whose contents are history, not live method. Bindings recorded in a
-# dated decision or report are describing what happened and must not be "fixed".
-HISTORICAL_DIRS = ("decisions", "reports")
+# Paths whose contents are history, not live method. Bindings recorded in a dated
+# decision, report, or chat digest are describing what happened and must not be
+# "fixed" — rewriting the record to look portable is worse than the lock-in.
+# Matched as path prefixes, so nested locations like docs/history work.
+HISTORICAL_DIRS = ("decisions", "reports", os.path.join("docs", "history"))
 SCAN_EXT = (".md", ".py", ".sh", ".json", ".yml", ".yaml", ".toml")
 SKIP_DIRS = {".git", "__pycache__", "node_modules", "dashboard"}
 # This file defines the patterns, so scanning it matches every one of them. Skipped
@@ -108,7 +110,7 @@ def scan():
     hits = {c: {} for c in BINDINGS}
     for path in walk_files():
         r = rel(path)
-        if r.split(os.sep)[0] in HISTORICAL_DIRS:
+        if any(r == h or r.startswith(h + os.sep) for h in HISTORICAL_DIRS):
             continue
         try:
             text = open(path, encoding="utf-8").read()
@@ -154,7 +156,7 @@ def main(argv):
         if not have_convention:
             print("no conventions/portability.md — every platform binding below is unjustified\n")
         print("PLATFORM BINDINGS (grouped by concept; %s excluded as history)"
-              % ", ".join(HISTORICAL_DIRS))
+              % ", ".join(h.replace(os.sep, "/") for h in HISTORICAL_DIRS))
         for concept in BINDINGS:
             files = hits[concept]
             if not files:

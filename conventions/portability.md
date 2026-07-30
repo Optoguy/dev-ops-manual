@@ -39,6 +39,7 @@ Measured, not asserted. Commands are in [the check](#the-check) below.
 | **`CLAUDE.md`** — the auto-read contract file | Claude Code reads it at session start | **Accepted.** Same reasoning: a filename and a convention, not a format. Every other platform has an equivalent. | Rename, or symlink. The content needs no change. |
 | **`~/.claude/CLAUDE.md`** — standing preferences | Where personal preferences are read from | **Accepted**, and deliberately thin: interaction rules only, no project logic. | Re-paste the marked block wherever the new platform keeps preferences. `install.sh --prefs` writes a marked block, so it is a target path change. |
 | **Routines** — the scheduling mechanism | Claude Code Remote triggers | **This is the real lock-in, and the only one worth worrying about.** Nothing in the method can schedule itself. | Every scheduled ritual is defined as a **skill** with the schedule written in `conventions/routines.md` — so the *work* is portable and only the *timer* is not. A cron job, a CI schedule, or a human calendar reminder can fire the same prompt. |
+| **Chat-transcript reading** — `chat_distill.py` parses `~/.claude/projects/**.jsonl` | The transcript layout is Claude Code's | **Accepted, and it is the reason the whole capture exists.** The alternative is losing the record entirely. What it *produces* — dated markdown digests, brain entries, a history index — is fully portable and is the point. | Write a reader for the new platform's history format and keep the same digest output. One function, and `--find` already looks in more than one location. If a platform exposes no history at all, that is a portability finding about the platform. |
 | **`AskUserQuestion`** — clickable option menus | A Claude Code tool | **Accepted, and it degrades gracefully.** 10 references. The underlying rule is "put choices as discrete options, recommended first" — which is why the house rule *also* requires the written "Your options" list on every reply. | The written list is already the record. On a platform without menus, nothing is lost but the clicking. |
 
 ### The honest summary
@@ -69,6 +70,12 @@ convention exists to keep true.
   model directly from application code is a portability defect.
 - **Generated output stays self-contained.** Already a design rule for other
   reasons; it is also what makes the artifacts outlive the toolchain.
+- **Capture the chat record on a cadence.** The reasoning behind a project — the
+  options rejected, the corrections, the owner's exact words — exists only in a
+  transcript held in an ephemeral container. Committed digests and brain entries
+  are what survive a platform change, and they only exist if something writes them
+  before the container is reclaimed. See
+  [`history-capture`](../skills/history-capture/SKILL.md).
 - **When a platform gains a capability, check whether it removes a workaround.**
   That belongs to the [method scan](../skills/method-scan/SKILL.md), and the
   reverse holds too: a capability the method now depends on is new lock-in that
