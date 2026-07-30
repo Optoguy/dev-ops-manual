@@ -83,6 +83,27 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <li><strong>Version pinning is explicit:</strong> a project&#x27;s CLAUDE.md may name the</li>
 </ul>
 <p><code>dev-ops-manual</code> commit it installed from. A project running an older method is a valid state, not drift to be &quot;corrected&quot; from outside.</p>
+<h3>Every change that affects projects ships with adoption instructions</h3>
+<p>Added 2026-07-29, at the owner&#x27;s request: <em>&quot;any time there is an update in dev ops, give me the instructions for each project.&quot;</em> Chosen over automating the pull, because a scheduled job cannot tell a deliberate fork from stale drift — and getting that wrong destroys working code (see the <a href="../reports/2026-07-29-skills-drift.md">2026-07-29 drift report</a>).</p>
+<p><strong>When a change lands here that touches <code>skills/</code>, <code>conventions/</code>, or anything a project installs, the same session produces a per-project adoption prompt</strong> — one per project, ready to paste into that project&#x27;s own chat. Not a generic &quot;re-run install.sh&quot;: each prompt states</p>
+<ul>
+<li><strong>which commit</strong> the project is moving from and to, and what arrived;</li>
+<li><strong>what is safe to overwrite</strong> (the reference copies under <code>.claude/skills/</code>)</li>
+</ul>
+<p>and <strong>what must not be</strong> — that project&#x27;s own forks, named file by file, with the line counts that show they are forks and not staleness;</p>
+<ul>
+<li><strong>what will break on install</strong>, so nobody &quot;fixes&quot; it by weakening a check. A</li>
+</ul>
+<p>project adopting the goals convention starts failing <code>build_dashboard.py --check</code> until its owner writes <code>plan/goals.json</code> — that is the gate working;</p>
+<ul>
+<li><strong>what only the owner can do</strong>, named as such. Agents never write a goals</li>
+</ul>
+<p>file;</p>
+<ul>
+<li><strong>the verification</strong> to paste back into the pull request.</li>
+</ul>
+<p>Run <code>python scripts/skills_drift.py &amp;lt;project&amp;gt; …</code> first — the prompts are written from its output, not from memory. Deliver them as a file, not as chat text.</p>
+<p>This keeps distribution pull-direction (each project&#x27;s own chat does the work, on its own schedule, opening its own draft pull request) while putting the judgment in a prompt instead of in a script.</p>
 <p>The reverse direction is encouraged: a project that discovers a better rule proposes it <em>here</em>, where it can benefit every project.</p>
 <h2>Every project carries three linked documents</h2>
 <p>Added 2026-07-28. A project is legible when three questions have written answers, and each answer points at the other two:</p>
