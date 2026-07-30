@@ -57,15 +57,37 @@ Reformatting deliberately is fine as its own commit that changes nothing else.
 
 ## Goals — `plan/goals.json`
 
-**A plan without goals is a list of things somebody felt like doing.** Every
-project carries a current monthly goal and a current weekly goal, each with one
-measurable number, and **the owner sets both**. Full convention:
+**A plan without goals is a list of things somebody felt like doing.** Goals are
+a **ladder of three**, each level serving the one above:
+
+| Level | Answers | Scored? |
+|---|---|---|
+| **End goal** | Why are we doing this project at all? | Reviewed, not scored |
+| **Monthly** | What must be true this month to get closer? | Against a number |
+| **Weekly** | What must happen this week to serve the month? | Against a number |
+
+The end goal is the **strategy document's answer in one sentence**, restated in
+`plan/goals.json` so the ladder can be rendered and checked; it carries `goal`,
+`why`, `success` (what would have to be true — checkable, not necessarily a
+number), `horizon`, `strategy` (the path back to the document) and `reviewed`.
+It has no measure and no progress bar: a bar on a multi-year ambition is fake
+precision. Report it stale after 90 days; **never block on it.**
+
+**Each level names what it serves** — the month sets `"supports": "end"`, the week
+sets the month's id. A broken ladder blocks, because a month goal that supports
+nothing above it means the project is busy on something that leads nowhere.
+
+The owner sets all three. Full convention:
 [goals-and-measures.md](../../conventions/goals-and-measures.md). Start from
 `assets/goals.example.json`.
 
 ```json
 {
-  "month": { "id": "2026-08", "goal": "…",
+  "end":   { "goal": "why this project exists, in one sentence",
+             "why": "who it is for", "success": "what would have to be true",
+             "horizon": "roughly when", "strategy": "docs/STRATEGY.md",
+             "reviewed": "2026-07-30" },
+  "month": { "id": "2026-08", "supports": "end", "goal": "…",
              "measure": {"name": "…", "baseline": 0, "target": 5,
                          "unit": "people", "as_of": "2026-07-29",
                          "source": "where the number comes from"} },
@@ -96,10 +118,13 @@ rather than implying progress. The page is deterministic — elapsed and remaini
 days are computed in the browser from embedded dates, so `--check` keeps meaning
 "you forgot to rebuild".
 
-`build_dashboard.py` renders the goals at the top of the page and prints a
-warning for any missing goal, weak measure, or unjustified task. Warnings are
-advisory by default so a project mid-adoption still builds; add `--strict-goals`
-to make them fail once that project has finished adopting.
+`build_dashboard.py` renders the goals at the top of the page and **fails
+`--check`** on a missing end goal, a broken ladder, a missing or weak measure, or
+an unjustified task. A project that has not adopted goals fails its own build
+check, and that is the intended pressure rather than a bug — the first permitted
+work there is writing `plan/goals.json`. The one exception is an *ageing* weekly
+goal, which is reported and stays advisory: a report that fails a build is a block
+by another name.
 
 ## The gate — run it before you start
 

@@ -93,6 +93,19 @@ def goal_warnings(goals):
         return ["no plan/goals.json — every project defines a monthly and a weekly goal "
                 "(conventions/goals-and-measures.md)"]
     out = []
+    end = goals.get("end") or {}
+    if not end:
+        out.append("goals: no end goal — 'why are we doing this project' is unanswered, "
+                   "so the monthly goal supports nothing above it")
+    else:
+        miss = [k for k in ("goal", "why", "success", "horizon", "strategy")
+                if not str(end.get(k) or "").strip()]
+        if miss:
+            out.append(f"goals: the end goal is missing {', '.join(miss)}")
+    month_sup = str((goals.get("month") or {}).get("supports") or "").strip().lower()
+    if goals.get("month") and month_sup not in ("end", "end-goal"):
+        out.append('goals: the monthly goal does not declare "supports": "end" — the ladder '
+                   "from week to month to end goal is broken")
     for period in ("month", "week"):
         g = goals.get(period)
         if not g:

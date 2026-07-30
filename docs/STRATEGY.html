@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategy — Dev Operating Manual</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><span>Strategy</span><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from STRATEGY.md — edit the markdown, not this file</p>
+<h1>Strategy — Dev Operating Manual</h1>
+<p><strong>End goal set by the owner, 2026-07-30</strong>, in his own words. Everything below is written from them.</p>
+<h2>The end goal</h2>
+<blockquote><p><strong>Dan runs more projects in parallel than one person could, because every project is operated the same proven way and he is never the bottleneck.</strong></p></blockquote>
+<p>The owner&#x27;s statement of it:</p>
+<blockquote><p><em>Dev ops goal is to ensure all my projects are operated consistently and that best practices are developed and shared to every project. Dev ops is responsible for continuous improvement, doing regular external research to bring in new methods of distributed agent work and agent-human work systems and collaboration. Dev ops must do regular audits of all projects and share concise actionable findings and recommendations. Dev ops must ensure that human communication is clear and saves the time of the founder and allows the founder to expand his reach through parallel projects run via agents.</em></p></blockquote>
+<p><strong>Reach is the point. The rest are the means.</strong> Consistency, shared practice, imported methods, audits and clear writing all exist so that adding a fourth or fifth project costs the owner attention he actually has.</p>
+<h2>Four responsibilities</h2>
+<div class="tablewrap"><table><thead><tr><th>#</th><th>Responsibility</th><th>State today</th></tr></thead><tbody><tr><td>1</td><td><strong>Consistency</strong> — every project operated the same proven way, best practices developed here and shared to all</td><td><strong>Partly built.</strong> Skills, conventions, decisions, a drift check, and per-project adoption prompts.</td></tr><tr><td>2</td><td><strong>Continuous improvement</strong> — regular external research bringing in new methods of distributed agent work and agent-human collaboration</td><td><strong>Not built.</strong> Nothing in the method looks outward on any cadence.</td></tr><tr><td>3</td><td><strong>Regular audits of all projects</strong> — concise, actionable findings and recommendations</td><td><strong>Barely built.</strong> The skill drift check and the nightly sweep look at narrow slices. There is no cross-project audit that produces findings and recommendations.</td></tr><tr><td>4</td><td><strong>Clear communication that saves the owner&#x27;s time</strong></td><td><strong>Partly built.</strong> Plain-language rules, buttons over prose, a written options list on every reply, deliverables as files. Never measured.</td></tr></tbody></table></div>
+<p><strong>Two of the four are gaps, and naming them is the most useful thing this document does.</strong> An end goal that describes responsibilities the method cannot discharge is a plan, not a description — and it should be read that way until they exist.</p>
+<h2>What would make the end goal true</h2>
+<ul>
+<li><strong>Consistency:</strong> a rule learned in one project reaches all of them, and a chat</li>
+</ul>
+<p>that has read only this repository can run any project correctly without asking how it works.</p>
+<ul>
+<li><strong>Improvement:</strong> new methods for agent and agent-human work arrive on a</li>
+</ul>
+<p>deliberate cadence from outside, not by accident when something breaks.</p>
+<ul>
+<li><strong>Audits:</strong> every project is audited regularly, and each audit lands as a short</li>
+</ul>
+<p>list of findings with recommendations the owner can act on or dismiss in minutes.</p>
+<ul>
+<li><strong>Communication:</strong> the owner&#x27;s time goes to decisions. No rule has to be</li>
+</ul>
+<p>explained twice. <strong>And the count of projects he can run in parallel goes up while his hours do not.</strong></p>
+<p><strong>Horizon:</strong> ongoing. This is a standing capability, not a milestone. It can be lost as easily as built, which is why it is reviewed rather than declared finished.</p>
+<h2>The wedge</h2>
+<p>Not &quot;documentation&quot; — documentation is read once and rots. Three things make this different, and each exists because something broke:</p>
+<ol>
+<li><strong>Skills, not prose.</strong> The method installs as executable skills a chat loads</li>
+</ol>
+<p>automatically, so following it is the path of least resistance rather than an act of discipline.</p>
+<ol>
+<li><strong>Mechanical checks over good intentions.</strong> Every rule that matters has a</li>
+</ol>
+<p>command that fails: <code>goal_gate.py</code>, <code>build_dashboard.py --check</code>, <code>skills_drift.py</code>, <code>git diff --stat</code> on the plan file. A rule with no check is a suggestion, and suggestions decay within a month.</p>
+<ol>
+<li><strong>Scar tissue attached.</strong> Each convention names what broke, and when. Rules get</li>
+</ol>
+<p>followed when the reader can see the wreck that produced them.</p>
+<h2>The two missing capabilities, described</h2>
+<p>Written here rather than invented as tasks, because adding them to the plan is the owner&#x27;s call.</p>
+<p><strong>Regular external research.</strong> Someone or something has to read outside this system on a cadence and bring back what is worth adopting — how other people run fleets of agents, what patterns have emerged for agent-human handoff, what is being learned about unattended work, review, and trust. Report-first, as candidates with evidence, never as automatic changes to the method. Without a cadence this happens only when something fails, which means the method only ever learns from its own accidents.</p>
+<p><strong>A cross-project audit.</strong> Regular, all projects at once, producing a short list: what is drifting, what is stalled, what contradicts a convention, what the owner is blocking, and what should change. The existing pieces — the drift check, the nightly sweep, the weekly review — each look at one slice from inside one project. Nothing looks across the whole fleet and says &quot;here are the five things worth your attention this week.&quot;</p>
+<h2>What is genuinely undecided</h2>
+<ul>
+<li><strong>Whether reach is measurable.</strong> The end goal&#x27;s real test is *projects run in</li>
+</ul>
+<p>parallel without the owner becoming the bottleneck.* Today that number is four and there is no honest way to attribute it to the method. Until there is, the monthly goals will measure proxies, and proxies drift from the thing.</p>
+<ul>
+<li><strong>Whether the ceremony scales down.</strong> Four repositories and one person is a small</li>
+</ul>
+<p>fleet. Goals, gates, reviews and adoption prompts are cheap to write and not free to live with. If a month produces more reading than deciding, cut it back rather than adding to it.</p>
+<ul>
+<li><strong>Whether the manual becomes the project.</strong> The clearest failure mode: this</li>
+</ul>
+<p>repository is interesting to work on and the ventures it serves are harder. If a month&#x27;s goals are still about the manual rather than about a venture shipping, that is the finding.</p>
+<ul>
+<li><strong>Whether the current monthly goal is too narrow.</strong> August is &quot;every project</li>
+</ul>
+<p>runs on goals&quot; — one part of responsibility 1, and nothing of 2, 3 or 4. It is a defensible first step, but it is not a description of the job.</p>
+<h2>Related documents</h2>
+<ul>
+<li><a href="../dashboard/goals.html">Goals and status</a> — the current ladder and where the</li>
+</ul>
+<p>numbers stand.</p>
+<ul>
+<li><a href="../dashboard/index.html">Task plan</a> — what happens next, and who owns it.</li>
+<li><a href="../conventions/house-rules.md">House rules</a> — the operating contract itself.</li>
+</ul>
+</div>
+</body>
+</html>

@@ -7,6 +7,12 @@ Usage:
     python src/goal_gate.py --task <id>     # may work proceed on THIS task?
     python src/goal_gate.py --quiet         # exit code only
 
+Goals form a ladder: an END GOAL (why this project exists at all) that the
+MONTHLY goal supports, which the WEEKLY goal supports in turn. Each level names
+what it serves, so a broken ladder fails loudly instead of quietly. The end goal
+is reviewed rather than scored — it is reported on every run and flagged for
+review after 90 days, but a stale north star never blocks work.
+
 The weekly goal's age is reported on EVERY run, clear or blocked. Between day 7
 and day 14 the gate stays clear but says the goal is AGEING and when it will
 block — softening the stop without reporting it would just hide staleness.
@@ -42,6 +48,10 @@ GOALS = ROOT / "plan" / "goals.json"
 PLAN = ROOT / "plan" / "plan.json"
 
 EXEMPT_GOALS = {"keeping-the-lights-on"}
+# The end goal is reviewed, not scored. Report it stale after this long, never
+# block on it — a north star that needed re-checking is not a reason to stop work.
+END_GOAL_REVIEW_DAYS = 90
+REQUIRED_END_FIELDS = ("goal", "why", "success", "horizon", "strategy")
 # A weekly goal is meant to last a week. It is REPORTED as ageing the moment it
 # outlives that (owner rule, 2026-07-29: soften the stop, but say so every time),
 # and it BLOCKS at twice its intended life, where it can no longer be called
@@ -95,6 +105,69 @@ def week_age(week):
         return None, f"the weekly goal's 'starts' is not a date ({starts!r})"
 
 
+def end_goal_faults(goals):
+    """The end goal answers 'why are we doing this project at all'.
+
+    Without it, a month goal supports nothing above itself and the ladder leads
+    nowhere. Its `success` field is what makes it more than a slogan: the
+    condition that would have to be true for it to be achieved. It need not be a
+    number — forcing one on a multi-year ambition produces fake precision — but
+    it must be checkable by a person.
+    """
+    end = goals.get("end") if goals else None
+    if not end:
+        return ["there is no end goal — 'why are we doing this project' has no "
+                "written answer, so the monthly goal supports nothing above it"]
+    missing = [k for k in REQUIRED_END_FIELDS if not str(end.get(k) or "").strip()]
+    faults = []
+    if missing:
+        faults.append(f"the end goal is missing {', '.join(missing)} "
+                      f"(why = who it is for and why it exists; success = what would "
+                      f"have to be true; horizon = roughly when; strategy = the document)")
+    return faults
+
+
+def chain_faults(goals):
+    """Every level names what it serves, so a broken ladder fails loudly.
+
+    Whether the support is GENUINE is a judgment call for the monthly review.
+    This only checks that the claim was made.
+    """
+    if not goals:
+        return []
+    faults = []
+    month = goals.get("month") or {}
+    week = goals.get("week") or {}
+    if month and str(month.get("supports") or "").strip().lower() not in ("end", "end-goal"):
+        faults.append("the monthly goal does not declare that it supports the end goal "
+                      '(set "supports": "end") — if it genuinely does not, the month or '
+                      "the end goal is wrong, and that is the finding")
+    mid = month.get("id")
+    if week and mid and str(week.get("supports") or "").strip() != str(mid):
+        faults.append(f"the weekly goal supports {week.get('supports')!r}, not the current "
+                      f"month {mid!r} — the ladder is broken between week and month")
+    return faults
+
+
+def end_goal_note(goals):
+    """Reported every run. Reviewed, never blocking."""
+    end = (goals or {}).get("end") or {}
+    if not end:
+        return None
+    line = f"  End goal:  {end.get('goal', '')}"
+    reviewed = end.get("reviewed")
+    if not reviewed:
+        return line + "\n             (never confirmed — record a 'reviewed' date)"
+    try:
+        age = (date.today() - date.fromisoformat(str(reviewed))).days
+    except ValueError:
+        return line + f"\n             ('reviewed' is not a date: {reviewed!r})"
+    if age > END_GOAL_REVIEW_DAYS:
+        return (line + f"\n             last confirmed {age} days ago — DUE FOR REVIEW. "
+                       f"Is this still the right thing to be aiming at?")
+    return line + f"\n             confirmed {age} day{'s' if age != 1 else ''} ago"
+
+
 def gate(goals):
     """Returns (blocked_reasons, week_goal, days_elapsed).
 
@@ -105,7 +178,7 @@ def gate(goals):
     if goals is None:
         return (["there is no plan/goals.json — this project has no goals at all"], None, None)
 
-    reasons = []
+    reasons = end_goal_faults(goals)
     for period in ("month", "week"):
         g = goals.get(period)
         if not g:
@@ -124,6 +197,7 @@ def gate(goals):
             f"the weekly goal started {age} days ago ({week.get('starts')}) — expired. "
             f"A goal older than {WEEK_STALE_DAYS} days is not something to work against."
         )
+    reasons.extend(chain_faults(goals))
     return reasons, week, age
 
 
@@ -185,6 +259,9 @@ def describe(goals, week, age):
     mo = goals.get("month") or {}
     if mo.get("goal"):
         out.append(f"  Serving:   {mo.get('id', '')} — {mo['goal']}")
+    note = end_goal_note(goals)
+    if note:
+        out.append(note)
     out.append(age_note(age))
     return "\n".join(out)
 

@@ -66,6 +66,13 @@ Most projects want a bit of both. Scaffold the overlap, offer the rest.
      with the real first tasks from the interview, each tagged `owner`
      (`me` | `agent`), `priority` (`P0`/`P1`/`P2`), and `status`. Run
      `python src/build_dashboard.py` to generate `dashboard/index.html`.
+   - **Write the end goal first, out of the step-1 interview** — one sentence on
+     why this project exists at all, plus who it is for (`why`), what would have
+     to be true for it to be achieved (`success`), and roughly when (`horizon`).
+     It goes in `docs/STRATEGY.md` as prose and is restated in
+     `plan/goals.json` under `end`. **The monthly goal must then declare
+     `"supports": "end"`** — a project whose month serves nothing above it will
+     be busy on work that leads nowhere, and the gate blocks on it.
    - **Create `plan/goals.json` from `plan-track/assets/goals.example.json` and
      get the owner to fill it in before any task is worked** (house rule). A
      project with no current monthly and weekly goal has no basis for choosing

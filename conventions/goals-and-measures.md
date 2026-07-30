@@ -7,10 +7,62 @@ justification as to how it supports achieving the current goals and KPIs."*
 
 This convention binds every project, **including this one**.
 
+## The ladder — three levels, each serving the one above
+
+Added 2026-07-30 at the owner's request: *"we need to also ensure each project has
+a high level end goal defined that monthly and weekly goals support. This is part
+of the strategy as well. Why are we doing this project."*
+
+| Level | Answers | Cadence | Scored? |
+|---|---|---|---|
+| **End goal** | Why are we doing this project at all? | Years, or a condition | **Reviewed, not scored** |
+| **Monthly goal** | What has to be true this month for that to get closer? | A month | Scored against a number |
+| **Weekly goal** | What has to happen this week to serve the month? | A week | Scored against a number |
+
+**Every level names what it serves.** The month sets `"supports": "end"`; the week
+sets `"supports": "<month id>"`. The gate checks the claim was made, and blocks if
+the ladder is broken — a month goal that supports nothing above it means the
+project is busy on something that leads nowhere, which is precisely the failure
+goals exist to prevent.
+
+Whether the support is *genuine* is a judgment call, not a script's. That is the
+monthly review's job.
+
+### The end goal is strategy, restated
+
+**The end goal is the strategy document's answer, in one sentence.** It lives in
+two places on purpose, the same way the narrative plan and the task file do:
+
+- **`docs/STRATEGY.md`** — the prose: why this exists, who it is for, the wedge,
+  the evidence, and what is still undecided. This is the source.
+- **`plan/goals.json` → `end`** — the machine-readable restatement, so the
+  generators can render the ladder and the gate can check it. It carries a
+  `strategy` field pointing back at the document.
+
+If those two disagree, the strategy document wins and the goals file is stale.
+
+Required fields, and why each one earns its place:
+
+| Field | What it is | Why required |
+|---|---|---|
+| `goal` | One sentence: what winning looks like | The thing itself |
+| `why` | Who it is for, and why it exists at all | Without this it is a slogan |
+| `success` | **What would have to be true** for it to be achieved | The falsifiable part. Need not be a number — forcing one on a multi-year ambition produces fake precision — but a person must be able to check it |
+| `horizon` | Roughly when, or the condition that ends it | "Ongoing" is a legitimate answer for a standing capability |
+| `strategy` | Path to the document | So the prose and the sentence cannot drift silently |
+| `reviewed` | Date last confirmed still right | Reported every run; flagged after 90 days |
+
+**An end goal has no measure and no progress bar.** It is reviewed, not scored:
+confirmed as still-right, or changed. Changing one is a decision, and gets a dated
+decision record. A stale end goal is reported on every run but **never blocks** —
+a north star that needs re-checking is not a reason to stop work.
+
 ## The rule in three sentences
 
+0. **Every project has a written end goal** — why it exists at all — that the
+   monthly goal serves, restated from its strategy document.
 1. **Every project has a current monthly goal and a current weekly goal, and the
-   owner sets both.** Agents may draft; only the owner approves.
+   owner sets all three.** Agents may draft; only the owner approves.
 2. **Every goal carries one measure** with a baseline, a target, a date, and a
    named source. A goal without a number is a wish.
 3. **Every piece of agent-suggested work names the goal it serves and how it
@@ -28,7 +80,16 @@ already the busiest merge point in every repo.
 {
   "project": "Example",
   "updated": "2026-07-29",
+  "end": {
+    "goal": "Any engineer can hand a manufacturer a spec that gets quoted without a phone call.",
+    "why": "Small builders lose weeks to specs that come back with questions.",
+    "success": "Specs produced here are quoted as-is, and builders come back for a second one.",
+    "horizon": "2027 — or earlier if quote-ready is proven and someone pays",
+    "strategy": "docs/STRATEGY.md",
+    "reviewed": "2026-07-29"
+  },
   "month": {
+    "supports": "end",
     "id": "2026-08",
     "goal": "Prove that a finished spec is worth paying for.",
     "measure": {
@@ -60,9 +121,9 @@ already the busiest merge point in every repo.
 
 Rules for the file:
 
-- **Both `month` and `week` are required** once a project has any tasks.
-- `week.supports` names the month goal it serves. A weekly goal that supports
-  nothing is a red flag worth raising, not a validation error.
+- **`end`, `month` and `week` are all required** once a project has any tasks.
+- **`month.supports` is `"end"`; `week.supports` is the month's id.** A level that
+  names nothing above it breaks the ladder, and the gate blocks on it.
 - **`history` is append-only.** When a period ends, move the goal into `history`
   with an `outcome` (`hit` | `missed` | `abandoned`) and the measure's final
   value. This is how you find out whether goals are being set honestly.
