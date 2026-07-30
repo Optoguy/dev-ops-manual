@@ -92,9 +92,9 @@
       "title": "Schedule the weekly fleet audit and the monthly method scan as Routines",
       "owner": "me",
       "priority": "P1",
-      "status": "todo",
+      "status": "done",
       "phase": "grow",
-      "note": "Both skills exist as of 2026-07-30 and neither runs. A capability that never fires is indistinguishable from one that does not exist. Recommended: fleet audit weekly before the project reviews, method scan monthly. Both must fire into a persistent session — each ends in a menu, and a ritual that cannot ask cannot propose. Owner-owned because creating Routines is a standing commitment."
+      "note": "Both skills exist as of 2026-07-30 and neither runs. A capability that never fires is indistinguishable from one that does not exist. Recommended: fleet audit weekly before the project reviews, method scan monthly. Both must fire into a persistent session — each ends in a menu, and a ritual that cannot ask cannot propose. Owner-owned because creating Routines is a standing commitment. Done 2026-07-30: both created and bound to the manual's persistent session — fleet audit Sundays 6:00pm ET (0 22 * * 0), method scan 1st of the month 9:00am ET (0 13 1 * *). Recorded in conventions/routines.md per the rule that a Routine is never invisible automation. Neither stores connector grants, so if a firing needs the GitHub API it may not have it — the first audit will show."
     },
     {
       "id": "first-fleet-audit",

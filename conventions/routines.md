@@ -58,6 +58,13 @@ Current map:
 | Night shift (all repos) | 8:30pm ET daily | Dev Operating Manual chat |
 | SpecBuildr daily traffic report | 6:30am ET daily | SpecBuildr chat |
 | SpecBuildr weekly growth strategy | Mondays 15:00 UTC | SpecBuildr chat |
+| Fleet audit (all repos) | Sundays 6:00pm ET (`0 22 * * 0`) | Dev Operating Manual chat |
+| Method scan (the method) | 1st of the month, 9:00am ET (`0 13 1 * *`) | Dev Operating Manual chat |
+
+The last two were created 2026-07-30 and are bound to the manual's persistent
+session. Pause or retime either from the Routines list, or ask that chat to
+update the trigger. The fleet audit sits on Sunday evening on purpose, so its
+five findings are in hand *before* the week's project reviews.
 
 **The method itself carries two fleet-wide rituals** (added 2026-07-30, from the
 owner's end goal — the manual owns continuous improvement and regular audits):
