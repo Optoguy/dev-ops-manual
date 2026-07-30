@@ -165,6 +165,32 @@ Added 2026-07-29 at the owner's request. Full convention:
 - **Finished goals move to `history` with their outcome and final number** —
   append-only. A history with no misses means the goals are set too low.
 
+## Portability — nothing exclusive to one platform without a reason
+
+Added 2026-07-30 at the owner's request: *"every project including dev ops can be
+migrated to another AI platform if ever needed in the future. Nothing must be
+exclusive to Claude unless there is a clear justification."* Full convention and
+the audited table: [portability.md](portability.md).
+
+- **Anything that only works on one AI platform carries a written justification
+  and a stated fallback.** Not a ban — a bar. Something with neither is a defect
+  and gets replaced with the portable version.
+- **Portable assets stay stdlib-only.** A third-party import is a second thing
+  that must exist wherever the method runs. (All twelve scripts pass today.)
+- **Every scheduled ritual is a skill first, a schedule second.** Never encode the
+  work inside a trigger's prompt only — losing the platform would lose the ritual.
+- **No project embeds an AI provider without an abstraction.** SpecBuildr is the
+  precedent: a same-origin contract, the provider behind an environment variable,
+  swapping is a one-file change.
+- **Check it:** `python scripts/portability_check.py --strict`. It reports, never
+  rewrites — new lock-in is a person's decision, and the check only makes sure it
+  is not silent.
+
+**What it does not mean:** not vendor neutrality for its own sake, not writing
+everything twice, and not avoiding new platform features. Adopt them, and write
+down the fallback. A feature with a known fallback is a dependency with an exit,
+not lock-in.
+
 ## Tasks and priorities
 
 - **One source of truth per repo**, declared in its `CLAUDE.md`. Usually

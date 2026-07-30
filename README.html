@@ -80,6 +80,10 @@ cd dev-ops-manual
 <hr>
 <h2>The conventions</h2>
 <ul>
+<li><strong><a href="conventions/portability.md">Portability</a></strong> — **nothing exclusive to one AI</li>
+</ul>
+<p>platform** without a written justification and a fallback. Audited table of what is bound and why; <code>portability_check.py --strict</code> fails on unjustified lock-in or a third-party import in a portable asset.</p>
+<ul>
 <li><strong><a href="conventions/goals-and-measures.md">Goals and measures</a></strong> — **no work without</li>
 </ul>
 <p>a goal** (<code>python src/goal_gate.py</code> is the stop); owner-set monthly and weekly goals, one measurable number each, and the rule that every suggested task says which goal it serves. Generates <code>dashboard/goals.html</code>.</p>

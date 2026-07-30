@@ -108,6 +108,16 @@
       "note": "Exercises the new skill against real state and tests whether the five-finding cap produces something readable. fleet_state.py already shows the raw material: three projects with no goals file, 24 SpecBuildr and 22 MedTech open tasks carrying no goal, and three different pinned method versions."
     },
     {
+      "id": "prove-portability-once",
+      "goal": "keeping-the-lights-on",
+      "title": "Actually test a migration once, on a throwaway copy",
+      "owner": "agent",
+      "priority": "P2",
+      "status": "todo",
+      "phase": "grow",
+      "note": "Added 2026-07-30 with the portability convention. The claim 'a migration would be a day of re-pathing, not a rewrite' is an estimate — nobody has migrated anything. Take a throwaway copy, move .claude/skills elsewhere, rename CLAUDE.md, drive the scripts from a plain shell, and record what actually broke. An untested exit is not an exit. Labelled keeping-the-lights-on because it protects against a platform risk rather than serving a growth goal."
+    },
+    {
       "id": "conventions-coverage",
       "goal": "2026-08",
       "justification": "Moves projects-with-a-current-weekly-goal: rules that are practiced but unwritten cannot be adopted by a project that only reads the manual.",

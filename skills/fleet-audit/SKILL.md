@@ -49,6 +49,9 @@ Then add what a script cannot know:
   holds the method.
 - **Anything the project's own conventions require** that is checkable: its lint
   gate, its `--check` targets, its tests.
+- **Portability** — `python src/portability_check.py --strict` per project. New
+  lock-in without a justification is exactly the kind of thing that is invisible
+  from inside one project and obvious across four.
 
 ### 2. Look for the five patterns that only show up across projects
 

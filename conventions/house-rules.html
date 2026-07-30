@@ -185,6 +185,29 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <li><strong>Finished goals move to <code>history</code> with their outcome and final number</strong> —</li>
 </ul>
 <p>append-only. A history with no misses means the goals are set too low.</p>
+<h2>Portability — nothing exclusive to one platform without a reason</h2>
+<p>Added 2026-07-30 at the owner&#x27;s request: <em>&quot;every project including dev ops can be migrated to another AI platform if ever needed in the future. Nothing must be exclusive to Claude unless there is a clear justification.&quot;</em> Full convention and the audited table: <a href="portability.md">portability.md</a>.</p>
+<ul>
+<li>**Anything that only works on one AI platform carries a written justification</li>
+</ul>
+<p>and a stated fallback.** Not a ban — a bar. Something with neither is a defect and gets replaced with the portable version.</p>
+<ul>
+<li><strong>Portable assets stay stdlib-only.</strong> A third-party import is a second thing</li>
+</ul>
+<p>that must exist wherever the method runs. (All twelve scripts pass today.)</p>
+<ul>
+<li><strong>Every scheduled ritual is a skill first, a schedule second.</strong> Never encode the</li>
+</ul>
+<p>work inside a trigger&#x27;s prompt only — losing the platform would lose the ritual.</p>
+<ul>
+<li><strong>No project embeds an AI provider without an abstraction.</strong> SpecBuildr is the</li>
+</ul>
+<p>precedent: a same-origin contract, the provider behind an environment variable, swapping is a one-file change.</p>
+<ul>
+<li><strong>Check it:</strong> <code>python scripts/portability_check.py --strict</code>. It reports, never</li>
+</ul>
+<p>rewrites — new lock-in is a person&#x27;s decision, and the check only makes sure it is not silent.</p>
+<p><strong>What it does not mean:</strong> not vendor neutrality for its own sake, not writing everything twice, and not avoiding new platform features. Adopt them, and write down the fallback. A feature with a known fallback is a dependency with an exit, not lock-in.</p>
 <h2>Tasks and priorities</h2>
 <ul>
 <li><strong>One source of truth per repo</strong>, declared in its <code>CLAUDE.md</code>. Usually</li>

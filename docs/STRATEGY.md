@@ -30,6 +30,7 @@ fifth project costs the owner attention he actually has.
 | 1 | **Consistency** — every project operated the same proven way, best practices developed here and shared to all | **Partly built.** Skills, conventions, decisions, a drift check, and per-project adoption prompts. |
 | 2 | **Continuous improvement** — regular external research bringing in new methods of distributed agent work and agent-human collaboration | **Built 2026-07-30**, not yet scheduled. The `method-scan` skill: monthly, report-first, five standing questions, a "what breaks today that this fixes" filter, and recorded discards. |
 | 3 | **Regular audits of all projects** — concise, actionable findings and recommendations | **Built 2026-07-30**, not yet scheduled. The `fleet-audit` skill plus `fleet_state.py`: weekly, all projects at once, capped at five ranked findings each with a recommendation and an owner. |
+| 5 | **Portability** — every project, this one included, can move to another AI platform; nothing exclusive to one without a written justification | **Built 2026-07-30.** `conventions/portability.md` audits what is bound and why, with a fallback for each; `portability_check.py` fails on unjustified lock-in or a third-party import in a portable asset. |
 | 4 | **Clear communication that saves the owner's time** | **Partly built.** Plain-language rules, buttons over prose, a written options list on every reply, deliverables as files. Never measured. |
 
 **All four now have a mechanism.** Two of them were gaps when this document was
@@ -50,6 +51,9 @@ indistinguishable from one that does not exist.
 - **Communication:** the owner's time goes to decisions. No rule has to be
   explained twice. **And the count of projects he can run in parallel goes up
   while his hours do not.**
+- **Portability:** moving the whole fleet to another AI platform is a day of
+  re-pathing, not a rewrite. Every platform binding has a written reason and a
+  stated fallback, and the check passes.
 
 **Horizon:** ongoing. This is a standing capability, not a milestone. It can be
 lost as easily as built, which is why it is reviewed rather than declared
