@@ -73,9 +73,9 @@
       "title": "Install the skill suite into medtech-intel-QMSR once it has code",
       "owner": "agent",
       "priority": "P1",
-      "status": "todo",
+      "status": "in-progress",
       "phase": "sync",
-      "note": "New venture repo created 2026-07-28, still empty pending the app import. Run ./install.sh --repo <clone> and add it to the fleet table in README.md."
+      "note": "New venture repo created 2026-07-28, still empty pending the app import. Run ./install.sh --repo <clone> and add it to the fleet table in README.md. Claimed 2026-07-30 night-shift."
     },
     {
       "id": "skills-drift-check",
