@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategy — Dev Operating Manual</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><span>Strategy</span><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from STRATEGY.md — edit the markdown, not this file</p>
+<h1>Strategy — Dev Operating Manual</h1>
+<p><strong>Draft for review, 2026-07-30.</strong> The end goal below is the one the monthly and weekly goals must ladder up to, so it is the owner&#x27;s to confirm or rewrite.</p>
+<h2>Why this repository exists</h2>
+<p>Dan runs several ventures alone, with agents doing most of the building. The bottleneck is not agent capability. It is that <strong>method learned in one conversation is lost to the next one.</strong></p>
+<p>Every chat starts from nothing. Without a written method, each one re-derives how tasks are tracked, re-argues whether generated files are hand-edited, re-discovers that two sessions can build the same thing in parallel, and re-learns it the expensive way. Four repositories multiply that by four.</p>
+<p>This repository is the memory. It is the only place where &quot;how work happens&quot; is written down once and installed everywhere.</p>
+<h2>The end goal</h2>
+<blockquote><p><strong>Any chat, in any project, works the way Dan works — without Dan having to explain it again.</strong></p></blockquote>
+<p><strong>What would make that true:</strong></p>
+<ul>
+<li>A chat that has read only this repository can scaffold a new project and run it</li>
+</ul>
+<p>correctly, without asking how any of it works.</p>
+<ul>
+<li>No rule has to be explained twice. When one is broken, the fix is a written</li>
+</ul>
+<p>rule with a mechanical check, not a reminder.</p>
+<ul>
+<li>The owner&#x27;s time goes to <strong>decisions</strong> — what to build, what it is worth, who</li>
+</ul>
+<p>it is for — rather than to process, review of process, or repeating himself.</p>
+<p><strong>Horizon:</strong> ongoing. This is a standing capability, not a milestone with a date. It can be lost as easily as it is built, which is why it is reviewed rather than declared finished.</p>
+<h2>The wedge</h2>
+<p>Not &quot;documentation.&quot; Documentation is read once and rots. Three things make this different, and each exists because something broke:</p>
+<ol>
+<li><strong>Skills, not prose.</strong> The method is installed as executable skills a chat</li>
+</ol>
+<p>loads automatically, so following it is the path of least resistance rather than an act of discipline.</p>
+<ol>
+<li><strong>Mechanical checks over good intentions.</strong> Every rule that matters has a</li>
+</ol>
+<p>command that fails: <code>goal_gate.py</code>, <code>build_dashboard.py --check</code>, <code>skills_drift.py</code>, <code>git diff --stat</code> on the plan file. A rule with no check is a suggestion, and suggestions decay within a month.</p>
+<ol>
+<li><strong>Scar tissue attached.</strong> Each convention names what broke, and when. Rules</li>
+</ol>
+<p>are followed when the reader can see the wreck that produced them.</p>
+<h2>What is genuinely undecided</h2>
+<ul>
+<li><strong>Whether this earns its keep.</strong> The method has cost real hours this month. It</li>
+</ul>
+<p>has prevented duplicate work at least once, and caught a claim-detection bug that would have degraded every night shift. That is suggestive, not proof.</p>
+<ul>
+<li><strong>Whether the ceremony scales down.</strong> Four repositories and one person is a</li>
+</ul>
+<p>small fleet. Goals, gates, reviews and adoption prompts are cheap to write and not free to live with. If a month goes by where the process produces more reading than deciding, the honest response is to cut it back, not to add to it.</p>
+<ul>
+<li><strong>Whether the manual becomes the project.</strong> The clearest failure mode: this</li>
+</ul>
+<p>repository is interesting to work on, and the ventures it serves are harder. If a month&#x27;s goals are still about the manual rather than about a venture shipping, that is the finding.</p>
+<h2>Related documents</h2>
+<ul>
+<li><a href="../dashboard/index.html">Task plan</a> — what happens next, and who owns it.</li>
+<li><a href="../dashboard/goals.html">Goals and status</a> — the current ladder and where the</li>
+</ul>
+<p>numbers stand.</p>
+<ul>
+<li><a href="../conventions/house-rules.md">House rules</a> — the operating contract itself.</li>
+</ul>
+</div>
+</body>
+</html>

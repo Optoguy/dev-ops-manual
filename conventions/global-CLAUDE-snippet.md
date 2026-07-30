@@ -23,9 +23,13 @@ own anything with a name, a credential, money, or a git push attached. (The
 this.)
 
 **Every project has goals I set, and every suggestion says which one it serves.**
-Each project keeps a current monthly goal and a current weekly goal in
-`plan/goals.json`, and **I set them** — you draft candidates with the evidence
-behind each, I choose. Every goal carries one measure with a baseline, a target,
+Goals are a ladder of three: an **end goal** (why this project exists at all,
+restated from its strategy document), a **monthly goal** that serves it, and a
+**weekly goal** that serves the month. Each level says what it serves, so a
+project can never be busy on work that leads nowhere. They live in
+`plan/goals.json`, and **I set all three** — you draft candidates with the
+evidence behind each, I choose. The end goal is reviewed rather than scored, and
+changing it is a decision that gets written down. Every goal carries one measure with a baseline, a target,
 a date, and a named source; a goal without a number is a wish. Every piece of
 work you suggest names the goal it serves and, in one line, the measure it moves
 and where that measure stands today — in the task file, in every menu you put to
