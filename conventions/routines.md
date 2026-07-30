@@ -59,6 +59,19 @@ Current map:
 | SpecBuildr daily traffic report | 6:30am ET daily | SpecBuildr chat |
 | SpecBuildr weekly growth strategy | Mondays 15:00 UTC | SpecBuildr chat |
 
+**The method itself carries two fleet-wide rituals** (added 2026-07-30, from the
+owner's end goal — the manual owns continuous improvement and regular audits):
+
+| Ritual | Cadence | Lives in | Why |
+|---|---|---|---|
+| [Fleet audit](../skills/fleet-audit/SKILL.md) | **Weekly** | Dev Operating Manual chat | All projects at once, five ranked findings. Run it *before* each project's own weekly review, so the fleet view says which project deserves the attention. |
+| [Method scan](../skills/method-scan/SKILL.md) | **Monthly** | Dev Operating Manual chat | Read outside, bring back candidates. Monthly, because a weekly scan pads. |
+
+Both are cross-project by nature, so they belong to the method's chat rather than
+any one project's — the same reasoning as the night shift. Both **must fire into a
+persistent session**: each ends in a menu for the owner, and a ritual that cannot
+ask cannot propose.
+
 **Every project should also carry a weekly and a monthly goal review** (added
 2026-07-29; see [goals-and-measures.md](goals-and-measures.md) and the
 [`goal-review`](../skills/goal-review/SKILL.md) skill). Recommended cadence: the

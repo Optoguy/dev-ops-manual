@@ -28,13 +28,14 @@ fifth project costs the owner attention he actually has.
 | # | Responsibility | State today |
 |---|---|---|
 | 1 | **Consistency** — every project operated the same proven way, best practices developed here and shared to all | **Partly built.** Skills, conventions, decisions, a drift check, and per-project adoption prompts. |
-| 2 | **Continuous improvement** — regular external research bringing in new methods of distributed agent work and agent-human collaboration | **Not built.** Nothing in the method looks outward on any cadence. |
-| 3 | **Regular audits of all projects** — concise, actionable findings and recommendations | **Barely built.** The skill drift check and the nightly sweep look at narrow slices. There is no cross-project audit that produces findings and recommendations. |
+| 2 | **Continuous improvement** — regular external research bringing in new methods of distributed agent work and agent-human collaboration | **Built 2026-07-30**, not yet scheduled. The `method-scan` skill: monthly, report-first, five standing questions, a "what breaks today that this fixes" filter, and recorded discards. |
+| 3 | **Regular audits of all projects** — concise, actionable findings and recommendations | **Built 2026-07-30**, not yet scheduled. The `fleet-audit` skill plus `fleet_state.py`: weekly, all projects at once, capped at five ranked findings each with a recommendation and an owner. |
 | 4 | **Clear communication that saves the owner's time** | **Partly built.** Plain-language rules, buttons over prose, a written options list on every reply, deliverables as files. Never measured. |
 
-**Two of the four are gaps, and naming them is the most useful thing this document
-does.** An end goal that describes responsibilities the method cannot discharge is
-a plan, not a description — and it should be read that way until they exist.
+**All four now have a mechanism.** Two of them were gaps when this document was
+first written on 2026-07-30 and were built the same day; **neither is scheduled
+yet**, which is the remaining step. A capability that exists but never runs is
+indistinguishable from one that does not exist.
 
 ## What would make the end goal true
 
@@ -69,25 +70,28 @@ different, and each exists because something broke:
 3. **Scar tissue attached.** Each convention names what broke, and when. Rules get
    followed when the reader can see the wreck that produced them.
 
-## The two missing capabilities, described
+## The two capabilities built on 2026-07-30
 
-Written here rather than invented as tasks, because adding them to the plan is the
-owner's call.
+**Regular external research — [`method-scan`](../skills/method-scan/SKILL.md).**
+Monthly, report-first. Five standing questions (how others run agent fleets, how
+handoff is structured, what is known about unattended work, how agent output is
+reviewed, how a method is kept from rotting), each mapped to something the house
+method already does so a finding lands somewhere. Every candidate must answer
+**"what breaks today that this would fix"** or it is discarded however elegant —
+that filter is what stops the method bloating, since every rule costs every future
+session reading and compliance. Discards are recorded so they are not re-found.
+Without a cadence, the method only ever learns from its own accidents.
 
-**Regular external research.** Someone or something has to read outside this
-system on a cadence and bring back what is worth adopting — how other people run
-fleets of agents, what patterns have emerged for agent-human handoff, what is
-being learned about unattended work, review, and trust. Report-first, as
-candidates with evidence, never as automatic changes to the method. Without a
-cadence this happens only when something fails, which means the method only ever
-learns from its own accidents.
+**A cross-project audit — [`fleet-audit`](../skills/fleet-audit/SKILL.md).**
+Weekly, all projects at once, **capped at five ranked findings**, each four lines:
+what, evidence, recommendation with an owner, and the cost of waiting. The cap is
+the point — an audit that lists everything has pushed the sorting back onto the
+owner. It hunts the five patterns single-project reviews cannot see, chief among
+them a **shared blocker**: two or more projects waiting on the same decision is one
+finding, not three, and the highest-leverage line in any report.
+`fleet_state.py` collects the mechanical half; judgment is the agent's.
 
-**A cross-project audit.** Regular, all projects at once, producing a short list:
-what is drifting, what is stalled, what contradicts a convention, what the owner
-is blocking, and what should change. The existing pieces — the drift check, the
-nightly sweep, the weekly review — each look at one slice from inside one project.
-Nothing looks across the whole fleet and says "here are the five things worth your
-attention this week."
+**Neither is scheduled yet.** That is the next step, and it is the owner's call.
 
 ## What is genuinely undecided
 
