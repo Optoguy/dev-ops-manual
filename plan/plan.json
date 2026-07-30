@@ -123,9 +123,9 @@
       "title": "Get each project's own chat capturing its chat history weekly",
       "owner": "me",
       "priority": "P1",
-      "status": "todo",
+      "status": "in-progress",
       "phase": "sync",
-      "note": "Added 2026-07-30. A transcript is readable only from inside the container of the session that produced it, so this is the one ritual that cannot be centralised — SpecBuildr, NewCoEndotest and medtech-intel-QMSR must each schedule it in their own chat. Until they do, every container reclamation loses that project's reasoning permanently. fleet_state.py reports which projects have no docs/history/ at all; all three do as of today. Owner-owned because it means creating a Routine in three other conversations."
+      "note": "Added 2026-07-30. A transcript is readable only from inside the container of the session that produced it, so this is the one ritual that cannot be centralised — SpecBuildr, NewCoEndotest and medtech-intel-QMSR must each schedule it in their own chat. Until they do, every container reclamation loses that project's reasoning permanently. fleet_state.py reports which projects have no docs/history/ at all; all three do as of today. Owner-owned because it means creating a Routine in three other conversations. Claimed 2026-07-30 live-session: adoption prompts for all three projects dispatched by the owner 2026-07-30, each instructing that chat to schedule its own weekly capture Routine. Not done until fleet_state.py reports a captured period for SpecBuildr, newcoendotest and medtech-intel-qmsr; all three read NOT CAPTURED as of dispatch."
     },
     {
       "id": "capture-subagent-transcripts",
