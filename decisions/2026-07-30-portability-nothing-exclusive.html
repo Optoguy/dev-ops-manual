@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026-07-30 — Nothing exclusive to one AI platform without a written reason</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a href="../docs/STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from 2026-07-30-portability-nothing-exclusive.md — edit the markdown, not this file</p>
+<h1>2026-07-30 — Nothing exclusive to one AI platform without a written reason</h1>
+<p><strong>Decision.</strong> Every project, this repository included, must be able to move to another AI platform. Anything that only works on one platform carries a <strong>written justification and a stated fallback</strong>. Something with neither is a defect and gets replaced with the portable version. Checked by <code>scripts/portability_check.py --strict</code>.</p>
+<p><strong>Asked for by the owner</strong>, 2026-07-30: <em>&quot;Another high level goal for dev ops is to ensure that every project including dev ops can be migrated to another AI platform if ever needed in the future. Nothing must be exclusive to Claude unless there is a clear justification.&quot;</em></p>
+<h2>What the audit actually found</h2>
+<p>The useful part of this decision is that the position was measured before it was asserted.</p>
+<p><strong>Better than expected.</strong> All twelve portable scripts — the goal gate, both dashboard builders, the document renderer, the drift check, the fleet collector, the knowledge-base linter — are <strong>stdlib-only Python</strong>. Not one third-party import. They run anywhere Python does, including under a different model, a different agent runner, or a person at a terminal. The data is plain JSON and markdown, the generated pages are self-contained HTML with no external assets, and the provenance is git. <strong>None of that would notice a platform change.</strong></p>
+<p><strong>The lock-in is narrower than it looks and concentrated in one place.</strong> Four bindings are cosmetic: where skills live (<code>.claude/skills/</code>), which file is auto-read (<code>CLAUDE.md</code>), where preferences live (<code>~/.claude/CLAUDE.md</code>), and clickable option menus. Each is a path or a filename with a trivial fallback, and the menus already degrade gracefully because the house rule <em>also</em> requires the written options list on every reply — the list is the record, the clicking is the convenience.</p>
+<p><strong>One binding is real: scheduling.</strong> Nothing in the method can schedule itself. That is the single dependency worth worrying about, and it is why the mitigation is structural rather than a note: <strong>every scheduled ritual is defined as a skill, with the cadence written in <code>conventions/routines.md</code>.</strong> The trigger points at the skill; it does not contain the work. A cron job, a continuous-integration schedule, or a calendar reminder could fire the same prompt. Losing the platform would cost the timer, not the ritual.</p>
+<p><strong>The honest summary: the substance is portable, the packaging is not.</strong> A migration would be a day of re-pathing, not a rewrite. That is the claim this convention exists to keep true — and the check is what stops it quietly becoming false.</p>
+<h2>Design choices, and why</h2>
+<p><strong>A bar, not a ban.</strong> Vendor neutrality for its own sake would make the method worse: the platform-specific features are often the good ones, and refusing them to stay pure is a cost with no benefit. The requirement is only that <strong>leaving stays cheap</strong>, which is satisfied by writing down the fallback rather than by avoiding the dependency.</p>
+<p>**Justification is per <em>concept</em>, not per mention.** <code>CLAUDE.md</code> appears 48 times; that is one binding, not 48. The check groups by concept for exactly this reason — counting mentions would produce a number that goes up as the documentation improves, which is the wrong incentive.</p>
+<p><strong>Dated decisions and reports are excluded from the check.</strong> They describe what happened. A record saying &quot;we chose Claude Code Routines on 2026-07-23&quot; must not be flagged as unjustified lock-in and must never be &quot;fixed&quot; — rewriting history to look portable is worse than the lock-in.</p>
+<p><strong>Third-party imports are an objective strict failure.</strong> Unlike a path or a filename, a dependency is a second artefact that has to exist wherever the method runs. This is the one part of the check with no judgment in it, and it passes today.</p>
+<h2>What changes for agents</h2>
+<p>Before: use whatever the platform offers.</p>
+<p>After: the same, and <strong>write down the fallback</strong>. When adopting a platform capability, record what you would do without it. When a platform <em>gains</em> something that removes one of our workarounds, that is a method-scan finding and the most valuable kind — it makes the method smaller.</p>
+<h2>How this could be wrong</h2>
+<ul>
+<li><strong>The check is shallow by construction.</strong> It greps for known identifiers. Lock-in</li>
+</ul>
+<p>that arrives as a <em>behaviour</em> — a convention that only works because a particular model is unusually good at something — is invisible to it. The convention names that case and asks for it to be written down, which is an honour system.</p>
+<ul>
+<li><strong>It cannot see the future.</strong> The binding list is the one we know about today. A</li>
+</ul>
+<p>new platform feature adopted casually would not appear until someone added its pattern. The method scan is the intended catch, and it depends on someone running it.</p>
+<ul>
+<li><strong>Skipping its own file is a real blind spot.</strong> The checker defines the patterns,</li>
+</ul>
+<p>so scanning itself matches all of them. It is excluded by name and the docstring says so — but lock-in added <em>inside</em> the checker would pass silently.</p>
+<ul>
+<li><strong>A day of re-pathing is an estimate, not a test.</strong> Nobody has migrated anything.</li>
+</ul>
+<p>The claim would be worth far more if it had been tried once, even on a throwaway copy, and that has not been done.</p>
+</div>
+</body>
+</html>

@@ -65,6 +65,10 @@ assets. Invoke with `/<name>` in any session where they're installed.
 
 ## The conventions
 
+- **[Portability](conventions/portability.md)** — **nothing exclusive to one AI
+  platform** without a written justification and a fallback. Audited table of what
+  is bound and why; `portability_check.py --strict` fails on unjustified lock-in
+  or a third-party import in a portable asset.
 - **[Goals and measures](conventions/goals-and-measures.md)** — **no work without
   a goal** (`python src/goal_gate.py` is the stop); owner-set monthly
   and weekly goals, one measurable number each, and the rule that every suggested

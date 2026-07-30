@@ -29,6 +29,7 @@ a finding lands somewhere rather than floating.
 | **What is being learned about unattended work?** Verification, blast radius, rollback, trust building over time | the night shift, draft-pull-request-only, the verify-before-done bar |
 | **How is agent output reviewed?** Adversarial review, evals, second-model checks, acceptance criteria | `/verify`, the justification audit, the missing eval harness |
 | **How do people keep a method from rotting?** Drift, versioning, adoption across repos | `skills_drift.py`, adoption prompts, version pinning |
+| **What is changing about platform lock-in?** New capabilities that remove one of our workarounds, and new dependencies that add lock-in | `conventions/portability.md` — both directions matter, and the first is the most valuable finding available |
 
 **Also look for what makes a rule here unnecessary.** A finding that lets the
 method get *smaller* is worth more than one that adds to it, and much rarer.

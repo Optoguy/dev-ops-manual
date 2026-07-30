@@ -29,6 +29,7 @@ each project's own chat (see `conventions/routines.md`).
 - `decisions/` — dated records of choices that changed how work happens.
 - `scripts/` — `goal_gate.py` (**run it before starting work — no goal, no
   work**), `fleet_state.py` (mechanical state of every project, for the audit),
+  `portability_check.py` (**no platform lock-in without a written reason**),
   `build_dashboard.py`, `build_goals.py`, `render_docs.py`, and `skills_drift.py`
   (compares each project's installed `.claude/skills/` against `skills/` here;
   **reports only, never fixes** — adoption is the project's own call).
