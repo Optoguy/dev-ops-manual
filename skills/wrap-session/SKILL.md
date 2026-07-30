@@ -10,6 +10,12 @@ reality at the end of every session. A session that ends without a wrap leaves
 the next session (or the owner's glance at the dashboard) trusting stale state.
 This skill is the close-out ritual: sweep, record, regenerate, commit.
 
+**Run [`history-capture`](../history-capture/SKILL.md) as part of it, and read the
+transcript rather than relying on remembered context.** At session close your memory
+of the period is the least reliable it will ever be — after compaction it is a
+summary of a summary, while the transcript on disk is complete. The transcript also
+dies with the container, so session close is the last safe moment to extract it.
+
 ## Procedure
 
 1. **Sweep the session for durable findings.** Anything learned that will still

@@ -71,7 +71,7 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 </ul>
 <p>method is used. Written to read well on GitHub from a phone.</p>
 <ul>
-<li><code>skills/</code> — the 17 portable skills, each a directory with <code>SKILL.md</code> and</li>
+<li><code>skills/</code> — the 18 portable skills, each a directory with <code>SKILL.md</code> and</li>
 </ul>
 <p>optional <code>assets/</code>. <strong>This is the source of record</strong>; project repos hold installed copies under their own <code>.claude/skills/</code>.</p>
 <ul>
@@ -86,10 +86,12 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <li><code>decisions/</code> — dated records of choices that changed how work happens.</li>
 <li><code>scripts/</code> — <code>goal_gate.py</code> (**run it before starting work — no goal, no</li>
 </ul>
-<p>work<strong>), <code>fleet_state.py</code> (mechanical state of every project, for the audit), <code>portability_check.py</code> (</strong>no platform lock-in without a written reason<strong>), <code>build_dashboard.py</code>, <code>build_goals.py</code>, <code>render_docs.py</code>, and <code>skills_drift.py</code> (compares each project&#x27;s installed <code>.claude/skills/</code> against <code>skills/</code> here; </strong>reports only, never fixes** — adoption is the project&#x27;s own call).</p>
+<p>work<strong>), <code>fleet_state.py</code> (mechanical state of every project, for the audit), <code>portability_check.py</code> (</strong>no platform lock-in without a written reason<strong>), <code>chat_distill.py</code> (distil a chat transcript into a committable digest), <code>build_dashboard.py</code>, <code>build_goals.py</code>, <code>render_docs.py</code>, and <code>skills_drift.py</code> (compares each project&#x27;s installed <code>.claude/skills/</code> against <code>skills/</code> here; </strong>reports only, never fixes** — adoption is the project&#x27;s own call).</p>
 <ul>
 <li><code>reports/</code> — dated findings that aren&#x27;t decisions, each with an HTML twin.</li>
+<li><code>docs/history/</code> — <strong>generated</strong> chat-record digests, one per period, indexed by</li>
 </ul>
+<p><code>docs/HISTORY.md</code>. The reasoning behind the method; the transcripts they came from do not survive their containers.</p>
 <h2>Conventions for working <em>in</em> this repo</h2>
 <ul>
 <li><strong>A skill edit is a fleet-wide change.</strong> After editing anything under</li>

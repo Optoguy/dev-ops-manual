@@ -154,6 +154,25 @@ def plan_state(plan):
     }
 
 
+def history_state(repo, ref):
+    """How fresh the project's captured chat history is.
+
+    A transcript lives in the container of the session that made it, so no other
+    session can capture it — this is the one thing the fleet view can enforce but
+    not perform. Reports the newest period file and how long ago it was touched.
+    """
+    r = git(repo, "ls-tree", "-r", "--name-only", ref, "--", "docs/history")
+    files = sorted(p for p in r.stdout.split("\n") if p.strip().endswith(".md"))
+    if not files:
+        return {"present": False,
+                "note": "no docs/history/ — chat history is not being captured, so it "
+                        "dies with the container that holds it"}
+    last = git(repo, "log", "-1", "--format=%ad", "--date=short", ref,
+               "--", "docs/history").stdout.strip()
+    return {"present": True, "periods": len(files), "newest_file": files[-1],
+            "last_captured": last, "days_since": days_since(last)}
+
+
 def collect(path, ref):
     git(path, "fetch", "origin", "-q")
     ref = ref or default_ref(path)
@@ -173,6 +192,7 @@ def collect(path, ref):
         "last_commit": {"sha": sha, "date": when, "subject": subject,
                         "days_ago": days_since(when)},
         "manual_pin_line": pin,
+        "history": history_state(path, ref),
         "goals": goals_state(read_json(path, ref, "plan/goals.json")),
         "plan": plan_state(read_json(path, ref, "plan/plan.json")),
     }
@@ -212,6 +232,14 @@ def print_text(rows):
                 print("  %s: %s" % (label, ", ".join(pl[key])))
         if pl.get("lights_on"):
             print("  lights-on: %s" % ", ".join(pl["lights_on"]))
+        h = r.get("history") or {}
+        if not h.get("present"):
+            print("  history:   NOT CAPTURED — %s" % h.get("note", ""))
+        else:
+            d = h.get("days_since")
+            flag = "" if d is None or d <= 7 else "  <- STALE"
+            print("  history:   %d period(s), last captured %s (%s days ago)%s"
+                  % (h["periods"], h.get("last_captured", "?"), d, flag))
         if r.get("manual_pin_line"):
             print("  pinned:    %s" % r["manual_pin_line"])
 

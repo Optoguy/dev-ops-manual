@@ -52,6 +52,11 @@ Then add what a script cannot know:
 - **Portability** — `python src/portability_check.py --strict` per project. New
   lock-in without a justification is exactly the kind of thing that is invisible
   from inside one project and obvious across four.
+- **History freshness** — `fleet_state.py` reports each project's newest captured
+  period and how long ago. **This is the one thing the audit can enforce but never
+  perform:** a transcript is readable only by the session that made it, so a stale
+  history has to be reported back to that project's chat. A project with no
+  `docs/history/` is losing its reasoning every time a container is reclaimed.
 
 ### 2. Look for the five patterns that only show up across projects
 
