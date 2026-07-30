@@ -87,6 +87,27 @@
       "note": "Two copies of a skill always drift eventually — that risk is why this repo exists. Diff each project's installed copies against skills/, report differences, and open a PR re-installing where they've diverged. Claimed 2026-07-29 night-shift; scoped to report-only (this repo never pushes into project repos, 2026-07-28). Done 2026-07-29 night-shift: reports/2026-07-29-skills-drift.md + scripts/skills_drift.py; fleet is one commit behind (2026-07-28), no in-place edits found."
     },
     {
+      "id": "schedule-fleet-rituals",
+      "goal": "keeping-the-lights-on",
+      "title": "Schedule the weekly fleet audit and the monthly method scan as Routines",
+      "owner": "me",
+      "priority": "P1",
+      "status": "todo",
+      "phase": "grow",
+      "note": "Both skills exist as of 2026-07-30 and neither runs. A capability that never fires is indistinguishable from one that does not exist. Recommended: fleet audit weekly before the project reviews, method scan monthly. Both must fire into a persistent session — each ends in a menu, and a ritual that cannot ask cannot propose. Owner-owned because creating Routines is a standing commitment."
+    },
+    {
+      "id": "first-fleet-audit",
+      "goal": "2026-08",
+      "justification": "Moves projects-with-a-current-weekly-goal: the audit's likely lead finding is the shared blocker across SpecBuildr, NewCoEndotest and medtech-intel-QMSR — all three blocked on the same missing goals file.",
+      "title": "Run the first fleet audit and report the five findings",
+      "owner": "agent",
+      "priority": "P2",
+      "status": "todo",
+      "phase": "grow",
+      "note": "Exercises the new skill against real state and tests whether the five-finding cap produces something readable. fleet_state.py already shows the raw material: three projects with no goals file, 24 SpecBuildr and 22 MedTech open tasks carrying no goal, and three different pinned method versions."
+    },
+    {
       "id": "conventions-coverage",
       "goal": "2026-08",
       "justification": "Moves projects-with-a-current-weekly-goal: rules that are practiced but unwritten cannot be adopted by a project that only reads the manual.",

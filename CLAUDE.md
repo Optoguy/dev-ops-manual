@@ -16,7 +16,7 @@ each project's own chat (see `conventions/routines.md`).
 
 - `README.md` — the front door: install commands, the skill index, where the
   method is used. Written to read well on GitHub from a phone.
-- `skills/` — the 15 portable skills, each a directory with `SKILL.md` and
+- `skills/` — the 17 portable skills, each a directory with `SKILL.md` and
   optional `assets/`. **This is the source of record**; project repos hold
   installed copies under their own `.claude/skills/`.
 - `install.sh` — copies skills into `~/.claude/skills/` (`--global`) or a
@@ -28,7 +28,8 @@ each project's own chat (see `conventions/routines.md`).
   `--prefs` writes).
 - `decisions/` — dated records of choices that changed how work happens.
 - `scripts/` — `goal_gate.py` (**run it before starting work — no goal, no
-  work**), `build_dashboard.py`, `build_goals.py`, `render_docs.py`, and `skills_drift.py`
+  work**), `fleet_state.py` (mechanical state of every project, for the audit),
+  `build_dashboard.py`, `build_goals.py`, `render_docs.py`, and `skills_drift.py`
   (compares each project's installed `.claude/skills/` against `skills/` here;
   **reports only, never fixes** — adoption is the project's own call).
 - `reports/` — dated findings that aren't decisions, each with an HTML twin.
