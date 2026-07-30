@@ -73,9 +73,10 @@
       "title": "Install the skill suite into medtech-intel-QMSR once it has code",
       "owner": "agent",
       "priority": "P1",
-      "status": "in-progress",
+      "status": "done",
+      "done_date": "2026-07-30",
       "phase": "sync",
-      "note": "New venture repo created 2026-07-28, still empty pending the app import. Run ./install.sh --repo <clone> and add it to the fleet table in README.md. Claimed 2026-07-30 night-shift."
+      "note": "New venture repo created 2026-07-28, still empty pending the app import. Run ./install.sh --repo <clone> and add it to the fleet table in README.md. Claimed 2026-07-30 night-shift. DONE 2026-07-30 night-shift: superseded by events. medtech-intel-QMSR has the suite installed on its default branch (14 skills, 24 files) and is already in the README fleet table; its own chat now maintains the pull itself (its pull request #5 refreshes to b2d436e). Nothing left to do, and under the 2026-07-28 rule this repo would not install it anyway."
     },
     {
       "id": "skills-drift-check",
@@ -96,16 +97,6 @@
       "status": "todo",
       "phase": "grow",
       "note": "Several rules were learned in conversation and only partly recorded (e.g. file-first deliverable delivery, plan-file union merges, regenerate-don't-hand-merge). Sweep recent project history for rules being followed that conventions/ doesn't state, and propose additions."
-    },
-    {
-      "id": "evaluate-skill-gaps",
-      "goal": "keeping-the-lights-on",
-      "title": "Evaluate which built-in Claude skills are worth adopting into the house suite",
-      "owner": "me",
-      "priority": "P2",
-      "status": "todo",
-      "phase": "grow",
-      "note": "Candidates seen in use: /security-review before a traffic push, skill-creator for authoring/evaluating skills properly, fewer-permission-prompts to cut interruptions. Owner call on which become house practice."
     }
   ]
 }
