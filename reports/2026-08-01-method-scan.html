@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method scan — 2026-08-01</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a href="../docs/STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from 2026-08-01-method-scan.md — edit the markdown, not this file</p>
+<h1>Method scan — 2026-08-01</h1>
+<p>First scan under <code>/method-scan</code>. Report only: nothing here changes a convention. Adopting any of it is a decision that gets its own dated record.</p>
+<hr>
+<h2>What got smaller</h2>
+<p><strong>The method can stop copying itself into every repository.</strong></p>
+<p>This is the finding to read first, and the only one that deletes rather than adds.</p>
+<p><code>install.sh --repo &amp;lt;path&amp;gt;</code> copies <code>skills/</code> into each project&#x27;s <code>.claude/skills/</code>. <code>scripts/skills_drift.py</code> exists to detect what that copying causes — its own docstring says so: <em>&quot;Two copies of a skill always drift eventually — that risk is why this repo exists.&quot;</em> Every adoption is then a hand-run install plus a per-repo pull request, and every pull request touching <code>skills/</code> has to list which repositories need the install re-run.</p>
+<p>Claude Code&#x27;s plugin system removes the second copy entirely. A marketplace is a <code>.claude-plugin/marketplace.json</code> catalogue in this repository; each project names it in its own <code>.claude/settings.json</code> and installs from it. There is one source, versioned, and no local copy to drift.</p>
+<p><strong>What breaks today.</strong> Drift is not hypothetical here, and it is currently producing a false green:</p>
+<ul>
+<li><code>medtech-intel-QMSR</code>&#x27;s installed <code>scripts/goal_gate.py</code> is the pre-ladder</li>
+</ul>
+<p>version. <code>grep -c end_goal_faults</code> returns <strong>0</strong>. It reports <code>CLEAR</code> while the repository has <strong>no end goal at all</strong> — the current gate on its own unmerged pull request #6 reports <code>BLOCKED</code> on the same data. A stale copy is telling the owner work may proceed when the rule says it may not.</p>
+<ul>
+<li>Four repositories currently sit on <strong>three different method versions</strong>.</li>
+</ul>
+<p>SpecBuildr merged the <code>87a24ac</code> adoption this morning (#63); NewCoEndotest&#x27;s equivalent (#19) and medtech&#x27;s (#6) have been open as drafts since 2026-07-30.</p>
+<ul>
+<li>The adoption ritual is now four pull requests per method change — #62 and #63</li>
+</ul>
+<p>in SpecBuildr, #6 in medtech, #19 in NewCoEndotest — each hand-run, each separately reviewable, each able to stall.</p>
+<p><strong>What it would change.</strong> <code>install.sh</code> keeps <code>--prefs</code> and <code>--global</code>, loses <code>--repo</code>. <code>scripts/skills_drift.py</code> is deleted. The &quot;re-run <code>./install.sh --repo</code>&quot; clause comes out of <code>conventions/house-rules.md</code>, both goal decisions, and every future pull-request body.</p>
+<p><strong>The mechanical check.</strong> <code>claude plugin validate ./&amp;lt;plugin&amp;gt;</code> exits nonzero on a malformed plugin, and the marketplace entry carries an explicit <code>version</code> or pins to a 40-character commit <code>sha</code>, so &quot;which version is this project on&quot; is a field to read rather than a hash to compute. Replaces <code>skills_drift.py</code> with a lookup.</p>
+<p><strong>Three honest costs.</strong></p>
+<ol>
+<li><strong>Skill names get namespaced</strong> — <code>/night-shift</code> becomes</li>
+</ol>
+<p><code>/dev-ops-manual:night-shift</code>. That is in every skill&#x27;s cross-references and in the nightly Routine prompt.</p>
+<ol>
+<li><strong>It is a new platform binding</strong>, and this repository adopted</li>
+</ol>
+<p><code>conventions/portability.md</code> two days ago. Marketplaces are Claude Code&#x27;s mechanism. The mitigating fact: the plugin payload is still plain directories of <code>SKILL.md</code> files, so the content stays portable and only the distribution is platform-specific — but it must be recorded as a binding with a fallback, not slipped in.</p>
+<ol>
+<li><strong>Trust surface.</strong> Anthropic&#x27;s own warning: *&quot;Plugins and marketplaces are</li>
+</ol>
+<p>highly trusted components that can execute arbitrary code on your machine with your user privileges.&quot;* This proposal is for a <strong>private, self-owned</strong> marketplace — a first-party repository the owner already controls. It is not a recommendation to install third-party plugins, and the third-party aggregators found during this scan (one advertising 471 plugins and 3,069 skills) are explicitly out of scope.</p>
+<p><strong>Verdict: adopt</strong> — as a migration with its own decision record, not a side effect.</p>
+<p>Sources: <a href="https://code.claude.com/docs/en/plugin-marketplaces">Create and distribute a plugin marketplace</a> · <a href="https://code.claude.com/docs/en/discover-plugins">Discover and install prebuilt plugins</a> · <a href="https://code.claude.com/docs/en/plugins">Create plugins</a></p>
+<hr>
+<h2>Adopt</h2>
+<h3>1. Plugin-marketplace distribution</h3>
+<p>Above. Deletes <code>skills_drift.py</code>, <code>install.sh --repo</code>, and the per-pull-request re-install clause.</p>
+<h3>2. Claims are leases, not locks — they expire</h3>
+<p>Distributed systems stopped using permanent locks decades ago for exactly the failure this method has. The lease pattern: a claim is <strong>time-bound</strong>, must be renewed, and expires on its own. A holder that pauses or dies does not block the resource forever. The companion idea is the <strong>fencing token</strong> — a monotonically increasing number issued with the lease, so a stale holder that wakes up and tries to act is rejected by the thing it is writing to.</p>
+<p><code>claim-before-you-build</code> (2026-07-26) implements the lock half and not the expiry half. <code>status: in-progress</code> is held until someone remembers to clear it.</p>
+<p><strong>What breaks today.</strong> Found in this session, not hypothetically: SpecBuildr&#x27;s <code>adopt-manual-87a24ac</code> is still <code>status: in-progress</code> although the pull request that completed it (#63) merged this morning. Under the night-shift rule, <code>in-progress</code> means &quot;someone has this&quot; — so that task is now unavailable to every future session, indefinitely, because of a claim nobody released. The original 2026-07-26 collision that produced the claim rule was the same class of failure in the other direction.</p>
+<p><strong>What it would change.</strong> A claim note already carries a date (<code>claimed &amp;lt;date&amp;gt; night-shift</code>). Make it mean something: a claim older than N days, or whose referenced pull request is merged or closed, is <strong>expired</strong> — reclaimable by the next session, with a note, no permission needed.</p>
+<p><strong>The mechanical check.</strong> <code>build_dashboard.py --check</code> already exits nonzero on goal faults; add expired claims to it. The rule is computable from data the plan file already holds — <code>status</code>, the claim date in <code>note</code>, and the pull-request state that <code>fleet_state.py</code> already reads. This is the cheapest of the three: one predicate, no new file format.</p>
+<p>The fencing-token half is <strong>not</strong> proposed. It guards against a paused holder resuming and corrupting state; a Claude session that wakes after its claim expired would re-read the plan file first and see the reclaim. Recorded here so the idea is not re-found and mistaken for missing.</p>
+<p>Sources: <a href="https://singhajit.com/distributed-systems/lease/">Lease pattern in distributed systems</a> · <a href="https://levelup.gitconnected.com/beyond-the-lock-why-fencing-tokens-are-essential-5be0857d5a6a">Beyond the lock: why fencing tokens are essential</a></p>
+<hr>
+<h2>Adapt</h2>
+<p><strong>Approval menus should state blast radius and rollback, not just intent.</strong> Three decades of human-factors work says reviewers drift into rubber-stamping — the International AI Safety Report 2026 is quoted as warning that automation bias <em>&quot;undermines competence by discouraging active reasoning and verification.&quot;</em> The recommendation that survives the filter is small: replace a bare &quot;Approve?&quot; with a per-option line naming expected blast radius and the rollback path.</p>
+<p>The house slate already carries goal, measure, verification method and dispatch tag. The missing half-line is <strong>what this can break and how it is undone</strong>. For night-shift work the answer is nearly always &quot;a draft pull request, closed without merging&quot; — which is itself worth saying, because it is the sentence that makes approving safe rather than habitual.</p>
+<p>The larger proposal in the same literature — calibrating interruptions to an estimated human fatigue curve — is discarded below.</p>
+<p>Sources: <a href="https://arxiv.org/pdf/2606.08919">Oversight has a capacity (arXiv 2606.08919)</a> · <a href="https://arxiv.org/pdf/2606.05391">Human oversight of agentic systems in practice (arXiv 2606.05391)</a></p>
+<h2>Watch</h2>
+<p><strong>Per-agent git worktree isolation.</strong> The multi-agent write-ups converge on isolating each concurrent agent in its own worktree so parallel edits cannot collide, and Claude Code&#x27;s Agent tool already exposes <code>isolation: &amp;quot;worktree&amp;quot;</code>. Not applicable yet: this method runs one agent at a time by design, and the external-agents convention forbids two agents on overlapping file sets. It becomes applicable the first time a night shift genuinely fans out — at which point the branch-per-night model is the thing that has to change.</p>
+<hr>
+<h2>Discard — recorded so they are not re-found next quarter</h2>
+<ul>
+<li><strong>I-PASS / SBAR structured clinical handoff.</strong> Best-evidenced item in the</li>
+</ul>
+<p>whole scan — moderate-certainty evidence across ten studies including two randomised trials that I-PASS reduces medical errors. Discarded anyway: it fixes verbal handoff between shift workers with no written artefact. This method&#x27;s handoff is already written and durable (the pull-request body, the morning summary, <code>/wrap-session</code>). Adopting the mnemonic adds vocabulary without naming a failure that happened here.</p>
+<ul>
+<li><strong>Fatigue-calibrated adaptive interruption.</strong> The core proposal of arXiv</li>
+</ul>
+<p>2606.08919. Its own limitations section is disqualifying for this method: evaluation is <strong>simulation only, no real-world deployment data</strong>, it assumes fatigue degrades oversight monotonically, and it requires estimating an individual&#x27;s fatigue threshold, which the paper concedes &quot;may be difficult to obtain in practice.&quot; One person and four repositories cannot calibrate a curve.</p>
+<ul>
+<li><strong>The 88-agents-per-operator oversight-ratio literature.</strong> Real finding</li>
+</ul>
+<p>(BCG/UC Riverside numbers on reviewer fatigue: 14% more mental effort, 39% higher major-error rates), wrong scale. It describes operators supervising fleets. Here the ratio is one owner to at most three proposed tasks a night.</p>
+<ul>
+<li><strong>&quot;Multi-agent orchestration failure playbooks.&quot;</strong> Several 2026 write-ups on</li>
+</ul>
+<p>agents colliding on hotspot files. Their prescriptions — spec-scoped tasks, isolate per agent, require tests before merge — are what <code>claim-before-you-build</code>, the external-agents convention and the verify-before-done bar already do. No new mechanism, and none of them published post-mortem numbers.</p>
+<ul>
+<li><strong>Third-party plugin aggregators.</strong> Discovered while researching</li>
+</ul>
+<p>marketplaces. Irrelevant to method and an active trust risk; noted only so the marketplace adoption is not misread as endorsing them.</p>
+<hr>
+<h2>What was scanned</h2>
+<p>Date range: sources published or current through 2026-08-01. Five kinds:</p>
+<div class="tablewrap"><table><thead><tr><th>Kind</th><th>Read</th></tr></thead><tbody><tr><td><strong>Primary vendor documentation</strong></td><td>Claude Code docs: plugin marketplaces, plugin creation, plugin discovery/installation</td></tr><tr><td><strong>Adjacent discipline — distributed systems</strong></td><td>Lease pattern, fencing tokens, stale-lock reclaim</td></tr><tr><td><strong>Adjacent discipline — medicine</strong></td><td>I-PASS / SBAR structured handoff systematic reviews (AHRQ <em>Making Healthcare Safer IV</em>)</td></tr><tr><td><strong>Research</strong></td><td>arXiv 2606.08919 (oversight capacity), 2606.05391 (oversight in practice); limitations read first</td></tr><tr><td><strong>Practitioner write-ups</strong></td><td>Multi-agent orchestration and parallel-agent collision playbooks, 2026</td></tr></tbody></table></div>
+<p><strong>Under-covered, said plainly:</strong> the practitioner category is the weak one. What surfaced was mostly vendor-adjacent blog content restating known advice; nothing carried post-mortem numbers from a team actually running an agent fleet. That category should be searched differently next month — conference talks, incident write-ups, or engineering blogs by name — rather than by keyword.</p>
+<p><strong>Aviation was skipped.</strong> Crew resource management and checklist discipline were in scope and not read; the medical handoff literature was taken as the representative of that family. Worth its own pass if the approval-gate question comes back.</p>
+<p><strong>Untrusted-data check.</strong> Everything fetched was treated as data to summarise. Nothing read as an attempt to redirect behaviour — no injected instructions, no &quot;ignore previous&quot; patterns, no requests to fetch or execute anything. The only notable content-level caution is the plugin trust warning quoted above, which is Anthropic&#x27;s own documentation warning users about third-party plugins, not an attempt to influence this scan.</p>
+</div>
+</body>
+</html>

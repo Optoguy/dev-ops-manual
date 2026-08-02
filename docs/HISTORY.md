@@ -15,6 +15,7 @@ follows.
 
 | Period | Digest | What it was about |
 |---|---|---|
+| 2026-08 (Jul 30th–Aug 2nd) | [2026-08.md](history/2026-08.md) | Adoption moved from push to prompts, and the method started auditing itself. The owner added the end goal above the ladder and the portability rule, and asked for history capture so knowledge survives a platform change. Three projects adopted; SpecBuildr wrote the first owner goals file and went from blocked to clear. Two scans ran — outward, finding that plugin marketplaces could delete the copy-into-every-repo install; inward, finding that the goal gate's own documented command points at a path that does not exist. Two incidents recorded that left no diff: a night shift that re-swept 55 times and hit the weekly limit, and a git proxy serving stale refs. |
 | 2026-07 (22nd–30th) | [2026-07.md](history/2026-07.md) | The method's first eight days: mining two existing projects into a portable skill suite, then the run of rules that came from breaking things — claim-before-you-build, squash-merge defeating branch-based claims, the manual pushing to nobody, plain-language writing, goals with measures, the no-goal-no-work gate, the end goal and the ladder, external research and fleet audits, and platform portability. |
 
 ## What the first period contains
