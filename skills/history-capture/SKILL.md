@@ -121,19 +121,35 @@ authors are the substance of a brain, not a leak.
   engineer's answer about a datasheet, a reviewer's published objection, a
   conference talk.
 
-**Still leave out, and summarize the existence instead:**
+**Record when it is the actual reason behind a decision the project made**
+(widened further 2026-08-05, same decision):
+
+- A private fact or circumstance about a named person, **if it was load-bearing
+  for a decision** — record the fact plainly, as the reason, not as colour.
+  *"The integration stalled after [name] left the company"* is the record;
+  speculation about why they left is not.
+- A characterisation of a named person's **conduct**, if that conduct is what
+  the decision responds to — record what happened, in neutral language, not a
+  judgment of their character. *"[Name] gave three incompatible answers about
+  lead time across two calls"* is a finding; *"[name] is unreliable"* is not.
+
+The test is whether the fact is the **cause** of something the project decided,
+not whether it is merely interesting. If you would not cite it in the decision
+record's reasoning, it does not belong in the digest either.
+
+**Still leave out, no exception:**
 
 - **Contact details and private identifiers** — personal email addresses, phone
   numbers, home addresses, account numbers. The person can be named; their
   contact card cannot.
 - **Anything under an employer's confidentiality or a non-disclosure agreement.**
-  Unchanged, and the strictest line here.
+  The strictest line here, and load-bearing-to-a-decision does not override it.
 - **Customer data pasted into the chat** — a customer's own files, specifications
   or records. Naming the customer is fine; reproducing their material is not.
-- **Private facts about an identifiable person** — health, employment status,
-  pay, family or personal circumstances — and anything said to you in confidence.
-- **Characterisations of a named person** that would embarrass them if read back.
-  Record the decision and the reasoning; leave out the assessment of the human.
+- **Health information**, unless the person disclosed it publicly themselves.
+- **Anything said to you in confidence**, regardless of relevance to a decision.
+  A private fact volunteered off the record is not "load-bearing" — it is
+  confidential, full stop.
 
 When a line is genuinely ambiguous, write the finding without the name and note
 that a name exists. Do not drop the finding.

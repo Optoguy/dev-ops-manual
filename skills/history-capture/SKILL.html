@@ -126,7 +126,17 @@ python src/chat_distill.py &lt;transcript&gt; --stats        # size of the real 
 <li>People acting in a professional or public capacity, where what is recorded is</li>
 </ul>
 <p>what they said or did in that capacity and it bears on the project — a vendor engineer&#x27;s answer about a datasheet, a reviewer&#x27;s published objection, a conference talk.</p>
-<p><strong>Still leave out, and summarize the existence instead:</strong></p>
+<p><strong>Record when it is the actual reason behind a decision the project made</strong> (widened further 2026-08-05, same decision):</p>
+<ul>
+<li>A private fact or circumstance about a named person, **if it was load-bearing</li>
+</ul>
+<p>for a decision** — record the fact plainly, as the reason, not as colour. <em>&quot;The integration stalled after [name] left the company&quot;</em> is the record; speculation about why they left is not.</p>
+<ul>
+<li>A characterisation of a named person&#x27;s <strong>conduct</strong>, if that conduct is what</li>
+</ul>
+<p>the decision responds to — record what happened, in neutral language, not a judgment of their character. <em>&quot;[Name] gave three incompatible answers about lead time across two calls&quot;</em> is a finding; <em>&quot;[name] is unreliable&quot;</em> is not.</p>
+<p>The test is whether the fact is the <strong>cause</strong> of something the project decided, not whether it is merely interesting. If you would not cite it in the decision record&#x27;s reasoning, it does not belong in the digest either.</p>
+<p><strong>Still leave out, no exception:</strong></p>
 <ul>
 <li><strong>Contact details and private identifiers</strong> — personal email addresses, phone</li>
 </ul>
@@ -134,19 +144,16 @@ python src/chat_distill.py &lt;transcript&gt; --stats        # size of the real 
 <ul>
 <li><strong>Anything under an employer&#x27;s confidentiality or a non-disclosure agreement.</strong></li>
 </ul>
-<p>Unchanged, and the strictest line here.</p>
+<p>The strictest line here, and load-bearing-to-a-decision does not override it.</p>
 <ul>
 <li><strong>Customer data pasted into the chat</strong> — a customer&#x27;s own files, specifications</li>
 </ul>
 <p>or records. Naming the customer is fine; reproducing their material is not.</p>
 <ul>
-<li><strong>Private facts about an identifiable person</strong> — health, employment status,</li>
+<li><strong>Health information</strong>, unless the person disclosed it publicly themselves.</li>
+<li><strong>Anything said to you in confidence</strong>, regardless of relevance to a decision.</li>
 </ul>
-<p>pay, family or personal circumstances — and anything said to you in confidence.</p>
-<ul>
-<li><strong>Characterisations of a named person</strong> that would embarrass them if read back.</li>
-</ul>
-<p>Record the decision and the reasoning; leave out the assessment of the human.</p>
+<p>A private fact volunteered off the record is not &quot;load-bearing&quot; — it is confidential, full stop.</p>
 <p>When a line is genuinely ambiguous, write the finding without the name and note that a name exists. Do not drop the finding.</p>
 <h3>6. Commit, scoped</h3>
 <p>The digest, the brain entries, and the history index in one commit with a plain dated message. Regenerate the web-page twins. Then say in one line what the period was about — that sentence is usually the most useful output of the whole ritual.</p>

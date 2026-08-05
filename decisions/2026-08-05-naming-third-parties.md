@@ -47,13 +47,23 @@ with the citation, because that is what a citation is; and people acting in a
 professional or public capacity where what is recorded is what they said or did
 in that capacity and it bears on the project.
 
-**Still leave out**, summarizing the existence instead: contact details and
-private identifiers; anything under an employer's confidentiality or a
-non-disclosure agreement, which is unchanged and remains the strictest line;
-customer material pasted into the chat, as distinct from the customer's name;
-private facts about an identifiable person, and anything said in confidence; and
-characterisations of a named person that would embarrass them if read back —
-record the decision and the reasoning, not the assessment of the human.
+**Widened further the same day, same decision, before merge.** The owner, asked
+whether to also allow private facts and characterisations where they bear on a
+decision: *"2,3"* — merge, and widen. So a private fact or a characterisation of
+a named person's conduct **is** recordable when it was the actual cause of a
+decision the project made, written as the fact or the conduct, not as judgment
+of the person: *"the integration stalled after [name] left the company"* is the
+record; *"[name] is unreliable"* is not. The test is whether the fact is
+something you would cite in the decision's own reasoning — if not, it does not
+belong in the digest either.
+
+**Still leave out, no exception:** contact details and private identifiers;
+anything under an employer's confidentiality or a non-disclosure agreement —
+load-bearing-to-a-decision does not override this; customer material pasted
+into the chat, as distinct from the customer's name; health information unless
+the person disclosed it publicly themselves; and anything said in confidence,
+regardless of relevance to a decision — a private fact volunteered off the
+record is not "load-bearing," it is confidential, full stop.
 
 Ambiguous cases write the finding without the name and note that a name exists.
 **The finding is never dropped.**
