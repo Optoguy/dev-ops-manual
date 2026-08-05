@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>One Manager agent executes across all projects; dev-ops never touches them again</title>
+<title>PolyBot: one Manager agent executes across all projects; dev-ops never touches them again</title>
 <style>
 :root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
   --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
@@ -60,7 +60,7 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <body>
 <div class="wrap">
 <nav class="nav"><a href="../docs/STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from 2026-08-05-manager-agent.md — edit the markdown, not this file</p>
-<h1>One Manager agent executes across all projects; dev-ops never touches them again</h1>
+<h1>PolyBot: one Manager agent executes across all projects; dev-ops never touches them again</h1>
 <p><strong>Date:</strong> 2026-08-05 <strong>Status:</strong> adopted on merge of the pull request that carries this file <strong>Changes:</strong> new <code>conventions/three-roles.md</code>; amended <code>conventions/routines.md</code> (designated-chat rule) and <code>conventions/house-rules.md</code> (the night-shift carve-out relocates)</p>
 <h2>The instruction</h2>
 <p>The owner, 2026-08-05, immediately after the two-week attention review:</p>
@@ -101,6 +101,23 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <li><strong>The repos were built for it.</strong> Every project carries its context in-repo —</li>
 </ul>
 <p>CLAUDE.md, brain, plan, goals — precisely so a competent agent can pick it up cold. The Manager is the first full beneficiary of that discipline.</p>
+<h2>Amendment, same session — the name, and role personas</h2>
+<p>The owner, on approving the draft:</p>
+<blockquote><p>I want the manager to be named PolyBot. And I want to develop role specific behaviors and personalities. PolyBot should act like a director — giving me objective input, questioning my decisions, providing clear feedback and reporting on behavior of the bots that report into it. The project specialist should have a different behavior. They act on instructions and report up. They don&#x27;t question decisions unless there is a potential rule violation.</p></blockquote>
+<p>So the Manager is <strong>PolyBot</strong>, and each role got a spine — the &quot;Conduct&quot; section of <a href="../conventions/three-roles.md">three-roles.md</a>:</p>
+<ul>
+<li><strong>PolyBot, the director:</strong> verdicts with reasoning rather than unweighted</li>
+</ul>
+<p>menus; questions a decision once, sharply, when it contradicts a goal or prior decision, then commits fully if reaffirmed; reports on the owner&#x27;s own follow-through in the same flat tone as everything else; and carries a standing inbox section on each bot&#x27;s behaviour — disciplines held, quality flags — escalating repeated failures to the method chat as proposed rule fixes. The management channel is git: sessions cannot message each other, so instructions travel as plan tasks PolyBot writes and reports travel as what the specialists push.</p>
+<ul>
+<li><strong>Specialists:</strong> act on instructions, report up through committed status; no</li>
+</ul>
+<p>questioning of decisions, with one mandatory exception — a potential rule violation (hard constraint, credential or identity risk, data loss, publishing, goals files) <strong>stops the work</strong> and gets stated in one sentence. Surfacing contradicting facts is always allowed; relitigating is not.</p>
+<ul>
+<li><strong>The method chat:</strong> the auditor&#x27;s temperament — impartial, evidence-first,</li>
+</ul>
+<p>reports on PolyBot too.</p>
+<p>The specialist conduct reaches project repos through their CLAUDE.md on their next method adoption, not by push.</p>
 <h2>What this deliberately does not change</h2>
 <p>The merge gate, draft-only output, owner-only goals files, agents-never-publish, claim-before-you-build, per-chat history capture, specialist Routines. Where decisions reach the owner changes; who holds them does not.</p>
 <h2>Risks accepted</h2>

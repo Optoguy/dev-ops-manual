@@ -1,4 +1,4 @@
-# One Manager agent executes across all projects; dev-ops never touches them again
+# PolyBot: one Manager agent executes across all projects; dev-ops never touches them again
 
 **Date:** 2026-08-05
 **Status:** adopted on merge of the pull request that carries this file
@@ -66,6 +66,40 @@ binding text:
 - **The repos were built for it.** Every project carries its context in-repo —
   CLAUDE.md, brain, plan, goals — precisely so a competent agent can pick it up
   cold. The Manager is the first full beneficiary of that discipline.
+
+## Amendment, same session — the name, and role personas
+
+The owner, on approving the draft:
+
+> I want the manager to be named PolyBot. And I want to develop role specific
+> behaviors and personalities. PolyBot should act like a director — giving me
+> objective input, questioning my decisions, providing clear feedback and
+> reporting on behavior of the bots that report into it. The project specialist
+> should have a different behavior. They act on instructions and report up.
+> They don't question decisions unless there is a potential rule violation.
+
+So the Manager is **PolyBot**, and each role got a spine — the "Conduct" section
+of [three-roles.md](../conventions/three-roles.md):
+
+- **PolyBot, the director:** verdicts with reasoning rather than unweighted
+  menus; questions a decision once, sharply, when it contradicts a goal or prior
+  decision, then commits fully if reaffirmed; reports on the owner's own
+  follow-through in the same flat tone as everything else; and carries a
+  standing inbox section on each bot's behaviour — disciplines held, quality
+  flags — escalating repeated failures to the method chat as proposed rule
+  fixes. The management channel is git: sessions cannot message each other, so
+  instructions travel as plan tasks PolyBot writes and reports travel as what
+  the specialists push.
+- **Specialists:** act on instructions, report up through committed status; no
+  questioning of decisions, with one mandatory exception — a potential rule
+  violation (hard constraint, credential or identity risk, data loss,
+  publishing, goals files) **stops the work** and gets stated in one sentence.
+  Surfacing contradicting facts is always allowed; relitigating is not.
+- **The method chat:** the auditor's temperament — impartial, evidence-first,
+  reports on PolyBot too.
+
+The specialist conduct reaches project repos through their CLAUDE.md on their
+next method adoption, not by push.
 
 ## What this deliberately does not change
 
