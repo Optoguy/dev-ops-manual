@@ -102,9 +102,41 @@ pasted into the chat.**
 
 - Skim the digest for anything credential-shaped that survived.
 - **Never commit the raw transcript.** The digest is the artefact.
-- If the period included pasted customer data, personal information, or anything
-  under an employer's confidentiality, that content does not go in the repository
-  at all — summarize its *existence* and leave the content out.
+
+**Naming people and organisations — the test is purpose, not category**
+(relaxed 2026-08-05; see
+[the decision](../../decisions/2026-08-05-naming-third-parties.md)).
+
+A project's knowledge is largely *about* other parties, and a record that cannot
+name them is not a record. Vendors, competitors, standards bodies and cited
+authors are the substance of a brain, not a leak.
+
+**Name freely:**
+
+- Organisations — vendors, competitors, suppliers, customers as companies,
+  standards bodies, publishers.
+- Published work and its authors, with the citation. That is what a citation *is*.
+- People acting in a professional or public capacity, where what is recorded is
+  what they said or did in that capacity and it bears on the project — a vendor
+  engineer's answer about a datasheet, a reviewer's published objection, a
+  conference talk.
+
+**Still leave out, and summarize the existence instead:**
+
+- **Contact details and private identifiers** — personal email addresses, phone
+  numbers, home addresses, account numbers. The person can be named; their
+  contact card cannot.
+- **Anything under an employer's confidentiality or a non-disclosure agreement.**
+  Unchanged, and the strictest line here.
+- **Customer data pasted into the chat** — a customer's own files, specifications
+  or records. Naming the customer is fine; reproducing their material is not.
+- **Private facts about an identifiable person** — health, employment status,
+  pay, family or personal circumstances — and anything said to you in confidence.
+- **Characterisations of a named person** that would embarrass them if read back.
+  Record the decision and the reasoning; leave out the assessment of the human.
+
+When a line is genuinely ambiguous, write the finding without the name and note
+that a name exists. Do not drop the finding.
 
 ### 6. Commit, scoped
 
