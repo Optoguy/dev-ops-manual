@@ -102,6 +102,23 @@ anything not on it may be named. The previous shape invited a reader to ask "am 
 allowed to name this," which is the wrong question and the one that produced the
 over-strict prompt in the first place.
 
+### Second amendment, same day — customer names in public material
+
+The owner, asked whether naming a customer in *public* material should also be
+pre-authorized rather than referred to him as a permission question: **yes.**
+
+An agent may draft a landing page, case study, post or deck that names a customer
+and quotes them, without stopping to ask. The instruction behind it: a draft
+watered down to *"a leading manufacturer"* has lost the thing that made it
+persuasive, and asking permission mid-draft moves work back onto the owner for no
+gain.
+
+**What does not change, and is why this is safe:** agents never publish. Every
+outward-facing draft reaches the owner before it goes anywhere, and pressing send
+is where any contractual permission to use a customer's name is honoured. The
+gate was already there for every outward artefact; this amendment removes a
+redundant second gate in front of it, not the real one.
+
 ## Consequences
 
 - Applies wherever a project writes durable knowledge, not only to history

@@ -79,9 +79,17 @@ Two things it deliberately does not touch:
 
 - **Customers and prospects.** Naming them, recording what they asked for, and
   quoting them is encouraged — that is
-  [`/discovery-call`](../skills/discovery-call/SKILL.md)'s whole purpose. Using a
-  customer's name in *public* material is a permission question for the owner,
-  not a claims question.
+  [`/discovery-call`](../skills/discovery-call/SKILL.md)'s whole purpose. This
+  extends to **public material**: an agent may draft a landing page, a case
+  study, a post or a deck that names a customer and quotes them, without
+  stopping to ask. Do not water a draft down to "a leading manufacturer" when
+  the name is what makes it persuasive.
+
+  The one thing that does not change: **agents never publish.** Every outward
+  draft goes to the owner, and pressing send is where any contractual permission
+  to use a customer's name is honoured. That gate already exists for every
+  outward-facing artefact, so it needs no extra step here — but write the draft
+  knowing a human, not the agent, carries that obligation.
 - **Neutral factual comparison.** "Their instrument is 470 kg; ours is 4 kg" is a
   fact, and stating it is fine. This convention starts where the claim becomes
   *better than*.
