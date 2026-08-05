@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>History capture — before the container is reclaimed</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a href="../../docs/STRATEGY.html">Strategy</a><a href="../../dashboard/goals.html">Goals</a><a href="../../dashboard/index.html">Task plan</a></nav><p class="src">Generated from SKILL.md — edit the markdown, not this file</p>
+<hr>
+<p>name: history-capture description: Turn a chat transcript into durable project history and brain knowledge before the container that holds it is reclaimed. Distil the session, append to the project history, promote what is durable into the knowledge base with provenance. Use weekly, at session close, or when asked to capture history, save context, or protect knowledge against a platform change. ---</p>
+<h1>History capture — before the container is reclaimed</h1>
+<p>Owner instruction, 2026-07-30: <em>&quot;look into how to regularly summarize the history of a project including the chat records and how to regularly update the project brain from the chat. I don&#x27;t want to lose context and knowledge in the case of a transition to another platform.&quot;</em></p>
+<p><strong>The chat transcript is the only complete record of why a project looks the way it does — and it is stored in an ephemeral container.</strong> The repository keeps conclusions. The chat keeps the options rejected, the corrections, the near-misses, and the owner&#x27;s exact words before anyone paraphrased them. When the container goes, that goes.</p>
+<p><strong>Compaction is the nearer threat than a platform change.</strong> A long session&#x27;s memory of its own first week is a summary of a summary; the file on disk is complete. So this ritual pays for itself immediately, and the migration protection is a bonus.</p>
+<h2>Two layers, and they are different jobs</h2>
+<div class="tablewrap"><table><thead><tr><th>Layer</th><th>What</th><th>Who does it</th></tr></thead><tbody><tr><td><strong>Mechanical</strong></td><td>Extract owner turns and prose, drop tool calls and noise, redact secrets</td><td><code>chat_distill.py</code> — no judgment, same output every time</td></tr><tr><td><strong>Judgment</strong></td><td>Decide what is <em>durable knowledge</em>, write it where it will be found</td><td>This skill. The expensive half.</td></tr></tbody></table></div>
+<p><strong>Never skip straight to the judgment layer using remembered context.</strong> After compaction your memory of the period is exactly the lossy thing this ritual exists to replace. Read the file.</p>
+<h2>Procedure</h2>
+<h3>1. Find the transcript and measure before extracting</h3>
+<pre><code>python src/chat_distill.py --find                     # what exists on this machine
+python src/chat_distill.py &lt;transcript&gt; --stats        # size of the real signal</code></pre>
+<p><code>--stats</code> first, always. It tells you whether the period is worth a full pass — sixty owner turns is a rich week, three is a quiet one that may only need a line in the history file.</p>
+<p><strong>If no transcript is found, stop and say so.</strong> On a platform that keeps history elsewhere, the fallback is a reader for that format (see <a href="../../conventions/portability.md">portability.md</a>); do not substitute your own recollection and present it as a record. A history file built from memory is worse than none, because it looks authoritative.</p>
+<h3>2. Distil, scoped to the period</h3>
+<pre><code>python src/chat_distill.py &lt;transcript&gt; --since &lt;last-capture-date&gt; \
+  --out docs/history/&lt;YYYY-MM&gt;.md</code></pre>
+<p><strong>Per-period files, not one growing document.</strong> Eight days produced 85 KB; a year in one file is unreadable and unmergeable.</p>
+<h3>3. Read the digest and sort it — this is the actual work</h3>
+<p>Every line is one of four things. Most are the last one.</p>
+<div class="tablewrap"><table><thead><tr><th>Kind</th><th>Where it goes</th></tr></thead><tbody><tr><td><strong>Durable knowledge</strong> — a fact, a constraint, a measured number, a source</td><td><code>brain/</code>, with frontmatter and provenance</td></tr><tr><td><strong>A decision</strong> not yet recorded</td><td><code>/decision-log</code>, dated, with the reasoning</td></tr><tr><td><strong>Narrative</strong> — what happened, in order</td><td>the history file, which the digest already is</td></tr><tr><td><strong>Transient</strong> — coordination, retries, &quot;continue&quot;, answered questions</td><td>nothing. Leave it in the digest and move on.</td></tr></tbody></table></div>
+<p>Three kinds are easy to miss and are the most valuable:</p>
+<ul>
+<li><strong>Corrections.</strong> Where the agent was wrong and the owner said so. These are the</li>
+</ul>
+<p>strongest evidence about how the work actually goes, and they never appear in a diff. Capture the correction, not a face-saving version of it.</p>
+<ul>
+<li><strong>Rejected options.</strong> Why the road not taken was not taken. Without this the next</li>
+</ul>
+<p>session re-proposes it, and the owner re-explains.</p>
+<ul>
+<li><strong>The owner&#x27;s exact words</strong> on anything that became a rule. A paraphrase drifts;</li>
+</ul>
+<p>a quotation does not. Every convention that cites the instruction behind it is more persuasive than one that does not.</p>
+<h3>4. Write it where it will be found</h3>
+<ul>
+<li><strong><code>docs/history/&amp;lt;YYYY-MM&amp;gt;.md</code></strong> — the digest, committed. Append-only: never</li>
+</ul>
+<p>rewrite an earlier period. If an earlier entry was wrong, add a correction dated now, in keeping with the supersede-don&#x27;t-delete rule.</p>
+<ul>
+<li><strong><code>brain/</code></strong> — one file per durable finding, following that repo&#x27;s conventions,</li>
+</ul>
+<p>passing its lint. <strong>Cite the transcript date</strong>, not the digest, so provenance survives even if the digest is later trimmed.</p>
+<ul>
+<li><strong><code>docs/HISTORY.md</code></strong> — a short index: one line per period, linking its file,</li>
+</ul>
+<p>with the two or three things that period was about. This is what a new agent or a new platform reads first.</p>
+<h3>5. Check the redaction before committing</h3>
+<p><code>chat_distill.py</code> masks known secret shapes — API keys, tokens, JWTs, private keys, <code>password:</code> forms. <strong>It is best-effort, and a transcript contains everything ever pasted into the chat.</strong></p>
+<ul>
+<li>Skim the digest for anything credential-shaped that survived.</li>
+<li><strong>Never commit the raw transcript.</strong> The digest is the artefact.</li>
+</ul>
+<p><strong>Naming people and organisations — the test is purpose, not category</strong> (relaxed 2026-08-05; see <a href="../../decisions/2026-08-05-naming-third-parties.md">the decision</a>).</p>
+<p>A project&#x27;s knowledge is largely <em>about</em> other parties, and a record that cannot name them is not a record. Vendors, competitors, standards bodies and cited authors are the substance of a brain, not a leak.</p>
+<p><strong>Name freely:</strong></p>
+<ul>
+<li>Organisations — vendors, competitors, suppliers, customers as companies,</li>
+</ul>
+<p>standards bodies, publishers.</p>
+<ul>
+<li>Published work and its authors, with the citation. That is what a citation <em>is</em>.</li>
+<li>People acting in a professional or public capacity, where what is recorded is</li>
+</ul>
+<p>what they said or did in that capacity and it bears on the project — a vendor engineer&#x27;s answer about a datasheet, a reviewer&#x27;s published objection, a conference talk.</p>
+<p><strong>Record when it is the actual reason behind a decision the project made</strong> (widened further 2026-08-05, same decision):</p>
+<ul>
+<li>A private fact or circumstance about a named person, **if it was load-bearing</li>
+</ul>
+<p>for a decision** — record the fact plainly, as the reason, not as colour. <em>&quot;The integration stalled after [name] left the company&quot;</em> is the record; speculation about why they left is not.</p>
+<ul>
+<li>A characterisation of a named person&#x27;s <strong>conduct</strong>, if that conduct is what</li>
+</ul>
+<p>the decision responds to — record what happened, in neutral language, not a judgment of their character. <em>&quot;[Name] gave three incompatible answers about lead time across two calls&quot;</em> is a finding; <em>&quot;[name] is unreliable&quot;</em> is not.</p>
+<p>The test is whether the fact is the <strong>cause</strong> of something the project decided, not whether it is merely interesting. If you would not cite it in the decision record&#x27;s reasoning, it does not belong in the digest either.</p>
+<p><strong>Still leave out, no exception:</strong></p>
+<ul>
+<li><strong>Contact details and private identifiers</strong> — personal email addresses, phone</li>
+</ul>
+<p>numbers, home addresses, account numbers. The person can be named; their contact card cannot.</p>
+<ul>
+<li><strong>Anything under an employer&#x27;s confidentiality or a non-disclosure agreement.</strong></li>
+</ul>
+<p>The strictest line here, and load-bearing-to-a-decision does not override it.</p>
+<ul>
+<li><strong>Customer data pasted into the chat</strong> — a customer&#x27;s own files, specifications</li>
+</ul>
+<p>or records. Naming the customer is fine; reproducing their material is not.</p>
+<ul>
+<li><strong>Health information</strong>, unless the person disclosed it publicly themselves.</li>
+<li><strong>Anything said to you in confidence</strong>, regardless of relevance to a decision.</li>
+</ul>
+<p>A private fact volunteered off the record is not &quot;load-bearing&quot; — it is confidential, full stop.</p>
+<p>When a line is genuinely ambiguous, write the finding without the name and note that a name exists. Do not drop the finding.</p>
+<h3>6. Commit, scoped</h3>
+<p>The digest, the brain entries, and the history index in one commit with a plain dated message. Regenerate the web-page twins. Then say in one line what the period was about — that sentence is usually the most useful output of the whole ritual.</p>
+<h2>Cadence</h2>
+<p><strong>Weekly, plus at session close.</strong></p>
+<p>Weekly rather than at milestones, because <strong>the container can be reclaimed at any time</strong> — waiting for a natural stopping point risks losing everything since the last one. A quiet week costs two minutes and one line.</p>
+<p>At session close, <a href="../wrap-session/SKILL.md"><code>wrap-session</code></a> runs this rather than relying on remembered context, which by then is the least reliable it will ever be.</p>
+<p><strong>Each project&#x27;s chat captures its own history.</strong> A transcript lives in the container of the session that produced it, so no other chat can reach it — this is the one ritual that genuinely cannot be centralised. The <a href="../fleet-audit/SKILL.md">fleet audit</a> checks freshness across projects and reports any whose history has gone stale, which is the enforcement.</p>
+<h2>Judgment</h2>
+<ul>
+<li><strong>Volume is not the goal.</strong> A week that yields three brain entries and a</li>
+</ul>
+<p>four-line history note has been captured well. Twenty entries usually means transient chatter was promoted.</p>
+<ul>
+<li><strong>The digest is raw material, not a deliverable.</strong> Nobody reads 85 KB. Its job is</li>
+</ul>
+<p>to be <em>searchable later</em> and to feed step 3.</p>
+<ul>
+<li><strong>Quote the owner; paraphrase yourself.</strong> His words are evidence. Yours are</li>
+</ul>
+<p>already in the repository.</p>
+<ul>
+<li><strong>Capture the correction, not the recovery.</strong> &quot;The first implementation checked</li>
+</ul>
+<p>the gate before the label, so it blocked the work that must never be blocked&quot; is worth more than &quot;fixed a bug&quot;.</p>
+<ul>
+<li><strong>A finding whose source has died is still worth recording</strong> — mark it</li>
+</ul>
+<p><code>confidence: low</code> and say the transcript is gone. Better a flagged memory than a silent gap.</p>
+<ul>
+<li><strong>Do not editorialise the history.</strong> It is a record. If a week went badly, the</li>
+</ul>
+<p>record says so; that is what makes the good weeks mean anything.</p>
+</div>
+</body>
+</html>
