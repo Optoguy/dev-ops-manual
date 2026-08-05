@@ -158,6 +158,17 @@
       "status": "todo",
       "phase": "grow",
       "note": "Added 2026-08-05. SpecBuildr's first history capture (its PR #71) found the verbatim values of two credentials in its digest while the masker reported ZERO matches — caught before commit, nothing leaked. The cause is structural: six of the seven SECRET_PATTERNS match a distinctive shape (sk-, gh*_, AIza, AKIA, JWT, PEM), and the seventh fires only when a labelling word sits immediately before the value with = or : between them. A transcript usually carries a bare pasted value, so a 32-hex account id or a human-chosen password matches nothing. FIX: an env-value comparison pass in redact(), after the shape patterns — collect os.environ entries whose NAME looks credential-ish, keep values above a minimum length, sort longest-first so a substring cannot corrupt a longer replacement, substitute a REDACTED:NAME marker; compare only, never print a value; report matched NAMES at end of run. MUST ALSO: (1) a false-positive guard — API_VERSION=2024 would blank every '2024', so minimum length plus name filter, and the test must prove a short value leaves text alone; (2) write down what it still cannot catch — it only sees secrets present in THIS container's environment, so a password pasted for a service not in env still passes. Without that stated prominently the fix replaces an honest warning with false confidence, which is worse than the current state. Update the digest header text and history-capture/SKILL.md step 5 to match. VERIFY BY MAKING IT FIRE (per reports/2026-07-30-rules-get-broken-by-their-author.md): seed a fake variable holding a shapeless 32-hex value into a fixture transcript, assert the value is absent from output and the marker present, capture stdout and assert the value never appears there either, assert a 6-character value causes no mass redaction, then run it against this repository's own transcript first. FLEET-WIDE: duplicated at skills/brain/assets/chat_distill.py, so the pull request must list every repo needing ./install.sh --repo re-run — SpecBuildr, medtech-intel-QMSR, and NewCoEndotest (which gets its own src/ copy when its PR #19 merges). Every project running the weekly capture carries this exposure until it lands."
+    },
+    {
+      "id": "send-reinstall-prompts",
+      "goal": "2026-08",
+      "justification": "Moves projects-on-the-current-method: three repos are one to three skill versions behind main after today's naming + claims-discipline merges (#13, #14), and only the owner can paste prompts into their chats.",
+      "title": "Paste the three re-install prompts into each project chat",
+      "owner": "me",
+      "priority": "P1",
+      "status": "todo",
+      "phase": "sync",
+      "note": "Added 2026-08-05 at the owner's request. main is at 76fe3ac with the relaxed naming rule, the discovery-call reconciliation, and the new claims-discipline convention. Each project's own chat runs: pull dev-ops-manual, ./install.sh --repo <its path>, commit the refreshed .claude/skills/, draft pull request. NewCoEndotest first - it is actively capturing history against wording that is now three versions old and is also owed the naming correction directly. Ask this chat for the three paste-ready prompts when sitting down to do it."
     }
   ]
 }
