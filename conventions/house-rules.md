@@ -14,9 +14,13 @@ its own session**, when that project is ready for them.
   is available; adopting it is the project's own decision, in the project's own
   chat, on the project's own schedule.
 
-**The one carve-out: the night shift.** The cross-project night shift lives in
-the method's chat by design and *does* open a draft PR in each project it works.
-That is not a contradiction, because the two directions are opposites:
+**The carve-out is retiring (2026-08-05).** The cross-project night shift lived
+in the method's chat and *did* open a draft PR in each project it worked — the
+one exception to this rule. With the three-role split
+([three-roles.md](three-roles.md)) that execution moves to the **Manager** chat,
+and this rule becomes absolute: once the Manager boots, the method's chat never
+acts on a project repo at all. Until then the night shift runs here under the
+old terms:
 
 | | Night shift | Method trickle-down |
 |---|---|---|
@@ -26,7 +30,7 @@ That is not a contradiction, because the two directions are opposites:
 
 A cross-repo PR is legitimate when it executes work the project's own plan
 already contains and the owner approved. It is not legitimate when it imports a
-rule the project didn't choose.
+rule the project didn't choose. That test now lives with the Manager.
 - Each project adopts with `./install.sh --repo /path/to/<project>` from a
   `dev-ops-manual` clone, then commits the re-installed `.claude/skills/` and
   whatever conventions it chose to restate.

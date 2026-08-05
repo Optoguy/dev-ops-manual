@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One Manager agent executes across all projects; dev-ops never touches them again</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a href="../docs/STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from 2026-08-05-manager-agent.md — edit the markdown, not this file</p>
+<h1>One Manager agent executes across all projects; dev-ops never touches them again</h1>
+<p><strong>Date:</strong> 2026-08-05 <strong>Status:</strong> adopted on merge of the pull request that carries this file <strong>Changes:</strong> new <code>conventions/three-roles.md</code>; amended <code>conventions/routines.md</code> (designated-chat rule) and <code>conventions/house-rules.md</code> (the night-shift carve-out relocates)</p>
+<h2>The instruction</h2>
+<p>The owner, 2026-08-05, immediately after the two-week attention review:</p>
+<blockquote><p>Would it be possible to make a single manager agent that I interact with that implements actions in each project? I want to keep dev ops independent and never takes action on other projects</p></blockquote>
+<p>And the feedback that prompted the review:</p>
+<blockquote><p>the system is not effective, I often get confused on status, I can&#x27;t recall what is the next step in each chat… I need a very clear list of tasks and actions. I feel like a lot of things go missed in these chats.</p></blockquote>
+<h2>What was true before</h2>
+<p>Four chats of equal rank, each owning one repo&#x27;s work and Routines, each ending turns with locally-correct next-step menus. The <a href="../reports/2026-08-05-two-week-review-owner-attention.md">two-week review</a> measured what that did with the owner&#x27;s actual attention (two short daily windows, serial): five of seven night slates expired unanswered, ten draft pull requests queued to nine days, ~22 owner tasks scattered across four plan files, and a 108-hour silence in one chat while the owner worked another — invisible to all of them.</p>
+<p>The method chat also carried a structural wart: it owned the cross-project night shift, so the repo whose rule is <em>&quot;this repo never pushes to project repos&quot;</em> was, one carve-out a night, the repo that did.</p>
+<h2>The decision</h2>
+<p>Three roles — see <a href="../conventions/three-roles.md">three-roles.md</a> for the binding text:</p>
+<ul>
+<li><strong>The Manager</strong>: one new chat the owner talks to daily. Executes in every</li>
+</ul>
+<p>project repo under the existing disciplines (claim-before-you-build, draft pull requests, one concern each, merges only on the owner&#x27;s word). Opens each owner window with the fleet inbox. Takes the night shift with it.</p>
+<ul>
+<li><strong>The method</strong> (this repo&#x27;s chat): audits and improves the method. With the</li>
+</ul>
+<p>night shift gone, <em>never acts on a project repo</em> — the owner&#x27;s requested independence, now without exception. The auditor no longer audits its own actions.</p>
+<ul>
+<li><strong>Specialists</strong> (the existing project chats): deep domain work when the owner</li>
+</ul>
+<p>sits with them. They claim like anyone else; their Routines and their history capture stay with them, because a transcript is readable only by the session that produced it.</p>
+<h2>Why this shape</h2>
+<ul>
+<li><strong>It matches the measured attention pattern.</strong> One inbox at the window&#x27;s</li>
+</ul>
+<p>start, batch decisions in one place, plain-word execution — instead of four cadences asking separately.</p>
+<ul>
+<li><strong>It separates actor from auditor.</strong> The fleet audit now reviews work it had</li>
+</ul>
+<p>no hand in.</p>
+<ul>
+<li><strong>It is already load-tested.</strong> The night shift has run cross-repo from one</li>
+</ul>
+<p>session for a week under the claim protocol; the Manager is that pattern promoted from one night a week to the owner&#x27;s whole day.</p>
+<ul>
+<li><strong>The repos were built for it.</strong> Every project carries its context in-repo —</li>
+</ul>
+<p>CLAUDE.md, brain, plan, goals — precisely so a competent agent can pick it up cold. The Manager is the first full beneficiary of that discipline.</p>
+<h2>What this deliberately does not change</h2>
+<p>The merge gate, draft-only output, owner-only goals files, agents-never-publish, claim-before-you-build, per-chat history capture, specialist Routines. Where decisions reach the owner changes; who holds them does not.</p>
+<h2>Risks accepted</h2>
+<ul>
+<li><strong>Shallower per-domain context in the Manager</strong> than a specialist chat with</li>
+</ul>
+<p>weeks of history — mitigated by the in-repo context discipline, and by specialists remaining for deep work.</p>
+<ul>
+<li><strong>One conversation carrying the whole fleet</strong> compacts sooner and its</li>
+</ul>
+<p>transcript matters more — mitigated by weekly history capture, named in the charter as the Manager&#x27;s own duty.</p>
+<ul>
+<li><strong>A collision window remains</strong> between the Manager and a live specialist</li>
+</ul>
+<p>session; the claim protocol has mediated the identical case since 2026-07-26.</p>
+</div>
+</body>
+</html>
