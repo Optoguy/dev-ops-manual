@@ -111,15 +111,32 @@ A project's knowledge is largely *about* other parties, and a record that cannot
 name them is not a record. Vendors, competitors, standards bodies and cited
 authors are the substance of a brain, not a leak.
 
+**There is no blanket restriction on naming a third party.** The exclusions below
+are a short, specific list. Everything not on it may be named.
+
 **Name freely:**
 
-- Organisations — vendors, competitors, suppliers, customers as companies,
-  standards bodies, publishers.
+- Organisations — vendors, competitors, suppliers, partners, **customers and
+  prospective customers**, standards bodies, publishers.
 - Published work and its authors, with the citation. That is what a citation *is*.
-- People acting in a professional or public capacity, where what is recorded is
-  what they said or did in that capacity and it bears on the project — a vendor
-  engineer's answer about a datasheet, a reviewer's published objection, a
-  conference talk.
+- People acting in a professional capacity, where what is recorded is what they
+  said or did in that capacity and it bears on the project — a vendor engineer's
+  answer about a datasheet, a reviewer's published objection, a conference talk.
+- **People at customers and prospects, and what they told you in a business
+  conversation** — a discovery call, a sales call, a meeting. Name them, quote
+  them, record which company they are from and what they asked for.
+
+**A business conversation is not "said in confidence."** A discovery call is the
+single most valuable knowledge a project acquires, and it exists to be recorded.
+It becomes confidential only when the other party says so — an explicit "off the
+record", a non-disclosure agreement, or a confidential programme or customer
+identifier they let slip. Absent that, capture it.
+
+[`/discovery-call`](../discovery-call/SKILL.md) holds the calibrated version of
+this boundary and is the authority when the two are read together: record the
+person to `brain/people/`, quote key claims verbatim, source it as
+*"call with `<name>`, `<date>`"* — and when a call mixes open and confidential
+material, capture the open part rather than dropping the whole call.
 
 **Record when it is the actual reason behind a decision the project made**
 (widened further 2026-08-05, same decision):
@@ -144,12 +161,15 @@ record's reasoning, it does not belong in the digest either.
   contact card cannot.
 - **Anything under an employer's confidentiality or a non-disclosure agreement.**
   The strictest line here, and load-bearing-to-a-decision does not override it.
-- **Customer data pasted into the chat** — a customer's own files, specifications
-  or records. Naming the customer is fine; reproducing their material is not.
+- **A customer's own material** — their files, specifications or records, pasted
+  into the chat. Naming the customer and recording what they wanted is fine;
+  reproducing their material is not.
 - **Health information**, unless the person disclosed it publicly themselves.
-- **Anything said to you in confidence**, regardless of relevance to a decision.
-  A private fact volunteered off the record is not "load-bearing" — it is
-  confidential, full stop.
+- **Anything the other party explicitly placed off the record**, regardless of
+  relevance to a decision. This means a stated confidence — "don't repeat this",
+  an agreement, a confidential identifier — not merely a private setting. A
+  two-person call is not automatically confidential; a sentence prefaced with
+  "between us" is.
 
 When a line is genuinely ambiguous, write the finding without the name and note
 that a name exists. Do not drop the finding.

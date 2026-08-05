@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verify a document against its sources and the public record</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a href="../../docs/STRATEGY.html">Strategy</a><a href="../../dashboard/goals.html">Goals</a><a href="../../dashboard/index.html">Task plan</a></nav><p class="src">Generated from SKILL.md — edit the markdown, not this file</p>
+<hr>
+<p>name: verify description: Adversarially verify a document, draft, or set of claims — audit every citation, cross-reference key claims against public sources, and report verdicts most-severe-first without editing anything. Use when asked to check work, fact-check, verify claims or citations, red-team a draft, or before anything goes external (a page, a plan, a post, a spec). If the repo has its own verification skill (e.g. brain-verify), use that instead. ---</p>
+<h1>Verify a document against its sources and the public record</h1>
+<p>Report-only: this skill never edits the document under review and never &quot;fixes&quot; the underlying knowledge — findings become proposals for the owner. The stance is adversarial: for each claim, try to refute it. A verification pass that only confirms is a rubber stamp.</p>
+<h2>Procedure</h2>
+<ol>
+<li><strong>Parse into claims.</strong> Extract every substantive claim (quantitative,</li>
+</ol>
+<p>factual, attributive) with whatever citation it carries. An uncited substantive claim is an immediate finding — it can&#x27;t be audited, which is the problem.</p>
+<ol>
+<li><strong>Internal citation audit</strong> (every cited claim): open the cited source —</li>
+</ol>
+<p>a knowledge file, a doc, a dataset — and judge:</p>
+<ul>
+<li><strong>SUPPORTED</strong> — the source says this.</li>
+<ul>
+<li><strong>MISQUOTED</strong> — the source says something materially different (quote both).</li>
+<li><strong>NOT FOUND</strong> — the citation doesn&#x27;t contain the claim.</li>
+</ul>
+</ul>
+<p>Also flag claims that cite deprecated or reference-only material as if it were validated — that&#x27;s a status laundering finding, not a citation finding.</p>
+<ol>
+<li><strong>External cross-reference</strong> (key quantitative and factual claims): search</li>
+</ol>
+<p>public sources — official documentation, standards catalogs, vendor and company sites, published papers. Verdicts:</p>
+<ul>
+<li><strong>CORROBORATED</strong> (cite the public source)</li>
+<ul>
+<li><strong>CONTRADICTED</strong> (quote what the public source says — highest severity)</li>
+<li><strong>NOT PUBLICLY VERIFIABLE</strong></li>
+</ul>
+</ul>
+<p><strong>Paywall honesty:</strong> the contents of paywalled sources (standards clause text, paid reports) cannot be publicly verified — mark <strong>PAYWALL-LIMITED</strong> and state exactly what could be checked (existence, edition, date) versus what could not. Never infer clause content from abstracts.</p>
+<ol>
+<li><strong>Scale with agents.</strong> For anything longer than a page, fan claims out to</li>
+</ol>
+<p>parallel verification agents with an adversarial framing (&quot;try to refute this claim&quot;), one cluster per agent; internal and external checks run concurrently.</p>
+<ol>
+<li><strong>Keep verification separate from ingestion.</strong> Public material found while</li>
+</ol>
+<p>verifying is for checking only — it enters the project&#x27;s knowledge base only through the normal capture discipline with owner review. A corroborating source is a <em>promotion candidate</em> for reference-only content; promotion is the owner&#x27;s call, never automatic.</p>
+<ol>
+<li><strong>Output: a verdict table</strong> — claim / citation / internal verdict / external</li>
+</ol>
+<p>verdict / note — ordered most severe first, plus summary counts and proposed fixes. On request, save it beside the draft as <code>&amp;lt;name&amp;gt;-VERIFICATION.md</code> (committed only with owner approval, scoped staging as always).</p>
+<h2>Severity order</h2>
+<p>CONTRADICTED-by-public-source &gt; MISQUOTED / NOT-FOUND citation &gt; uncited claim &gt; reference-only or deprecated content cited as validated &gt; PAYWALL-LIMITED / NOT PUBLICLY VERIFIABLE (the last two are inventory, not failures).</p>
+<p>**A CONTRADICTED verdict against a <em>competitor&#x27;s</em> published material is usually not a research failure.** It is <a href="../../conventions/claims-discipline.md">claims-discipline.md</a> failing at composition time and being caught late. Report it as a claims-discipline finding so the positioning rule gets fixed, not only the sentence. If the project keeps a never-claim list, check the draft against it as part of step 2.</p>
+<h2>Judgment</h2>
+<ul>
+<li><strong>Verify the claims that carry weight.</strong> A wrong number in a headline or a</li>
+</ul>
+<p>price is severe; a wrong adjective in a caption is not. Spend the adversarial effort where being wrong costs something.</p>
+<ul>
+<li><strong>&quot;I couldn&#x27;t verify it&quot; is a finding, not a failure</strong> — the honest inventory</li>
+</ul>
+<p>of unverifiable claims tells the owner exactly what they&#x27;re asserting on their own authority.</p>
+<ul>
+<li><strong>Never soften a CONTRADICTED into a &quot;nuance.&quot;</strong> Quote both sides verbatim</li>
+</ul>
+<p>and let the owner rule.</p>
+</div>
+</body>
+</html>

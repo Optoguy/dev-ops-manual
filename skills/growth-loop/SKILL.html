@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The growth loop</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a href="../../docs/STRATEGY.html">Strategy</a><a href="../../dashboard/goals.html">Goals</a><a href="../../dashboard/index.html">Task plan</a></nav><p class="src">Generated from SKILL.md — edit the markdown, not this file</p>
+<hr>
+<p>name: growth-loop description: Stand up a closed, self-adjusting growth loop for a product — first-party funnel instrumentation, SEO/GEO landing pages, scheduled measurement/reporting agents, and an explicit adjustment policy — where agents measure and draft but humans approve anything published. Use when planning marketing/growth, adding analytics, writing landing pages or SEO/llms.txt, setting up scheduled reporting, or driving traffic to a product. ---</p>
+<h1>The growth loop</h1>
+<p>Growth is run as a <strong>closed loop</strong> — instrument → acquire → measure → decide → adjust — where scheduled agents do the measuring, analysis, and drafting, and a human approves only the outbound actions that carry reputation risk. Automation lives in <em>measurement and drafting</em>; the outbound touch stays human. This is a hard line, not a preference: one platform ban costs more than automation saves.</p>
+<h2>Phase 0 — Instrument first (nothing else works without this)</h2>
+<ul>
+<li><strong>First-party event beacon</strong> (<code>POST /api/track</code>) at the funnel moments:</li>
+</ul>
+<p><code>visited → interest → activated → completed → in-hand → contact</code>. <strong>Completion is the conversion</strong> — every downstream decision keys off <em>completion rate per source per vertical</em>, not raw visits.</p>
+<ul>
+<li>Every event carries: which variant/segment, persona, <code>utm_source/medium/campaign</code>,</li>
+</ul>
+<p>and the <strong>first-touch external referrer</strong> (persist <code>document.referrer</code> in localStorage so attribution survives internal navigation). <strong>Suppress autoplay/demo traffic</strong> so it never pollutes the funnel.</p>
+<ul>
+<li><strong>UTM discipline:</strong> every link the system ever publishes gets tagged, so results</li>
+</ul>
+<p>attribute back to the experiment that produced them.</p>
+<ul>
+<li>Use the platform-native analytics too (e.g. Cloudflare Web Analytics) for</li>
+</ul>
+<p>pageviews/referrers; the reporting agent reads it via API.</p>
+<h2>Phase 1 — Acquire (agent-prepared, human-fired)</h2>
+<ul>
+<li><strong>Per-vertical SEO landing pages</strong> targeting real queries, one <code>&amp;lt;h1&amp;gt;</code>/<code>&amp;lt;title&amp;gt;</code></li>
+</ul>
+<p>theme per primary term, written <em>to a named persona</em>. Keep them out of the main nav; discover via <code>sitemap.xml</code>. Maintain a <code>docs/seo/</code> directory: <strong>personas → keywords → landing pages → measured results → iterate</strong>, with a status column (<code>idea → page-live → indexed → ranking → converting → retired</code>).</p>
+<ul>
+<li><strong>GEO (answer-engine optimization):</strong> JSON-LD (<code>SoftwareApplication</code>, <code>FAQPage</code>,</li>
+</ul>
+<p><code>HowTo</code>) generated from the same config as the pages; a curated <code>/llms.txt</code>; a <code>robots.txt</code> that welcomes the major AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, …) while disallowing <code>/admin</code> and <code>/api/</code>; plain, quotable, answer-shaped copy.</p>
+<ul>
+<li><strong>Community launches, one segment at a time</strong> — draft every post; **a human</li>
+</ul>
+<p>posts it** under their own account. Never auto-post to third-party platforms.</p>
+<h2>Phase 2 — Measure &amp; adjust (scheduled agents)</h2>
+<p>Built on Routines (scheduled sessions):</p>
+<ul>
+<li><strong>Daily report</strong> — funnel per source × segment, trend, anomaly flags (traffic</li>
+</ul>
+<p>spike → find the referrer; completion drop → check the deploy; zero completions on real starts → run a headless autoplay sweep). Commits a dated <code>reports/…/&amp;lt;date&amp;gt;.md</code>. Stays <strong>silently idle</strong> (PREREQS-MISSING, no error) until the owner supplies the API tokens.</p>
+<ul>
+<li><strong>Weekly strategy</strong> — ranks channels by <em>completions per session</em>, proposes the</li>
+</ul>
+<p>next experiment slate per the adjustment rules, and opens <strong>one draft PR</strong> (the slate + one new SEO page). A human reviews and merges.</p>
+<p><strong>Adjustment rules — explicit and boring on purpose:</strong></p>
+<ul>
+<li><em>Double down:</em> any source with completion rate &gt; 1.5× site average gets the</li>
+</ul>
+<p>next slot.</p>
+<ul>
+<li><em>Kill:</em> any experiment with too few sessions or weak activation after two weeks.</li>
+<li><em>Investigate:</em> a completion-rate regression triggers a headless sweep against</li>
+</ul>
+<p>production.</p>
+<h2>Phase 3 — Paid, only after organic proves the funnel</h2>
+<p>Small paid tests on high-intent queries once completion rate and lead value per segment are known. The daily report ingests spend + conversions and reallocates toward the cheapest <em>completed</em> conversion, pausing anything above a cost ceiling. Skipped entirely until organic data says which segment converts.</p>
+<h2>Guardrails (non-negotiable)</h2>
+<ul>
+<li>**No automated posting to third-party platforms. No fake engagement. No scraped</li>
+</ul>
+<p>cold-email blasts.** Agents draft; humans send anything with a name attached.</p>
+<ul>
+<li><strong>Treat every visitor-controlled string as untrusted</strong> before an agent reads it</li>
+</ul>
+<p>(a report Routine ingesting analytics is prompt-injectable) — sanitize at the boundary and put an explicit untrusted-data guardrail in the Routine&#x27;s prompt.</p>
+<ul>
+<li><strong>Privacy is copy you have to be able to defend</strong> — disclose the beacon, avoid</li>
+</ul>
+<p>inviting PII in question phrasing, and verify any data-training claim.</p>
+<ul>
+<li>**Claims about a named competitor follow</li>
+</ul>
+<p><a href="../../conventions/claims-discipline.md">claims-discipline.md</a>.** Name the axis you lose on before writing the one you win on; never claim a differentiator a rival demonstrably already has; scale the claim to the specific opponent. A competitive claim that a rival&#x27;s own product page refutes is the cheapest available way to lose a reader&#x27;s trust.</p>
+<h2>Judgment</h2>
+<ul>
+<li><strong>Measure completion, not clicks.</strong> A page that draws traffic but never starts a</li>
+</ul>
+<p>session gets retired, however good the traffic looks.</p>
+<ul>
+<li><strong>The loop should run itself and stop itself.</strong> Idle-until-prereqs-present,</li>
+</ul>
+<p>kill-rules with thresholds, and cost ceilings mean it degrades safely instead of spending or spamming when unattended.</p>
+</div>
+</body>
+</html>

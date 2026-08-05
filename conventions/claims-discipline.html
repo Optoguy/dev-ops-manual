@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claims discipline — what you may say about a named competitor</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a href="../docs/STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from claims-discipline.md — edit the markdown, not this file</p>
+<h1>Claims discipline — what you may say about a named competitor</h1>
+<p>Added 2026-08-05. Adopted from NewCoEndotest, which wrote these rules for itself in <code>brain/knowledge/strategy/competitive-positioning.md</code> under the heading <em>&quot;Messaging discipline (the load-bearing part).&quot;</em> Generalized here; the examples below are theirs.</p>
+<p>Binds every project, this one included.</p>
+<h2>Why this exists, and why now</h2>
+<p>The <a href="../decisions/2026-08-05-naming-third-parties.md">2026-08-05 naming decision</a> made it legitimate to <strong>name</strong> a competitor in a project&#x27;s own records. This governs <strong>what may then be said about them</strong> in anything outward-facing.</p>
+<p><a href="../skills/verify/SKILL.md"><code>/verify</code></a> checks a claim <em>after</em> it is written. Nothing checked one <em>before</em>. That is the gap: a competitive claim that a rival&#x27;s own published material refutes is not a research failure discovered late — it is a composition failure that should never have been written.</p>
+<p>The rules were not reasoned out in advance. Each is the residue of a proposed position that a competitor&#x27;s own homepage or datasheet demolished.</p>
+<h2>The rules</h2>
+<p><strong>1. Name the axis you lose on, inside the rule.</strong></p>
+<blockquote><p><em>&quot;Against the production benches: win on price, portability, and target customer — <strong>never on measurement superiority</strong>. They are rigorous; claiming to out-measure them is false and will be seen through.&quot;</em></p></blockquote>
+<p>The discipline is not modesty. It is that a <strong>written</strong> rule names the dimension where a named competitor is genuinely better, so no future draft — by a different person, months later — quietly claims it. A positioning file that lists only your strengths has done half the job.</p>
+<p><strong>2. Never claim a differentiator the competitor demonstrably already has.</strong></p>
+<blockquote><p><em>&quot;Don&#x27;t claim &#x27;we trend results&#x27; as a differentiator. ScopeControl already does per-scope longitudinal trending. The defensible claim is <strong>what</strong> is trended.&quot;</em></p></blockquote>
+<p>The test is public evidence, not impression. If their product page shows it, it is not a differentiator, and the honest move is to sharpen the claim rather than drop the subject.</p>
+<p><strong>3. A category shift stops being a differentiator once a competitor markets it.</strong></p>
+<p>A rival&#x27;s own headline was <em>&quot;5× more accurate than humans&quot;</em> — the same shift the project was selling as its distinguishing idea. The rule: use a category argument to establish <strong>why the category matters</strong> with a customer, never as the reason to choose you over an incumbent inside it.</p>
+<p><strong>4. Scale the claim to the specific opponent.</strong></p>
+<p>One competitor is 470 kg and floor-standing, so portability is a headline against them. Another is benchtop, so against that one you lead with rigor and price instead. <strong>The same true sentence is strong against one rival and embarrassing against another.</strong> A claim written once and reused against everyone will be wrong against someone.</p>
+<p><strong>5. Never attack a competitor&#x27;s moat.</strong> Turnkey workflow is one rival&#x27;s; rigor-at-any-cost is another&#x27;s. Both are losing games — and a project that picks those fights is telling its customer to compare on the axis it loses.</p>
+<h2>Scope</h2>
+<p>Anything outward-facing: landing pages, pitch lines, discovery scripts, specification sheets, posts drafted for the owner, investor material. It does not govern internal analysis — a private file may say plainly that a competitor is better, and should.</p>
+<p><strong>This is not a naming restriction, and nothing here limits naming a third party.</strong> Name customers, prospective customers, partners, vendors and competitors freely, in records and in outward-facing material alike; see the <a href="../decisions/2026-08-05-naming-third-parties.md">naming decision</a>. What this convention governs is narrower: <strong>claims of superiority over a named competitor.</strong></p>
+<p>Two things it deliberately does not touch:</p>
+<ul>
+<li><strong>Customers and prospects.</strong> Naming them, recording what they asked for, and</li>
+</ul>
+<p>quoting them is encouraged — that is <a href="../skills/discovery-call/SKILL.md"><code>/discovery-call</code></a>&#x27;s whole purpose. This extends to <strong>public material</strong>: an agent may draft a landing page, a case study, a post or a deck that names a customer and quotes them, without stopping to ask. Do not water a draft down to &quot;a leading manufacturer&quot; when the name is what makes it persuasive.</p>
+<p>The one thing that does not change: <strong>agents never publish.</strong> Every outward draft goes to the owner, and pressing send is where any contractual permission to use a customer&#x27;s name is honoured. That gate already exists for every outward-facing artefact, so it needs no extra step here — but write the draft knowing a human, not the agent, carries that obligation.</p>
+<ul>
+<li><strong>Neutral factual comparison.</strong> &quot;Their instrument is 470 kg; ours is 4 kg&quot; is a</li>
+</ul>
+<p>fact, and stating it is fine. This convention starts where the claim becomes <em>better than</em>.</p>
+<h2>The check, and its known weakness</h2>
+<p><strong>There is no good mechanical check for this, and pretending otherwise would be worse than admitting it.</strong> This is a convention with a known weakness, in the sense <a href="../skills/method-scan/SKILL.md"><code>/method-scan</code></a> defines.</p>
+<p>The nearest thing that <em>is</em> checkable: a project writes a <strong>never-claim list</strong> — its named competitors, and for each, the axis it must not claim superiority on, with the public evidence. That file&#x27;s existence is checkable, and <a href="../skills/verify/SKILL.md"><code>/verify</code></a> can then test a draft against it.</p>
+<p>Without such a list this rule is judgment only, and by this method&#x27;s own standard — see <a href="../reports/2026-07-30-rules-get-broken-by-their-author.md">rules get broken by their author</a> — judgment-only rules decay within about a month. A project doing serious competitive positioning should write the list. A project with no competitive claims yet does not need one.</p>
+<h2>What a violation looks like</h2>
+<p>A <code>CONTRADICTED</code> verdict from <code>/verify</code> against a competitor&#x27;s published material is usually <strong>not</strong> a research failure. It is this convention failing at composition time, caught late. Treat it as a claims-discipline finding and fix the rule, not just the sentence.</p>
+</div>
+</body>
+</html>

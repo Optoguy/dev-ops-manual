@@ -77,6 +77,12 @@ ceiling. Skipped entirely until organic data says which segment converts.
   boundary and put an explicit untrusted-data guardrail in the Routine's prompt.
 - **Privacy is copy you have to be able to defend** — disclose the beacon, avoid
   inviting PII in question phrasing, and verify any data-training claim.
+- **Claims about a named competitor follow
+  [claims-discipline.md](../../conventions/claims-discipline.md).** Name the axis
+  you lose on before writing the one you win on; never claim a differentiator a
+  rival demonstrably already has; scale the claim to the specific opponent. A
+  competitive claim that a rival's own product page refutes is the cheapest
+  available way to lose a reader's trust.
 
 ## Judgment
 
