@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What NewCoEndotest knows about third parties that the manual doesn&#x27;t</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a href="../docs/STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from 2026-08-05-newco-third-party-method.md — edit the markdown, not this file</p>
+<h1>What NewCoEndotest knows about third parties that the manual doesn&#x27;t</h1>
+<p>2026-08-05. Report only — nothing changed. A proposal for one convention, and an audit of what already flowed upstream.</p>
+<hr>
+<h2>Already merged — no action needed</h2>
+<p>Most of NewCoEndotest&#x27;s third-party method is <strong>already in the manual</strong>, which is the reverse-direction rule working. Recorded here so nobody re-proposes it.</p>
+<div class="tablewrap"><table><thead><tr><th>Their mechanism</th><th>Where it already lives here</th></tr></thead><tbody><tr><td>Verdict set — CORROBORATED / CONTRADICTED / NOT PUBLICLY VERIFIABLE</td><td><code>skills/verify/SKILL.md</code> step 3</td></tr><tr><td><strong>Paywall honesty</strong> — mark PAYWALL-LIMITED, say what <em>could</em> be checked (edition, designation, date) versus what could not, never infer clause content from an abstract</td><td><code>skills/verify/SKILL.md</code> step 3</td></tr><tr><td>Severity order, CONTRADICTED-by-public-source highest, paywall-limited as <em>inventory not failure</em></td><td><code>skills/verify/SKILL.md</code></td></tr><tr><td><strong>Provenance guard</strong> — public material found while verifying is for checking only; it enters the knowledge base through a separate capture pass with owner review, never automatically</td><td><code>skills/verify/SKILL.md</code> step 5</td></tr><tr><td>Adversarial fan-out — parallel agents framed &quot;try to refute this claim&quot;</td><td><code>skills/verify/SKILL.md</code> step 4</td></tr><tr><td>`confidence: verified \</td><td>inferred` plus inline <em>(inferred)</em> markers</td><td><code>skills/brain/SKILL.md</code>, <code>frontmatter-schema.md</code></td></tr><tr><td><code>reference-only</code> — may inform thinking, must not be relied on as project work product</td><td><code>tag-vocabulary.template.md</code></td></tr><tr><td><code>internal-only</code> — never leaves the project; <strong>third-party assets</strong></td><td><code>tag-vocabulary.template.md</code></td></tr><tr><td>Flagging deprecated or reference-only material cited <em>as if validated</em></td><td><code>skills/verify/SKILL.md</code> step 2</td></tr></tbody></table></div>
+<p>That is a lot of transfer that already happened. The gap is narrow and specific.</p>
+<hr>
+<h2>The gap: nothing here governs claims <em>about a named competitor</em></h2>
+<p><code>/verify</code> checks a claim <strong>after</strong> it is written. Nothing in the manual governs <strong>composing</strong> one. The tag vocabulary even names <em>&quot;claims discipline&quot;</em> under the <code>governance</code> tag — and no file defines it.</p>
+<p>NewCoEndotest has it, in <code>brain/knowledge/strategy/competitive-positioning.md</code> under a heading it calls <strong>&quot;Messaging discipline (the load-bearing part).&quot;</strong> It is domain-specific in its examples and entirely general in its structure. Five rules, generalized:</p>
+<p><strong>1. Name the dimension you lose on, in the rule itself.</strong></p>
+<blockquote><p><em>&quot;Against the production benches (Trioptics / Optikos): win on price, portability, and target customer — <strong>never on measurement superiority</strong>. They are rigorous; claiming to out-measure them is false and will be seen through.&quot;</em></p></blockquote>
+<p>The discipline is not &quot;be modest.&quot; It is that a written rule names the axis where a named competitor is genuinely better, so no future draft quietly claims it.</p>
+<p><strong>2. Never claim a differentiator the competitor demonstrably already has.</strong></p>
+<blockquote><p><em>&quot;Don&#x27;t claim &#x27;we trend results&#x27; as a differentiator. ScopeControl already does per-scope longitudinal trending. The defensible claim is <strong>what</strong> is trended.&quot;</em></p></blockquote>
+<p><strong>3. A category shift is not a differentiator once a competitor markets it.</strong> Dovideq&#x27;s own headline is <em>&quot;5× more accurate than humans.&quot;</em> Same shift being sold. Their rule: use it to establish the category with a customer, <strong>never</strong> as the reason to choose you over an incumbent.</p>
+<p><strong>4. Scale the claim to the specific opponent.</strong> One competitor is 470 kg floor-standing — portability is a headline there. Another is benchtop — against it, lead with rigor and price instead. The same true sentence is strong or embarrassing depending on who it is aimed at.</p>
+<p><strong>5. Never attack a competitor&#x27;s moat.</strong> <em>&quot;Both are losing games.&quot;</em></p>
+<h3>Why this transfers</h3>
+<p>It is a <strong>falsifiability discipline for competitive claims</strong> — it forces a claim to survive contact with what the named third party actually publishes, <em>before</em> it is written rather than after. Every project has this exposure. SpecBuildr makes claims against other specification tools; medtech-intel-QMSR against regulatory copilots, and its brain already holds a competitor landscape file.</p>
+<p>It also pairs exactly with the naming rule relaxed earlier today: that decision made it legitimate to <strong>name</strong> a competitor. This governs <strong>what you may then say about them</strong>. Naming without claims discipline is the more dangerous of the two.</p>
+<hr>
+<h2>How to merge it — recommended shape</h2>
+<p><strong>A new short convention, <code>conventions/claims-discipline.md</code></strong>, holding the five rules in general form, plus two pointers:</p>
+<ul>
+<li><code>skills/growth-loop/SKILL.md</code> — it already forbids auto-posting and fake</li>
+</ul>
+<p>engagement; it should also govern what a claim may assert. This is where marketing copy gets composed.</p>
+<ul>
+<li><code>skills/verify/SKILL.md</code> — a line noting that a CONTRADICTED verdict against a</li>
+</ul>
+<p>competitor&#x27;s published material is usually a claims-discipline failure at composition time, not a research failure.</p>
+<p><strong>Why a convention rather than folding it into a skill:</strong> it binds anything outward-facing — landing pages, a pitch line, a discovery script, a spec sheet — not one ritual. Conventions are what every skill inherits.</p>
+<p><strong>The mechanical check, honestly:</strong> there isn&#x27;t a good one, and the convention should say so rather than pretend. The nearest thing is a <strong>per-project never-claim list</strong> — the project names its competitors and, for each, the axis it must not claim superiority on. That file <em>is</em> checkable for existence, and <code>/verify</code> can then test a draft against it. Without a project-specific list the rule is judgment only, which under this method&#x27;s own standard means it will decay. Label it a convention with a known weakness, per <code>/method-scan</code>&#x27;s rule.</p>
+<p><strong>Provenance to preserve.</strong> The rules were discovered in a specific competitive analysis and one of them is a live correction to an earlier position — the Lyon study line exists <em>because</em> a proposed differentiator was refuted by a competitor&#x27;s own homepage. That is the strongest argument for the rule, and it should be cited when adopting it rather than presented as abstract good sense.</p>
+<hr>
+<h2>What not to take</h2>
+<p><strong>Their <code>brain-verify</code> skill itself.</strong> It is the specialised local version of the manual&#x27;s <code>/verify</code>, and <code>/verify</code>&#x27;s own description already defers correctly: <em>&quot;If the repo has its own verification skill (e.g. brain-verify), use that instead.&quot;</em> That deferral is working. Do not merge the skills.</p>
+<p><strong>Their tag vocabulary wholesale.</strong> Their domain tags (<code>repair-isos</code>, and so on) are theirs. The governance tags already transferred.</p>
+</div>
+</body>
+</html>

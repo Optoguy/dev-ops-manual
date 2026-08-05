@@ -58,6 +58,13 @@ CONTRADICTED-by-public-source > MISQUOTED / NOT-FOUND citation > uncited claim >
 reference-only or deprecated content cited as validated > PAYWALL-LIMITED /
 NOT PUBLICLY VERIFIABLE (the last two are inventory, not failures).
 
+**A CONTRADICTED verdict against a *competitor's* published material is usually
+not a research failure.** It is
+[claims-discipline.md](../../conventions/claims-discipline.md) failing at
+composition time and being caught late. Report it as a claims-discipline finding
+so the positioning rule gets fixed, not only the sentence. If the project keeps a
+never-claim list, check the draft against it as part of step 2.
+
 ## Judgment
 
 - **Verify the claims that carry weight.** A wrong number in a headline or a
