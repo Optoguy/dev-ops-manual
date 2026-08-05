@@ -69,6 +69,23 @@ specification sheets, posts drafted for the owner, investor material. It does no
 govern internal analysis — a private file may say plainly that a competitor is
 better, and should.
 
+**This is not a naming restriction, and nothing here limits naming a third
+party.** Name customers, prospective customers, partners, vendors and competitors
+freely, in records and in outward-facing material alike; see the
+[naming decision](../decisions/2026-08-05-naming-third-parties.md). What this
+convention governs is narrower: **claims of superiority over a named competitor.**
+
+Two things it deliberately does not touch:
+
+- **Customers and prospects.** Naming them, recording what they asked for, and
+  quoting them is encouraged — that is
+  [`/discovery-call`](../skills/discovery-call/SKILL.md)'s whole purpose. Using a
+  customer's name in *public* material is a permission question for the owner,
+  not a claims question.
+- **Neutral factual comparison.** "Their instrument is 470 kg; ours is 4 kg" is a
+  fact, and stating it is fine. This convention starts where the claim becomes
+  *better than*.
+
 ## The check, and its known weakness
 
 **There is no good mechanical check for this, and pretending otherwise would be

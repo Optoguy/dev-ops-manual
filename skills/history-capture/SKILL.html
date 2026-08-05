@@ -116,16 +116,23 @@ python src/chat_distill.py &lt;transcript&gt; --stats        # size of the real 
 </ul>
 <p><strong>Naming people and organisations — the test is purpose, not category</strong> (relaxed 2026-08-05; see <a href="../../decisions/2026-08-05-naming-third-parties.md">the decision</a>).</p>
 <p>A project&#x27;s knowledge is largely <em>about</em> other parties, and a record that cannot name them is not a record. Vendors, competitors, standards bodies and cited authors are the substance of a brain, not a leak.</p>
+<p><strong>There is no blanket restriction on naming a third party.</strong> The exclusions below are a short, specific list. Everything not on it may be named.</p>
 <p><strong>Name freely:</strong></p>
 <ul>
-<li>Organisations — vendors, competitors, suppliers, customers as companies,</li>
+<li>Organisations — vendors, competitors, suppliers, partners, **customers and</li>
 </ul>
-<p>standards bodies, publishers.</p>
+<p>prospective customers**, standards bodies, publishers.</p>
 <ul>
 <li>Published work and its authors, with the citation. That is what a citation <em>is</em>.</li>
-<li>People acting in a professional or public capacity, where what is recorded is</li>
+<li>People acting in a professional capacity, where what is recorded is what they</li>
 </ul>
-<p>what they said or did in that capacity and it bears on the project — a vendor engineer&#x27;s answer about a datasheet, a reviewer&#x27;s published objection, a conference talk.</p>
+<p>said or did in that capacity and it bears on the project — a vendor engineer&#x27;s answer about a datasheet, a reviewer&#x27;s published objection, a conference talk.</p>
+<ul>
+<li>**People at customers and prospects, and what they told you in a business</li>
+</ul>
+<p>conversation** — a discovery call, a sales call, a meeting. Name them, quote them, record which company they are from and what they asked for.</p>
+<p><strong>A business conversation is not &quot;said in confidence.&quot;</strong> A discovery call is the single most valuable knowledge a project acquires, and it exists to be recorded. It becomes confidential only when the other party says so — an explicit &quot;off the record&quot;, a non-disclosure agreement, or a confidential programme or customer identifier they let slip. Absent that, capture it.</p>
+<p><a href="../discovery-call/SKILL.md"><code>/discovery-call</code></a> holds the calibrated version of this boundary and is the authority when the two are read together: record the person to <code>brain/people/</code>, quote key claims verbatim, source it as <em>&quot;call with <code>&amp;lt;name&amp;gt;</code>, <code>&amp;lt;date&amp;gt;</code>&quot;</em> — and when a call mixes open and confidential material, capture the open part rather than dropping the whole call.</p>
 <p><strong>Record when it is the actual reason behind a decision the project made</strong> (widened further 2026-08-05, same decision):</p>
 <ul>
 <li>A private fact or circumstance about a named person, **if it was load-bearing</li>
@@ -146,14 +153,14 @@ python src/chat_distill.py &lt;transcript&gt; --stats        # size of the real 
 </ul>
 <p>The strictest line here, and load-bearing-to-a-decision does not override it.</p>
 <ul>
-<li><strong>Customer data pasted into the chat</strong> — a customer&#x27;s own files, specifications</li>
+<li><strong>A customer&#x27;s own material</strong> — their files, specifications or records, pasted</li>
 </ul>
-<p>or records. Naming the customer is fine; reproducing their material is not.</p>
+<p>into the chat. Naming the customer and recording what they wanted is fine; reproducing their material is not.</p>
 <ul>
 <li><strong>Health information</strong>, unless the person disclosed it publicly themselves.</li>
-<li><strong>Anything said to you in confidence</strong>, regardless of relevance to a decision.</li>
+<li><strong>Anything the other party explicitly placed off the record</strong>, regardless of</li>
 </ul>
-<p>A private fact volunteered off the record is not &quot;load-bearing&quot; — it is confidential, full stop.</p>
+<p>relevance to a decision. This means a stated confidence — &quot;don&#x27;t repeat this&quot;, an agreement, a confidential identifier — not merely a private setting. A two-person call is not automatically confidential; a sentence prefaced with &quot;between us&quot; is.</p>
 <p>When a line is genuinely ambiguous, write the finding without the name and note that a name exists. Do not drop the finding.</p>
 <h3>6. Commit, scoped</h3>
 <p>The digest, the brain entries, and the history index in one commit with a plain dated message. Regenerate the web-page twins. Then say in one line what the period was about — that sentence is usually the most useful output of the whole ritual.</p>

@@ -68,6 +68,40 @@ record is not "load-bearing," it is confidential, full stop.
 Ambiguous cases write the finding without the name and note that a name exists.
 **The finding is never dropped.**
 
+## Amendment, same day — customers and prospects, and calls are not confidential by default
+
+The owner, on reviewing the claims-discipline pull request:
+
+> I also want to allow for naming customers and potential customers. I don't
+> think there should be a hard 3rd party limitation.
+
+Two changes, and the second is the one that mattered.
+
+**Customers and prospects are named explicitly**, as organisations and as the
+people at them — including what they said in a discovery call, a sales call or a
+meeting. The original wording said "customers as companies," which permitted the
+company and left the buyer contact ambiguous.
+
+**A business conversation is not "said in confidence."** The original exclusion —
+*"anything said to you in confidence, regardless of relevance"* — read as though a
+private setting made a conversation confidential. That would have contradicted
+[`/discovery-call`](../skills/discovery-call/SKILL.md), which **mandates** naming
+the person, quoting them verbatim, and sourcing the note as
+*"call with `<name>`, `<date>`."* Two skills would have given opposite
+instructions about the single most valuable knowledge a project acquires.
+
+`/discovery-call` was written first and was already correctly calibrated:
+confidence is something the other party **declares** — an explicit "off the
+record," an agreement, a confidential identifier — and a call mixing open and
+closed material is captured in its open part rather than dropped. That skill is
+now named as the authority when the two are read together.
+
+**The framing changed too.** The rule now opens by stating there is no blanket
+restriction on naming a third party: the exclusions are a short specific list, and
+anything not on it may be named. The previous shape invited a reader to ask "am I
+allowed to name this," which is the wrong question and the one that produced the
+over-strict prompt in the first place.
+
 ## Consequences
 
 - Applies wherever a project writes durable knowledge, not only to history
