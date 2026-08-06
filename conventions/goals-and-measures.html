@@ -91,6 +91,19 @@ hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
 <li>**Every project has a current monthly goal and a current weekly goal, and the</li>
 </ol>
 <p>owner sets all three.** Agents may draft; only the owner approves.</p>
+<p><strong>Deciding and typing are different acts</strong> (refined 2026-08-06; see <a href="../decisions/2026-08-06-goals-ratification-plain-git.md">the decision</a>). &quot;The owner sets the goals&quot; means the <em>content</em> is his — it originates from him or is ratified by him, in his live chat, in his words. It does not mean he edits JSON. PolyBot (or a project chat working with him directly) may write <code>plan/goals.json</code> to record a decision the owner made in that conversation, under three guards that keep the original protection intact:</p>
+<ul>
+<li><strong>Ratification in the live chat, always.</strong> An unattended run — a night</li>
+</ul>
+<p>shift, a Routine firing — never touches a goals file. An agent cannot unblock its own gate; it can only bring the owner a draft to approve.</p>
+<ul>
+<li><strong>Provenance in the commit.</strong> The commit that changes a goals file quotes</li>
+</ul>
+<p>the owner&#x27;s approving words and their date, so every goal traces to a human decision on inspection.</p>
+<ul>
+<li><strong>Independent audit.</strong> The fleet audit verifies that every goals-file</li>
+</ul>
+<p>change carries that trace. An agent writing its own permission slip is the failure this rule exists to prevent, and the audit is what makes it visible.</p>
 <ol>
 <li><strong>Every goal carries one measure</strong> with a baseline, a target, a date, and a</li>
 </ol>

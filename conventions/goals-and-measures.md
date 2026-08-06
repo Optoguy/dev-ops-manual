@@ -63,6 +63,25 @@ a north star that needs re-checking is not a reason to stop work.
    monthly goal serves, restated from its strategy document.
 1. **Every project has a current monthly goal and a current weekly goal, and the
    owner sets all three.** Agents may draft; only the owner approves.
+
+   **Deciding and typing are different acts** (refined 2026-08-06; see
+   [the decision](../decisions/2026-08-06-goals-ratification-plain-git.md)).
+   "The owner sets the goals" means the *content* is his — it originates from
+   him or is ratified by him, in his live chat, in his words. It does not mean
+   he edits JSON. PolyBot (or a project chat working with him directly) may
+   write `plan/goals.json` to record a decision the owner made in that
+   conversation, under three guards that keep the original protection intact:
+
+   - **Ratification in the live chat, always.** An unattended run — a night
+     shift, a Routine firing — never touches a goals file. An agent cannot
+     unblock its own gate; it can only bring the owner a draft to approve.
+   - **Provenance in the commit.** The commit that changes a goals file quotes
+     the owner's approving words and their date, so every goal traces to a
+     human decision on inspection.
+   - **Independent audit.** The fleet audit verifies that every goals-file
+     change carries that trace. An agent writing its own permission slip is
+     the failure this rule exists to prevent, and the audit is what makes it
+     visible.
 2. **Every goal carries one measure** with a baseline, a target, a date, and a
    named source. A goal without a number is a wish.
 3. **Every piece of agent-suggested work names the goal it serves and how it
