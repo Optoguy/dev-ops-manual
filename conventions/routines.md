@@ -46,16 +46,21 @@ and produced adjacent duplicate work within a day.
 
 - Each project's Routines live in **one** designated chat, along with that
   project's day-to-day work.
-- **Cross-project Routines** (the night shift) live in the chat that owns the
-  method, not in any one project's chat, and sweep every repo.
+- **Cross-project Routines split by role** (2026-08-05; see
+  [three-roles.md](three-roles.md)): **execution** — the night shift — belongs
+  to the **Manager** chat; **audit and method** Routines — fleet audit, method
+  scan — stay with the method's chat. Until the Manager boots, the night shift
+  remains here, the carve-out's last days.
 - A second chat may read and plan, but must not run scheduled work or write the
-  plan file for a repo it doesn't own.
+  plan file for a repo it doesn't own. Once booted, the Manager is the
+  designated actioning chat for cross-project execution; specialists keep their
+  own Routines and claim like anyone else.
 
 Current map:
 
 | Routine | Cadence | Lives in |
 |---|---|---|
-| Night shift (all repos) | 8:30pm ET daily | Dev Operating Manual chat |
+| Night shift (all repos) | 8:30pm ET daily | Dev Operating Manual chat → **Manager chat at boot** (recreate there, delete here — Routines cannot rebind across sessions) |
 | SpecBuildr daily traffic report | 6:30am ET daily | SpecBuildr chat |
 | SpecBuildr weekly growth strategy | Mondays 15:00 UTC | SpecBuildr chat |
 | Fleet audit (all repos) | Sundays 6:00pm ET (`0 22 * * 0`) | Dev Operating Manual chat |

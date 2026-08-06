@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two-week review: the system asks for your attention in the wrong shape</title>
+<style>
+:root { --bg:#fbfaf7; --panel:#fff; --ink:#1c1b18; --muted:#5f5c55; --faint:#8a8681;
+  --line:#e5e1d8; --accent:#1f6f4a; --accent-soft:#e8f3ed; --code:#f4f2ec; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#14150f; --panel:#1b1c16; --ink:#e9e7df; --muted:#a8a49a; --faint:#7d7a72;
+    --line:#2c2e25; --accent:#7fc9a1; --accent-soft:#1d2b23; --code:#22241c; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+.wrap { max-width:820px; margin:0 auto; padding:34px 22px 70px; }
+.src { color:var(--faint); font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+  margin-bottom:22px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+.nav { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+.nav a, .nav span { font-size:13px; padding:6px 13px; border-radius:20px; text-decoration:none;
+  border:1px solid var(--line); color:var(--muted); background:var(--panel); }
+.nav a:hover { border-color:var(--accent); color:var(--accent); }
+.nav span { background:var(--accent-soft); border-color:var(--accent); color:var(--accent);
+  font-weight:600; }
+h1 { font-size:clamp(24px,4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.01em; }
+h2 { font-size:clamp(18px,2.6vw,22px); margin:34px 0 10px; padding-bottom:6px;
+  border-bottom:1px solid var(--line); }
+h3 { font-size:16.5px; margin:24px 0 8px; }
+h4 { font-size:15px; margin:18px 0 6px; color:var(--muted); }
+p { margin:0 0 13px; }
+ul, ol { margin:0 0 14px; padding-left:24px; }
+li { margin-bottom:5px; }
+li::marker { color:var(--faint); }
+a { color:var(--accent); }
+code { background:var(--code); padding:1.5px 5px; border-radius:4px; font-size:.9em;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+pre { background:var(--code); padding:14px 16px; border-radius:9px; overflow-x:auto;
+  border:1px solid var(--line); margin:0 0 15px; }
+pre code { background:none; padding:0; font-size:13px; }
+blockquote { margin:0 0 15px; padding:10px 16px; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--muted); }
+blockquote p:last-child { margin-bottom:0; }
+.tablewrap { overflow-x:auto; margin:0 0 16px; }
+table { border-collapse:collapse; width:100%; font-size:14.5px; background:var(--panel);
+  border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+th, td { text-align:left; padding:9px 13px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+th { background:var(--code); font-weight:650; font-size:13px; letter-spacing:.02em; }
+tr:last-child td { border-bottom:none; }
+hr { border:none; border-top:1px solid var(--line); margin:28px 0; }
+.task { list-style:none; margin-left:-22px; }
+.task li { padding-left:26px; position:relative; }
+.task li::before { position:absolute; left:0; top:0; font-size:14px; }
+.task li.todo::before { content:'\2610'; color:var(--faint); }
+.task li.done::before { content:'\2611'; color:var(--accent); }
+.task li.done { color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><a href="../docs/STRATEGY.html">Strategy</a><a href="../dashboard/goals.html">Goals</a><a href="../dashboard/index.html">Task plan</a></nav><p class="src">Generated from 2026-08-05-two-week-review-owner-attention.md — edit the markdown, not this file</p>
+<h1>Two-week review: the system asks for your attention in the wrong shape</h1>
+<p>2026-08-05. Sources: this chat&#x27;s transcript (133 owner turns, timestamped), merge history of all four repos, the open pull-request queue, and the night-shift approval record. Owner feedback prompting it: <em>&quot;the system is not effective, I often get confused on status, I can&#x27;t recall what is the next step in each chat… I feel like a lot of things go missed.&quot;</em></p>
+<p>The feedback is correct, and the data says why.</p>
+<h2>Your actual availability</h2>
+<p>Two short windows, almost every working day, ET:</p>
+<div class="tablewrap"><table><thead><tr><th>Window</th><th>Evidence</th></tr></thead><tbody><tr><td><strong>~6:30–9:00 am</strong></td><td>68 of 133 chat turns land in hours 6–8; merge bursts sit here too — four SpecBuildr merges in 27 minutes on 7/31 (8:39–9:06 am), this morning&#x27;s #14 at 7:24 am</td></tr><tr><td><strong>~7:30–9:30 pm</strong></td><td>34 turns in hours 19–21; last night&#x27;s #13 at 9:42 pm; NewCoEndotest bench commits cluster 7–9:30 pm</td></tr></tbody></table></div>
+<p><strong>Attention is serial — one project owns a window.</strong> Week one (7/22–7/30) the window went to building the method and SpecBuildr: 110 chat turns, merges every day. Week two it went to the NewCoEndotest bench: overnight sessions on 8/1, 8/2, 8/4 — and this chat saw a <strong>108-hour gap</strong> (7/31 9:00 am → 8/4 9:09 pm) while medtech went untouched for six days. You were never away; the <em>other chats&#x27;</em> queues just kept growing as if you were.</p>
+<h2>What the system did with that pattern</h2>
+<ul>
+<li><strong>Night shift:</strong> 7 slates proposed since 7/28, **2 approved, 5 expired</li>
+</ul>
+<p>unanswered** — including one firing that re-swept 55 times and burned the weekly usage limit. Each unanswered night still paid the full sweep cost.</p>
+<ul>
+<li><strong>Pull requests:</strong> 10 open drafts tonight; oldest 9 days. Adoption pull</li>
+</ul>
+<p>requests averaged 5–6 days to merge. Merges happen only in your two windows, in bursts — the queue drains at ~4 per window when you&#x27;re in the mood.</p>
+<ul>
+<li><strong>Your task list:</strong> ~22 owner tasks scattered across four <code>plan.json</code> files</li>
+</ul>
+<p>(16 in SpecBuildr alone), plus 10 pull requests, plus in-chat questions that scroll away. <strong>No single ranked list of &quot;what needs Dan&quot; exists anywhere.</strong></p>
+<ul>
+<li><strong>Missed in plain sight, this fortnight:</strong> medtech&#x27;s gate lying for 6 days</li>
+</ul>
+<p>behind an unmerged fix; dev-ops-manual&#x27;s weekly goal <em>achieved</em> but unscored for 8 days; <code>ai-directories</code> — a P1 on the week&#x27;s only goal — untouched while the week expired; the prepared LinkedIn post unsent for 3 days with the weekly measure at 0.</p>
+<h2>The diagnosis, in one sentence</h2>
+<p><strong>Every part of the system asks for your decision at its own cadence and in its own place, while your attention arrives in two daily batches at one place at a time</strong> — so decisions expire unseen, queues grow silently, and &quot;status&quot; is the union of four chats, four dashboards, ten pull requests and a Routine schedule nobody can hold in their head.</p>
+<p>The per-chat options menus (a house rule) are locally right and globally useless: correct at the moment they&#x27;re written, buried by the next Routine firing, invisible from the other three chats.</p>
+<h2>The fix — four pieces, smallest first</h2>
+<p><strong>1. One Owner Inbox — the whole fleet on one page, decisions first.</strong> Generated from all four repos + the GitHub API; regenerated by the existing morning Routine and pushed to you at 6:25 am ET, before your window:</p>
+<pre><code>DECIDE (12 min)   · merge medtech #6 — gate is lying, 6 days   [link]
+                  · merge/close SpecBuildr #49 — parked 9 days [link]
+                  · …every open PR, one line, a recommendation
+DO (ranked, all repos)
+                  1. send LinkedIn post (W31 measure at 0, 2d left)
+                  2. write NewCo goals.json (28 tasks gated)  …
+EACH CHAT&#x27;S NEXT STEP
+                  SpecBuildr: waiting on you to send post
+                  medtech:    blocked on #6 merge, then end goal
+WHAT RAN WITHOUT YOU  · NewCo captured history · night shift: nothing (no slate approved)</code></pre>
+<p><code>fleet_state.py</code> already computes most of this. The missing input is a one-line <code>NEXT.md</code> each chat maintains at wrap — &quot;waiting on / next step&quot; — which is what kills &quot;I can&#x27;t recall what&#x27;s next in each chat.&quot;</p>
+<p><strong>2. Flip the night shift: run-then-review instead of ask-then-run.</strong> The nightly approval gate assumed you&#x27;re present every evening; you&#x27;re present about two evenings a week per chat, and 5 of 7 slates died waiting. Replace the per-night menu with a <strong>standing weekly policy</strong> you approve once — e.g. &quot;agent-owned, goal-serving or lights-on, verifiable, no credentials, no engine surgery&quot; — and let the night shift run under it unattended. <strong>The real gate was never the evening menu; it is the draft pull request</strong>, and that stays. Cost of a bad night is still a closed pull request, never a broken main.</p>
+<p><strong>3. Sweep-to-zero on drafts, weekly, inside one window.</strong> Any draft older than 7 days gets merged, closed, or explicitly parked with a reason — no fourth state. The inbox opens with this list. Ten drafts is not a queue, it is a second task system with no owner.</p>
+<p><strong>4. Move goal scoring off your plate.</strong> A goal&#x27;s number should never sit stale for 8 days: the Sunday fleet audit drafts the score with evidence (it already reads the measures), and you confirm or correct in the inbox. Setting goals stays yours alone; <em>scoring</em> them becomes a one-tap review.</p>
+<h2>What this does not change</h2>
+<p>The merge gate, draft-only pull requests, agents-never-publish, owner-only goals files, claim-before-you-build — untouched. This redesign moves <strong>where and when decisions reach you</strong>, not who holds them.</p>
+</div>
+</body>
+</html>
