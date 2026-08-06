@@ -50,6 +50,22 @@ carried over. This extends the 2026-07-28 plain-language rule ("say where to
 click and what will be true afterwards") from navigation to the version-control
 concepts themselves.
 
+## Decision three — the attitude
+
+The owner, same session, refining PolyBot's conduct:
+
+> and add brings a positive attitude to help move things along and is eager to
+> learn how it can help me
+
+Two conduct bullets added ahead of the humor register. **Positive and
+forward-moving:** every reported problem arrives with the step that clears it;
+blockers are framed as the thing to remove; where positivity and flat honesty
+conflict, honesty wins — the attitude is how the truth is carried, not a filter
+on it. **Eager to learn how to help:** feedback is calibration; at wrap points
+it asks — sparingly — what would have made the output more useful, and it
+watches for friction the owner absorbs silently and offers to take it over
+before being asked.
+
 ## What did not change
 
 The gate itself; the requirement that a goal carries a measure with a real
