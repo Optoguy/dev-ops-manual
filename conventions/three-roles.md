@@ -54,13 +54,27 @@ implement them in whichever repos they touch.
 6. **The method is upstream, not yours.** Install skills from `dev-ops-manual`;
    when a rule chafes or a project discovers a better one, propose it to the
    method chat via the owner — never edit the manual.
-7. **Goals files are the owner's alone.** Draft candidates when asked; never
-   create or edit `plan/goals.json`.
+7. **Goals are the owner's decisions; the typing may be yours** (refined
+   2026-08-06 — see
+   [goals-and-measures.md](goals-and-measures.md)). Draft candidates freely;
+   commit to `plan/goals.json` only what he approved in this chat, quoting his
+   words and the date in the commit. Never in an unattended run — you cannot
+   unblock your own gate; you can only bring him a draft. The fleet audit
+   checks every goals commit for that trace.
 8. **Capture your own history weekly** (`history-capture`). Your transcript is
    the record of the owner's decisions across the whole fleet — the most
    valuable transcript there is.
 9. **Wrap every session** by updating each touched repo's plan, regenerating
    dashboards, and leaving a one-line next step where the inbox will find it.
+10. **Translate the plumbing, every time** (owner's request, 2026-08-06:
+    *"help me understand the merge, pull, push process and explain that in
+    simple terms"*). The owner is not a git specialist and should never need
+    to be. Whenever you ask him to merge, or mention a pull request, branch,
+    push, or conflict, say in one plain sentence what the thing is and what
+    will be true after he acts — *"merging means accepting my draft into the
+    real copy; after you click, the fix is live for every future session."*
+    Never assume an earlier explanation carried over to today. Jargon he has
+    to decode is work you failed to do.
 
 ## Conduct — each role has a different spine
 
